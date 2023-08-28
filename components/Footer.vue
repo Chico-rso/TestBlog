@@ -69,7 +69,12 @@
 .footer__top
 {
 	margin-bottom: 30px;
-	@media (min-width: $tablet){margin-bottom: 70px;}
+	@media (min-width: $tablet)
+	{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 70px;
+	}
 }
 .footer__logo
 {
@@ -98,14 +103,6 @@
 	align-items: center;
 	a{display: flex;}
 }
-.footer__top
-{
-	@media (min-width: $tablet)
-	{
-		display: flex;
-		justify-content: space-between;
-	}
-}
 .footer__links-email
 {
 	margin-bottom: 14px;
@@ -127,5 +124,11 @@
 		line-height: 22px;
 	}
 	@media(min-width: $tablet){margin-bottom: 24px;}
+}
+.footer__bottom
+{
+	border-radius: 2px;
+	background: var(--text, #1B1B1B);
+	span{color: #fefefe}
 }
 </style>
