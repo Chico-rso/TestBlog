@@ -1,15 +1,16 @@
 <template>
-	<div>
-
+	<div class="subscribe">
+		<slot />
 	</div>
 </template>
 
 <script>
-export default {
-
-};
 </script>
 
 <style lang="scss" scoped>
-
+.subscribe
+{
+	border-radius: 2px;
+	background: var(--text, #1B1B1B);
+}
 </style>
