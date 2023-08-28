@@ -20,10 +20,7 @@ ul
 	}
 }
 
-address
-{
-	font-style: normal;
-}
+address{font-style: normal;}
 
 h1
 {
@@ -58,16 +55,9 @@ h4
 	margin:0px 0 8px 0;
 }
 
-p
-{
-	margin-top: 10px;
-}
-
-b
-{
-	font-weight: 700;
-}
-
+p{margin: 0;}
+b{font-weight: 700;}
+a{color: inherit;}
 a,
 a:hover,
 a:active,

@@ -1,7 +1,6 @@
 <template>
-	<div class="container">
-		<Header />
-	</div>
+	<section class="index">
+	</section>
 </template>
 
 <script setup>
@@ -14,5 +13,11 @@ p
 	font-style: italic;
 	font-weight: 300;
 	line-height: 26px;
+}
+.index
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 </style>
