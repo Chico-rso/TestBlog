@@ -46,11 +46,7 @@
 			</div>
 		</div>
 		<div class="footer__bottom">
-			<span>Подпишись на рассылку</span>
-			<label>
-				<input type="email">
-				<button></button>
-			</label>
+			<Subscribe />
 		</div>
 	</footer>
 </template>

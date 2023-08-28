@@ -42,5 +42,9 @@ const props = defineProps({
 });
 </script>
 <style lang="scss" scoped>
-
+.input__text
+{
+	border: none;
+	border-bottom: 1px #8D959C solid;
+}
 </style>
