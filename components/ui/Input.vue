@@ -1,7 +1,8 @@
 <template>
 	<div class="input__form">
 		<input
-			class="input__text"
+			:class="['input__text', 'input__text--' + customClass]"
+			:style="{minWidth: customWidth}"
 			:type="type"
 			:name="name"
 			:id="name"
@@ -13,11 +14,17 @@
 </template>
 
 <script setup>
+
 const props = defineProps({
 	name:
 		{
 			type: String,
 			default: "",
+		},
+	customClass:
+		{
+			type: String,
+			default: "default",
 		},
 	type:
 		{
@@ -29,10 +36,10 @@ const props = defineProps({
 			type: String,
 			required: true,
 		},
-	width:
+	customWidth:
 		{
 			type: String,
-			default: "300px",
+			default: "",
 		},
 	placeholder:
 		{
@@ -41,10 +48,23 @@ const props = defineProps({
 		},
 });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .input__text
 {
 	border: none;
-	border-bottom: 1px #8D959C solid;
+	background-color: transparent;
+	width: 100%;
+	padding: 5px 20px 5px 10px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 26px;
+	&--default
+	{
+		border-bottom: 1px solid #fefefe;
+		color: #fefefe;
+		&:focus {border-bottom: 1px solid #3657D3;}
+		&:focus::placeholder {color: transparent;}
+	}
 }
 </style>

@@ -12,6 +12,12 @@ export default defineNuxtConfig({
 			{ hid: 'description', name: 'description', content: '' },
 		],
 	},
+	components:[
+		{
+			path: '~/components',
+			pathPrefix: false
+		}
+	],
 	css: ['@/assets/scss/main.scss'],
 	 vite: {
     css: {
