@@ -68,6 +68,7 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	padding-top: 20px;
 	@media (min-width: $tablet){display: block;}
 }
 .footer__top

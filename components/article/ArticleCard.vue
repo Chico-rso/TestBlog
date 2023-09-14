@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink :to="link" class="article">
 		<div class="article__img">
-			<img alt="" :src="img">
+			<img loading="lazy" alt="" :src="img">
 		</div>
 		<p>{{text}}</p>
 		<Button custom-class="black" custom-width="164px" text-value="Читать"></Button>
@@ -32,6 +32,7 @@ const props = defineProps({
 <style lang="scss">
 .article
 {
+	cursor: pointer;
 	p
 	{
 		margin-bottom: 30px;
@@ -45,7 +46,6 @@ const props = defineProps({
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
-		overflow: hidden;
 	}
 }
 .article__img
