@@ -18,6 +18,10 @@ const props = defineProps({
 			default: [],
 		},
 });
+
+onMounted(()=>
+{
+})
 </script>
 <style lang="scss">
 .article__list
