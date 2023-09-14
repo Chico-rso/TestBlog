@@ -1,5 +1,6 @@
 <template>
 	<section class="index">
+		<ArticleList />
 	</section>
 </template>
 

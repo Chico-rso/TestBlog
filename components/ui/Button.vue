@@ -1,7 +1,7 @@
 <template>
 	<button
 		:class="['btn', 'btn--' + customClass]"
-		:style="{minWidth: customWidth, backgroundColor: btnColor}"
+		:style="{maxWidth: customWidth}"
 	>
 		{{ textValue }}
 	</button>

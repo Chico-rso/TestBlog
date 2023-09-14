@@ -5,6 +5,7 @@
 			<Input
 				name="email"
 				placeholder="Email"
+				label=""
 				customWidth="353px"
 			/>
 			<Button
