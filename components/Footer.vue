@@ -1,4 +1,5 @@
 <template>
+	<div class="footer__line"></div>
 	<footer class="footer container">
 		<div class="footer__top">
 			<div class="footer__logo">
@@ -55,6 +56,13 @@
 </script>
 
 <style lang="scss" scoped>
+.footer__line
+{
+	position: relative;
+	width: 100%;
+	height: 2px;
+	background: var(--gray, #8D959C);
+}
 .footer
 {
 	display: flex;
@@ -68,7 +76,9 @@
 	@media (min-width: $tablet)
 	{
 		display: flex;
+		padding: 50px 0 0 0;
 		justify-content: space-between;
+		align-items: baseline;
 		margin-bottom: 70px;
 	}
 }

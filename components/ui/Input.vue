@@ -1,16 +1,14 @@
 <template>
-	<div class="input__form">
-		<input
-			:class="['input__text', 'input__text--' + customClass]"
-			:style="{minWidth: customWidth}"
-			:type="type"
-			:name="name"
-			:id="name"
-			:placeholder="placeholder"
-			:label="label"
-		>
-		<label :for="name" class="input__label">{{label}}</label>
-	</div>
+	<input
+		:class="['input__text', 'input__text--' + customClass]"
+		:style="{maxWidth: customWidth}"
+		:type="type"
+		:name="name"
+		:id="name"
+		:placeholder="placeholder"
+		:label="label"
+	>
+	<label :for="name" class="input__label">{{label}}</label>
 </template>
 
 <script setup>
