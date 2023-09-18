@@ -74,9 +74,11 @@ const storeHome = useArticles();
 // 	},
 // ]);
 
-onMounted(() =>
+onBeforeMount(() =>
 {
 	storeHome.fetchHomePage();
+	console.log(storeHome.getArticles);
+
 });
 </script>
 

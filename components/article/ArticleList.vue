@@ -21,6 +21,8 @@ const props = defineProps({
 
 onMounted(()=>
 {
+	console.log(props.articles,'props.articles');
+
 })
 </script>
 <style lang="scss">
