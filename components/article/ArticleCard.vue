@@ -4,12 +4,11 @@
 			<img loading="lazy" alt="" :src="img">
 		</div>
 		<p>{{text}}</p>
-		<Button custom-class="black" custom-width="164px" text-value="Читать"></Button>
+		<UiButton custom-class="black" custom-width="164px" text-value="Читать"></UiButton>
 	</NuxtLink>
 </template>
 
 <script setup>
-
 const props = defineProps({
 	img:
 		{

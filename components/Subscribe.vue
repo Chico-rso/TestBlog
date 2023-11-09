@@ -2,13 +2,13 @@
 	<div class="subscribe">
 		<h3>Подпишись на рассылку</h3>
 		<div class="subscribe__form">
-			<Input
+			<UiInput
 				name="email"
 				placeholder="Email"
 				label=""
 				customWidth="353px"
 			/>
-			<Button
+			<UiButton
 				textValue="Подписаться"
 				customWidth="223px"
 				customClass="blue"
@@ -17,7 +17,7 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 </script>
 
 <style lang="scss">

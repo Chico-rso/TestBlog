@@ -36,10 +36,17 @@ onMounted(()=>
 .article__item
 {
 	flex-basis: 100%;
+	transition: all .3s ease;
+	padding: 10px;
+	border-radius: 6px;
 	a
 	{
 		display: flex;
 		flex-direction: column;
+	}
+	&:hover
+	{
+		box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 	}
 	@media (min-width: $tablet)
 	{
