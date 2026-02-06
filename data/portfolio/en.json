@@ -58,25 +58,89 @@
 	}
   },
   "projects": [
-	{
-	  "name": "FoodMap Delivery",
-	  "type": "Map-based food ordering and delivery",
-	  "description": "Map search and filters, fast selection of restaurants and couriers, interactive states for users.",
-	  "tags": [
-		"Vue",
-		"Nuxt",
-		"Maps",
-		"GSAP"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://vkusnoibistro.com/application/"
-		}
-	  ]
-	},
-	{
-	  "name": "Vkusno i Bystro",
+    {
+      "name": "Fordewind",
+      "type": "Corporate website & product pages",
+      "description": "UI build with a focus on visual storytelling, responsive layout, and readability.",
+      "tags": [
+        "Vue",
+        "SCSS",
+        "Responsive"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://fordewind.fsk.ru/"
+        }
+      ]
+    },
+    {
+      "name": "U2",
+      "type": "Real estate sales platform",
+      "description": "Property showcase, filters, and interactive selection scenarios.",
+      "tags": [
+        "Nuxt",
+        "TypeScript",
+        "Filters"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://u2.moscow/"
+        }
+      ]
+    },
+    {
+      "name": "Massandra Park",
+      "type": "Real estate sales platform",
+      "description": "Property catalog with strong visuals and clear navigation.",
+      "tags": [
+        "Nuxt",
+        "UI",
+        "Performance"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://massandrapark.ru/"
+        }
+      ]
+    },
+    {
+      "name": "Maks",
+      "type": "Real estate sales platform",
+      "description": "Promo and property showcase with an emphasis on premium UI.",
+      "tags": [
+        "Vue",
+        "SSR",
+        "Landing"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://xn--80auew.xn--p1ai/"
+        }
+      ]
+    },
+    {
+      "name": "FoodMap Delivery",
+      "type": "Map-based food ordering and delivery",
+      "description": "Map search and filters, fast selection of restaurants and couriers, interactive states for users.",
+      "tags": [
+        "Vue",
+        "Nuxt",
+        "Maps",
+        "GSAP"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://vkusnoibistro.com/application/"
+        }
+      ]
+    },
+    {
+      "name": "Vkusno i Bystro",
 	  "type": "Food delivery service",
 	  "description": "Animated UI components, improved user flow, and stable production performance.",
 	  "tags": [
@@ -104,70 +168,6 @@
 		{
 		  "label": "Website",
 		  "url": "https://zvet.ru/"
-		}
-	  ]
-	},
-	{
-	  "name": "Fordewind",
-	  "type": "Corporate website & product pages",
-	  "description": "UI build with a focus on visual storytelling, responsive layout, and readability.",
-	  "tags": [
-		"Vue",
-		"SCSS",
-		"Responsive"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://fordewind.fsk.ru/"
-		}
-	  ]
-	},
-	{
-	  "name": "U2",
-	  "type": "Real estate sales platform",
-	  "description": "Property showcase, filters, and interactive selection scenarios.",
-	  "tags": [
-		"Nuxt",
-		"TypeScript",
-		"Filters"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://u2.moscow/"
-		}
-	  ]
-	},
-	{
-	  "name": "Massandra Park",
-	  "type": "Real estate sales platform",
-	  "description": "Property catalog with strong visuals and clear navigation.",
-	  "tags": [
-		"Nuxt",
-		"UI",
-		"Performance"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://massandrapark.ru/"
-		}
-	  ]
-	},
-	{
-	  "name": "Maks",
-	  "type": "Real estate sales platform",
-	  "description": "Promo and property showcase with an emphasis on premium UI.",
-	  "tags": [
-		"Vue",
-		"SSR",
-		"Landing"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://xn--80auew.xn--p1ai/"
 		}
 	  ]
 	}
