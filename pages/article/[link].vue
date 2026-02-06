@@ -1,8 +1,8 @@
 <template>
-	<div>
-		<span>detail article</span>
-		<p>{{ $route.params.id }}</p>
-	</div>
+    <div>
+        <span>detail article</span>
+        <p>{{ $route.params.id }}</p>
+    </div>
 </template>
 
 <script setup>

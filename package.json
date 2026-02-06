@@ -10,13 +10,17 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.7.3"
+    "@resvg/resvg-js": "^2.6.2",
+    "nuxt": "^3.7.3",
+    "playwright": "^1.58.1",
+    "png-to-ico": "^3.0.1"
   },
   "overrides": {
     "vue": "latest"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
+    "gsap": "^3.14.2",
     "pinia": "^2.1.6"
   }
 }

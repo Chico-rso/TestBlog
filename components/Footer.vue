@@ -1,141 +1,101 @@
 <template>
-	<div class="footer__line"></div>
-	<footer class="footer container">
-		<div class="footer__top">
-			<div class="footer__logo">
-				<svg width="133" height="32">
-					<use xlink:href="#mainLogo"></use>
-				</svg>
-				<p class="footer__text">Cтатьи о дизайне и искусстве, которые исследуют творческие вдохновения и актуальные тенденции, раскрывая мир эстетики и креативности</p>
-			</div>
-			<div class="footer__links">
-				<div class="footer__links-email">
-					<span>email</span>
-					<a href="mailto:testblogsupport@gmail.com">testblogsupport@gmail.com</a>
-				</div>
-
-				<ul class="footer__social-list">
-					<li class="footer__social-item">
-						<NuxtLink to="#">
-							<svg width="30" height="30">
-								<use xlink:href="#facebook"></use>
-							</svg>
-						</NuxtLink>
-					</li>
-					<li class="footer__social-item">
-						<NuxtLink to="#">
-							<svg width="30" height="30">
-								<use xlink:href="#vk"></use>
-							</svg>
-						</NuxtLink>
-					</li>
-					<li class="footer__social-item">
-						<NuxtLink to="#">
-							<svg width="30" height="30">
-								<use xlink:href="#instagram"></use>
-							</svg>
-						</NuxtLink>
-					</li>
-					<li class="footer__social-item">
-						<NuxtLink to="#">
-							<svg width="30" height="30">
-								<use xlink:href="#telegram"></use>
-							</svg>
-						</NuxtLink>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer__bottom">
-			<Subscribe />
-		</div>
-	</footer>
+    <footer class="site-footer" id="contact">
+        <div class="container site-footer__inner">
+            <div class="site-footer__copy">
+                <h2>{{ t.footer.title }}</h2>
+                <p>{{ t.footer.subtitle }}</p>
+            </div>
+            <div class="site-footer__links">
+                <div>
+                    <span>{{ t.footer.emailLabel }}</span>
+                    <a :href="`mailto:${email}`">{{ email }}</a>
+                </div>
+                <div>
+                    <span>{{ t.footer.telegramLabel }}</span>
+                    <a :href="`https://t.me/${telegram}`" target="_blank" rel="noreferrer">@{{ telegram }}</a>
+                </div>
+                <div>
+                    <span>{{ t.footer.locationLabel }}</span>
+                    <strong>{{ t.hero.location }}</strong>
+                </div>
+            </div>
+            <div class="site-footer__meta">© {{ year }} Amiran Bestaev</div>
+        </div>
+    </footer>
 </template>
 
 <script setup>
+import { portfolioCopy } from '~/data/portfolioCopy.js';
+
+const email = 'amiranbestaev@gmail.ru';
+const telegram = 'AmiranBestaev';
+const year = new Date().getFullYear();
+
+const lang = useState('lang', () => 'ru');
+const t = computed(() => portfolioCopy[lang.value]);
 </script>
 
 <style lang="scss" scoped>
-.footer__line
-{
-	position: relative;
-	width: 100%;
-	height: 2px;
-	background: var(--gray, #8D959C);
+.site-footer {
+    padding: 80px 0 50px;
+    background: #151518;
+    color: #f4f4f6;
 }
-.footer
-{
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	padding-top: 20px;
-	@media (min-width: $tablet){display: block;}
+
+.site-footer__inner {
+    display: grid;
+    gap: 30px;
 }
-.footer__top
-{
-	margin-bottom: 30px;
-	@media (min-width: $tablet)
-	{
-		display: flex;
-		padding: 50px 0 0 0;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: 70px;
-	}
+
+.site-footer__copy {
+    h2 {
+        margin: 0 0 12px 0;
+        font-size: clamp(26px, 3vw, 40px);
+    }
+
+    p {
+        margin: 0;
+        color: rgba(244, 244, 246, 0.7);
+        max-width: 520px;
+    }
 }
-.footer__logo
-{
-	margin-bottom: 14px;
-	svg
-	{
-		margin-bottom: 10px;
-		@media (min-width: $tablet){margin-bottom: 20px;}
-	}
-	@media (min-width: $tablet){margin-bottom: 0;}
+
+.site-footer__links {
+    display: grid;
+    gap: 16px;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    span {
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(244, 244, 246, 0.6);
+    }
+
+    a,
+    strong {
+        color: #fff;
+        font-weight: 600;
+    }
 }
-.footer__text
-{
-	max-width: 426px;
-	text-align: left;
-	color: var(--gray, #8D959C);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 20px;
+
+.site-footer__meta {
+    font-size: 12px;
+    color: rgba(244, 244, 246, 0.5);
 }
-.footer__social-list
-{
-	display: flex;
-	gap: 20px;
-	align-items: center;
-	a{display: flex;}
-}
-.footer__links-email
-{
-	margin-bottom: 14px;
-	span
-	{
-		display: block;
-		color: var(--gray, #8D959C);
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 20px;
-	}
-	a
-	{
-		color: var(--text, #1B1B1B);
-		font-size: 18px;
-		font-style: normal;
-		font-weight: 600;
-		line-height: 22px;
-	}
-	@media(min-width: $tablet){margin-bottom: 24px;}
-}
-.footer__bottom
-{
-	border-radius: 2px;
-	background: var(--text, #1B1B1B);
-	span{color: #fefefe}
+
+@media (min-width: $tablet) {
+    .site-footer__inner {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+    }
+    .site-footer__meta {
+        grid-column: 1 / -1;
+    }
 }
 </style>

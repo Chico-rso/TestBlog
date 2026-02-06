@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F8F5F0"/>
+  <rect x="0" y="460" width="1200" height="170" fill="#2F5EF4" opacity="0.08"/>
+  <circle cx="980" cy="110" r="120" fill="#2F5EF4" opacity="0.18"/>
+  <text x="80" y="240" font-size="72" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#1C1C1F">Амиран Бестаев</text>
+  <text x="80" y="320" font-size="40" font-family="Arial, Helvetica, sans-serif" font-weight="500" fill="#2F5EF4">Frontend Developer · Vue/Nuxt · TypeScript</text>
+  <text x="80" y="390" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="400" fill="#6F6F76">Fast, expressive interfaces for maps, catalogs, and complex logic.</text>
+</svg>
