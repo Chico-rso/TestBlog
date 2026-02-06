@@ -5,7 +5,7 @@
                 <h2>{{ t.footer.title }}</h2>
                 <p>{{ t.footer.subtitle }}</p>
             </div>
-            <div class="site-footer__links">
+            <address class="site-footer__links">
                 <div>
                     <span>{{ t.footer.emailLabel }}</span>
                     <a :href="`mailto:${email}`">{{ email }}</a>
@@ -18,21 +18,18 @@
                     <span>{{ t.footer.locationLabel }}</span>
                     <strong>{{ t.hero.location }}</strong>
                 </div>
-            </div>
+            </address>
             <div class="site-footer__meta">© {{ year }} Amiran Bestaev</div>
         </div>
     </footer>
 </template>
 
 <script setup>
-import { portfolioCopy } from '~/data/portfolioCopy.js';
+import { portfolioConfig } from '~/data/portfolioConfig.js';
 
-const email = 'amiranbestaev@gmail.ru';
-const telegram = 'AmiranBestaev';
+const {t} = useLanguage();
 const year = new Date().getFullYear();
-
-const lang = useState('lang', () => 'ru');
-const t = computed(() => portfolioCopy[lang.value]);
+const {email, telegram} = portfolioConfig;
 </script>
 
 <style lang="scss" scoped>

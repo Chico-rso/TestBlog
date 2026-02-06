@@ -1,10 +1,10 @@
 import { Resvg } from '@resvg/resvg-js';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import pngToIco from 'png-to-ico';
 
 const outDir = path.resolve('public');
-mkdirSync(outDir, { recursive: true });
+mkdirSync(outDir, {recursive: true});
 
 const faviconSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,11 +24,11 @@ const ogSvg = `<?xml version="1.0" encoding="UTF-8"?>
 </svg>`;
 
 const renderToPng = (svg, size, outPath) => {
-  const resvg = new Resvg(svg, {
-    fitTo: { mode: 'width', value: size }
-  });
-  const pngData = resvg.render().asPng();
-  writeFileSync(outPath, pngData);
+    const resvg = new Resvg(svg, {
+        fitTo: {mode: 'width', value: size},
+    });
+    const pngData = resvg.render().asPng();
+    writeFileSync(outPath, pngData);
 };
 
 writeFileSync(path.join(outDir, 'favicon.svg'), faviconSvg);
@@ -40,8 +40,8 @@ renderToPng(faviconSvg, 32, path.join(outDir, 'favicon-32x32.png'));
 renderToPng(faviconSvg, 16, path.join(outDir, 'favicon-16x16.png'));
 
 const ico = await pngToIco([
-  path.join(outDir, 'favicon-16x16.png'),
-  path.join(outDir, 'favicon-32x32.png')
+    path.join(outDir, 'favicon-16x16.png'),
+    path.join(outDir, 'favicon-32x32.png'),
 ]);
 writeFileSync(path.join(outDir, 'favicon.ico'), ico);
 

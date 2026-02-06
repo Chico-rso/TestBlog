@@ -4,15 +4,20 @@
             <a class="brand" href="#top" aria-label="Home">
                 <span>AB</span>
             </a>
-            <nav class="site-nav">
-                <a href="#work" :class="{ active: activeSection === 'work' }">{{ t.nav.work }}</a>
-                <a href="#experience" :class="{ active: activeSection === 'experience' }">{{ t.nav.experience }}</a>
-                <a href="#skills" :class="{ active: activeSection === 'skills' }">{{ t.nav.skills }}</a>
-                <a href="#about" :class="{ active: activeSection === 'about' }">{{ t.nav.about }}</a>
-                <a href="#contact" :class="{ active: activeSection === 'contact' }">{{ t.nav.contact }}</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="#work" :class="{ active: activeSection === 'work' }"
+                   :aria-current="activeSection === 'work' ? 'location' : undefined">{{ t.nav.work }}</a>
+                <a href="#experience" :class="{ active: activeSection === 'experience' }"
+                   :aria-current="activeSection === 'experience' ? 'location' : undefined">{{ t.nav.experience }}</a>
+                <a href="#skills" :class="{ active: activeSection === 'skills' }"
+                   :aria-current="activeSection === 'skills' ? 'location' : undefined">{{ t.nav.skills }}</a>
+                <a href="#about" :class="{ active: activeSection === 'about' }"
+                   :aria-current="activeSection === 'about' ? 'location' : undefined">{{ t.nav.about }}</a>
+                <a href="#contact" :class="{ active: activeSection === 'contact' }"
+                   :aria-current="activeSection === 'contact' ? 'location' : undefined">{{ t.nav.contact }}</a>
             </nav>
             <div class="site-actions">
-                <button class="lang-toggle" type="button" @click="toggleLang">
+                <button class="lang-toggle" type="button" @click="toggleLang" aria-label="Toggle language">
                     <span :class="{ active: lang === 'ru' }">RU</span>
                     <span>/</span>
                     <span :class="{ active: lang === 'en' }">EN</span>
@@ -26,80 +31,11 @@
 </template>
 
 <script setup>
-import { portfolioCopy } from '~/data/portfolioCopy.js';
+import { portfolioConfig } from '~/data/portfolioConfig.js';
 
-const telegram = 'AmiranBestaev';
-const lang = useState('lang', () => 'ru');
-const t = computed(() => portfolioCopy[lang.value]);
-const activeSection = ref('');
-let rafId;
-let sections = [];
-let onScroll;
-const route = useRoute();
-
-const toggleLang = () => {
-    lang.value = lang.value === 'ru' ? 'en' : 'ru';
-};
-
-onMounted(() => {
-    const ids = ['work', 'experience', 'skills', 'about', 'contact'];
-    sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
-
-    if (route.hash) {
-        activeSection.value = route.hash.replace('#', '');
-    }
-
-    if (!sections.length || typeof window === 'undefined') {
-        return;
-    }
-
-    const updateActive = () => {
-        const marker = window.scrollY + window.innerHeight * 0.35;
-        let current = sections[0]?.id || '';
-
-        for (const section of sections) {
-            if (section.offsetTop <= marker) {
-                current = section.id;
-            }
-        }
-
-        if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
-            current = 'contact';
-        }
-
-        activeSection.value = current;
-    };
-
-    onScroll = () => {
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-        }
-        rafId = requestAnimationFrame(updateActive);
-    };
-
-    updateActive();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-});
-
-onBeforeUnmount(() => {
-    if (onScroll) {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onScroll);
-    }
-    if (rafId) {
-        cancelAnimationFrame(rafId);
-    }
-});
-
-watch(
-    () => route.hash,
-    (hash) => {
-        if (hash) {
-            activeSection.value = hash.replace('#', '');
-        }
-    }
-);
+const {lang, t, toggleLang} = useLanguage();
+const {activeSection} = useActiveSection(['work', 'experience', 'skills', 'about', 'contact']);
+const {telegram} = portfolioConfig;
 </script>
 
 <style lang="scss" scoped>

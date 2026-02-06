@@ -2,25 +2,25 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+	"build": "nuxt build",
+	"dev": "nuxt dev",
+	"generate": "nuxt generate",
+	"preview": "nuxt preview",
+	"postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@resvg/resvg-js": "^2.6.2",
-    "nuxt": "^3.7.3",
-    "playwright": "^1.58.1",
-    "png-to-ico": "^3.0.1"
+	"@nuxt/devtools": "latest",
+	"@resvg/resvg-js": "^2.6.2",
+	"nuxt": "^3.7.3",
+	"playwright": "^1.58.1",
+	"png-to-ico": "^3.0.1"
   },
   "overrides": {
-    "vue": "latest"
+	"vue": "latest"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
-    "gsap": "^3.14.2",
-    "pinia": "^2.1.6"
+	"@pinia/nuxt": "^0.4.11",
+	"gsap": "^3.14.2",
+	"pinia": "^2.1.6"
   }
 }

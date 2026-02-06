@@ -1,0 +1,260 @@
+{
+  "meta": {
+	"title": "Amiran Bestaev — Frontend Developer (Vue/Nuxt)",
+	"description": "Frontend developer with 5+ years of experience. Vue/Nuxt/TypeScript, complex UIs, GSAP animations, e2e testing."
+  },
+  "labels": {
+	"website": "Website",
+	"nda": "Private"
+  },
+  "nav": {
+	"work": "Work",
+	"experience": "Experience",
+	"skills": "Skills",
+	"about": "About",
+	"contact": "Contact"
+  },
+  "hero": {
+	"eyebrow": "Frontend · Vue/Nuxt · TypeScript",
+	"name": "Amiran Bestaev",
+	"role": "Frontend Developer",
+	"subtitle": "I build fast, expressive interfaces for products with maps, catalogs, and complex business logic.",
+	"status": "Open to opportunities: remote, hybrid, on-site",
+	"location": "Moscow",
+	"ctaPrimary": "Contact",
+	"ctaSecondary": "Telegram",
+	"ctaCv": "Download CV"
+  },
+  "stats": [
+	{
+	  "value": "5+",
+	  "label": "years of commercial experience"
+	},
+	{
+	  "value": "Vue/Nuxt",
+	  "label": "2/3 generations"
+	},
+	{
+	  "value": "GSAP",
+	  "label": "advanced motion & interaction"
+	}
+  ],
+  "sections": {
+	"work": {
+	  "title": "Selected Work",
+	  "subtitle": "Projects in e-commerce, delivery, and real estate with rich UI and complex logic."
+	},
+	"experience": {
+	  "title": "Experience",
+	  "subtitle": "Focused on Vue/Nuxt, TypeScript, performance, and production stability."
+	},
+	"skills": {
+	  "title": "Skills",
+	  "subtitle": "My everyday stack."
+	},
+	"about": {
+	  "title": "About",
+	  "subtitle": "Frontend developer with 5+ years of commercial experience. Specializing in Vue.js and Nuxt.js (Vue 2/3, Nuxt 2/3) with TypeScript. I worked on legacy codebases, SPA/SSR architecture, and introduced testing. I value clean code, clear architecture, and product thinking."
+	}
+  },
+  "projects": [
+	{
+	  "name": "FoodMap Delivery",
+	  "type": "Map-based food ordering and delivery",
+	  "description": "Map search and filters, fast selection of restaurants and couriers, interactive states for users.",
+	  "tags": [
+		"Vue",
+		"Nuxt",
+		"Maps",
+		"GSAP"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://vkusnoibistro.com/application/"
+		}
+	  ]
+	},
+	{
+	  "name": "Vkusno i Bystro",
+	  "type": "Food delivery service",
+	  "description": "Animated UI components, improved user flow, and stable production performance.",
+	  "tags": [
+		"Vue 2/3",
+		"GSAP",
+		"TypeScript"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://vkusnoibistro.com/application/"
+		}
+	  ]
+	},
+	{
+	  "name": "Tsvet Divanov",
+	  "type": "Furniture e-commerce",
+	  "description": "Catalog, filters, and product cards optimized for speed and easy selection.",
+	  "tags": [
+		"Nuxt",
+		"SSR",
+		"E-commerce"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://zvet.ru/"
+		}
+	  ]
+	},
+	{
+	  "name": "Fordewind",
+	  "type": "Corporate website & product pages",
+	  "description": "UI build with a focus on visual storytelling, responsive layout, and readability.",
+	  "tags": [
+		"Vue",
+		"SCSS",
+		"Responsive"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://fordewind.fsk.ru/"
+		}
+	  ]
+	},
+	{
+	  "name": "U2",
+	  "type": "Real estate sales platform",
+	  "description": "Property showcase, filters, and interactive selection scenarios.",
+	  "tags": [
+		"Nuxt",
+		"TypeScript",
+		"Filters"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://u2.moscow/"
+		}
+	  ]
+	},
+	{
+	  "name": "Massandra Park",
+	  "type": "Real estate sales platform",
+	  "description": "Property catalog with strong visuals and clear navigation.",
+	  "tags": [
+		"Nuxt",
+		"UI",
+		"Performance"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://massandrapark.ru/"
+		}
+	  ]
+	},
+	{
+	  "name": "Maks",
+	  "type": "Real estate sales platform",
+	  "description": "Promo and property showcase with an emphasis on premium UI.",
+	  "tags": [
+		"Vue",
+		"SSR",
+		"Landing"
+	  ],
+	  "links": [
+		{
+		  "label": "Website",
+		  "url": "https://xn--80auew.xn--p1ai/"
+		}
+	  ]
+	}
+  ],
+  "experience": [
+	{
+	  "company": "IdaProject",
+	  "role": "Frontend Developer",
+	  "period": "July 2024 — Present",
+	  "stack": "Vue 2/3, Nuxt 2/3, TypeScript",
+	  "bullets": [
+		"Designed a multi-level filter (“queue → building → section”) and extracted logic into a reusable composable.",
+		"Built a universal calculator (mortgage/installments) with strong typing and extensible architecture.",
+		"Delivered advanced GSAP animations for a map interface with custom pins."
+	  ]
+	},
+	{
+	  "company": "O2",
+	  "role": "Frontend Developer",
+	  "period": "February 2021 — July 2024",
+	  "stack": "Nuxt 2, Vue 3, TypeScript",
+	  "bullets": [
+		"Migrated key modules from Vue 2 to Vue 3 + TypeScript and reduced client bundle size.",
+		"Introduced e2e testing (Cypress) and code review practices.",
+		"Integrated maps and optimized pages with lazy loading via Intersection Observer."
+	  ]
+	}
+  ],
+  "skills": [
+	{
+	  "group": "Frontend",
+	  "items": [
+		"Vue.js 2/3",
+		"Nuxt.js 2/3",
+		"TypeScript",
+		"JavaScript (ES6+)"
+	  ]
+	},
+	{
+	  "group": "State",
+	  "items": [
+		"Pinia",
+		"Vuex"
+	  ]
+	},
+	{
+	  "group": "Styling",
+	  "items": [
+		"SCSS/Sass",
+		"BEM",
+		"Responsive layout",
+		"Cross-browser"
+	  ]
+	},
+	{
+	  "group": "Tooling",
+	  "items": [
+		"Vite",
+		"Webpack",
+		"Gulp",
+		"Git"
+	  ]
+	},
+	{
+	  "group": "Testing",
+	  "items": [
+		"Vitest",
+		"@nuxt/test-utils",
+		"Cypress"
+	  ]
+	},
+	{
+	  "group": "Other",
+	  "items": [
+		"SSR",
+		"REST API",
+		"Axios",
+		"GSAP",
+		"Maps"
+	  ]
+	}
+  ],
+  "footer": {
+	"title": "Let's build a strong interface",
+	"subtitle": "Open to opportunities. I can quickly join a team and deliver to release.",
+	"emailLabel": "Email",
+	"telegramLabel": "Telegram",
+	"locationLabel": "Location"
+  }
+}
