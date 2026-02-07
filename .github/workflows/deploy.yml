@@ -42,6 +42,7 @@ jobs:
             cd /var/www/portfolio
             rm -rf .output
             export PATH="/root/.nvm/versions/node/v20.19.5/bin:$PATH"
+            export NODE_OPTIONS="--max-old-space-size=1024"
             npm install
             npm run build
             PORT=3001 HOST=127.0.0.1 pm2 restart portfolio --update-env || PORT=3001 HOST=127.0.0.1 pm2 start /root/.nvm/versions/node/v20.19.5/bin/node --name portfolio -- /var/www/portfolio/.output/server/index.mjs

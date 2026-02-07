@@ -18,4 +18,4 @@ rsync -az --delete \
 	--exclude .output \
 	./ "${SERVER_USER}@${SERVER_HOST}:${REMOTE_DIR}/"
 
-ssh "${SERVER_USER}@${SERVER_HOST}" "cd ${REMOTE_DIR} && rm -rf .output && export PATH=$(dirname "${NODE_BIN}"):\\$PATH && npm install && npm run build && PORT=${PORT} HOST=${HOST} pm2 restart ${APP_NAME} --update-env || PORT=${PORT} HOST=${HOST} pm2 start ${NODE_BIN} --name ${APP_NAME} -- ${REMOTE_DIR}/.output/server/index.mjs && pm2 save"
+ssh "${SERVER_USER}@${SERVER_HOST}" "cd ${REMOTE_DIR} && rm -rf .output && export PATH=$(dirname "${NODE_BIN}"):\\$PATH && export NODE_OPTIONS=\\\"--max-old-space-size=1024\\\" && npm install && npm run build && PORT=${PORT} HOST=${HOST} pm2 restart ${APP_NAME} --update-env || PORT=${PORT} HOST=${HOST} pm2 start ${NODE_BIN} --name ${APP_NAME} -- ${REMOTE_DIR}/.output/server/index.mjs && pm2 save"
