@@ -16,35 +16,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
-      - name: Sync build to server
+      - name: Sync repo to server
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
-          rsync -az --delete .output/ "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/portfolio/"
+          rsync -az --delete \
+            --exclude node_modules \
+            --exclude .git \
+            --exclude .nuxt \
+            --exclude .output \
+            ./ "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/portfolio/"
 
-      - name: Restart app
+      - name: Build and Restart app
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            PORT=3000 HOST=0.0.0.0 pm2 restart portfolio || PORT=3000 HOST=0.0.0.0 pm2 start /var/www/portfolio/server/index.mjs --name portfolio --interpreter node --time --env production
+            cd /var/www/portfolio
+            rm -rf .output
+            export PATH="/root/.nvm/versions/node/v20.19.5/bin:$PATH"
+            npm install
+            npm run build
+            PORT=3001 HOST=127.0.0.1 pm2 restart portfolio --update-env || PORT=3001 HOST=127.0.0.1 pm2 start /root/.nvm/versions/node/v20.19.5/bin/node --name portfolio -- /var/www/portfolio/.output/server/index.mjs
             pm2 save
