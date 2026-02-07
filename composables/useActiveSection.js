@@ -1,5 +1,6 @@
 export const useActiveSection = (sectionIds, options = {}) => {
     const route = useRoute();
+    const router = useRouter();
     const activeSection = ref('');
     let rafId;
     let sections = [];
@@ -7,10 +8,19 @@ export const useActiveSection = (sectionIds, options = {}) => {
     let lockUntil = 0;
     
     const setFromHash = (hash) => {
-        if (hash) {
-            activeSection.value = hash.replace('#', '');
-            lockUntil = Date.now() + (options.lockDuration ?? 650);
+        if (!hash) {
+            activeSection.value = '';
+            return;
         }
+        activeSection.value = hash.replace('#', '');
+        lockUntil = Date.now() + (options.lockDuration ?? 650);
+    };
+
+    const clearHash = () => {
+        if (!route.hash) {
+            return;
+        }
+        router.replace({path: route.path, query: route.query, hash: ''});
     };
     
     const refreshSections = () => {
@@ -43,12 +53,18 @@ export const useActiveSection = (sectionIds, options = {}) => {
                 return;
             }
             const marker = window.scrollY + window.innerHeight * markerRatio;
-            let current = sections[0]?.id || '';
+            let current = '';
             
             for (const section of sections) {
                 if (section.offsetTop <= marker) {
                     current = section.id;
                 }
+            }
+
+            if (!current) {
+                activeSection.value = '';
+                clearHash();
+                return;
             }
             
             const lastId = sectionIds[sectionIds.length - 1];
