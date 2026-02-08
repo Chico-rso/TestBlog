@@ -18,7 +18,7 @@
 	"eyebrow": "Frontend · Vue/Nuxt · TypeScript",
 	"name": "Amiran Bestaev",
 	"role": "Frontend Developer",
-	"subtitle": "I build fast, expressive interfaces for products with maps, catalogs, and complex business logic.",
+	"subtitle": "I make interfaces for product services with catalogs, maps, filters, and complex business logic. Vue/Nuxt/ TypeScript, focus on stability and scalability.",
 	"status": "Open to opportunities: remote, hybrid, on-site",
 	"location": "Moscow",
 	"ctaPrimary": "Contact",
@@ -54,7 +54,7 @@
 	},
 	"about": {
 	  "title": "About",
-	  "subtitle": "Frontend developer with 5+ years of commercial experience. Specializing in Vue.js and Nuxt.js (Vue 2/3, Nuxt 2/3) with TypeScript. I worked on legacy codebases, SPA/SSR architecture, and introduced testing. I value clean code, clear architecture, and product thinking."
+	  "subtitle": "Frontend is a developer with 5+ years of commercial experience. I specialize in developing product interfaces for Vue.js and Nuxt.js (Vue 2/3, Nuxt 2/3) using TypeScript. He worked with legacy code, participated in the design of SPA architecture and SSR applications, applied business logic to composables and implemented testing in existing projects. In my work, I focus on readable code, predictable architecture, and stability in production. Projects with real users, complex logic, and a long lifecycle are interesting."
 	}
   },
   "projects": [
@@ -200,8 +200,8 @@
 	{
 	  "group": "Frontend",
 	  "items": [
-		"Vue.js 2/3",
-		"Nuxt.js 2/3",
+		"Vue.js 2/3 (Composition API)",
+		"Nuxt.js 2/3 (SSR, routing, middleware)",
 		"TypeScript",
 		"JavaScript (ES6+)"
 	  ]
@@ -210,7 +210,8 @@
 	  "group": "State",
 	  "items": [
 		"Pinia",
-		"Vuex"
+		"Vuex",
+		"REST API, Axios"
 	  ]
 	},
 	{
@@ -218,7 +219,7 @@
 	  "items": [
 		"SCSS/Sass",
 		"BEM",
-		"Responsive layout",
+		"Adaptive and cross-browser layout",
 		"Cross-browser"
 	  ]
 	},
@@ -236,25 +237,22 @@
 	  "items": [
 		"Vitest",
 		"@nuxt/test-utils",
-		"Cypress"
+		"Cypress (e2e)"
 	  ]
 	},
 	{
 	  "group": "Other",
 	  "items": [
 		"SSR",
-		"REST API",
-		"Axios",
-		"GSAP",
-		"Maps"
+		"Map Integration (Maps)"
 	  ]
 	}
   ],
   "footer": {
-	"title": "Let's build a strong interface",
-	"subtitle": "Open to opportunities. I can quickly join a team and deliver to release.",
-	"emailLabel": "Email",
+	"title": "Let's discuss the project or the team.",
+	"subtitle": "I am open to suggestions for frontend development (Vue / Nuxt / TypeScript).",
 	"telegramLabel": "Telegram",
+	"emailLabel": "Email",
 	"locationLabel": "Location"
   }
 }

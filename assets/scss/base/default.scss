@@ -4,12 +4,12 @@
     margin-right: auto;
     margin-left: auto;
     position: relative;
-    padding: 0 30px;
+    padding: 0 16px;
     @media(min-width: $tablet) {
-        padding: 0 50px;
+        padding: 0 24px;
     }
     @media (min-width: $desktop) {
-        padding: 0 30px;
+        padding: 0 28px;
     }
 }
 

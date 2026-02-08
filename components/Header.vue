@@ -53,7 +53,16 @@ const {telegram} = portfolioConfig;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 16px 0;
+    padding: 16px 28px;
+
+
+    @media (max-width: $tablet) {
+        padding: 16px 24px;
+    }
+
+    @media (max-width: $desktop) {
+        padding: 16px;
+    }
 }
 
 .brand {
