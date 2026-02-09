@@ -1,7 +1,7 @@
 <template>
     <header class="site-header">
         <div class="container site-header__inner">
-            <a class="brand" href="#top" aria-label="Home">
+            <a class="brand" href="#top" aria-label="Home" @click.prevent="scrollToTop">
                 <span>AB</span>
             </a>
             <nav class="site-nav" aria-label="Primary">
@@ -36,6 +36,13 @@ import { portfolioConfig } from '~/data/portfolioConfig.js';
 const {lang, t, toggleLang} = useLanguage();
 const {activeSection} = useActiveSection(['work', 'experience', 'skills', 'about', 'contact']);
 const {telegram} = portfolioConfig;
+
+const scrollToTop = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+};
 </script>
 
 <style lang="scss" scoped>
