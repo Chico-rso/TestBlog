@@ -62,7 +62,6 @@ const scrollToTop = () => {
     gap: 20px;
     padding: 16px 28px;
 
-
     @media (max-width: $tablet) {
         padding: 16px 24px;
     }
