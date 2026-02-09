@@ -20,6 +20,10 @@ export const useActiveSection = (sectionIds, options = {}) => {
         if (!route.hash) {
             return;
         }
+        const hashId = route.hash.replace('#', '');
+        if (!sectionIds.includes(hashId)) {
+            return;
+        }
         router.replace({path: route.path, query: route.query, hash: ''});
     };
     
