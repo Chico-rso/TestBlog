@@ -16,30 +16,35 @@ export const useTheme = () => {
         }
     };
     
-    const toggleTheme = () => {
-        theme.value = theme.value === 'dark' ? 'light' : 'dark';
+    const persistTheme = (value) => {
+        if (!process.client) {
+            return;
+        }
+        localStorage.setItem('theme', value);
     };
     
-    if (!initialized.value) {
-        if (process.client) {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'light' || savedTheme === 'dark') {
-                theme.value = savedTheme;
-            } else {
-                theme.value = prefersDark ? 'dark' : 'light';
-            }
+    const toggleTheme = () => {
+        theme.value = theme.value === 'dark' ? 'light' : 'dark';
+        applyTheme(theme.value);
+        persistTheme(theme.value);
+    };
+    
+    if (process.client && !initialized.value) {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+            theme.value = savedTheme;
+        } else {
+            theme.value = prefersDark ? 'dark' : 'light';
         }
+        applyTheme(theme.value);
         
         watch(
             theme,
             (value) => {
-                if (process.client) {
-                    localStorage.setItem('theme', value);
-                    applyTheme(value);
-                }
+                applyTheme(value);
+                persistTheme(value);
             },
-            {immediate: true},
         );
         
         initialized.value = true;
