@@ -1,12 +1,14 @@
 <template>
     <a class="skip-link" href="#main-content">{{ lang === 'ru' ? 'Перейти к контенту' : 'Skip to content' }}</a>
     <Header/>
-    <main id="main-content">
-        <NuxtPage/>
-    </main>
-    <Footer/>
-    <CommandPalette/>
-    <Sprite/>
+	<main id="main-content">
+	    <NuxtPage/>
+	</main>
+	<Footer/>
+	<ClientOnly>
+	    <CommandPalette/>
+	</ClientOnly>
+	<Sprite/>
 </template>
 
 <script setup>
@@ -36,5 +38,10 @@ main
 .skip-link:focus
 {
     top: 12px;
+}
+
+body.menu-open
+{
+    overflow: hidden;
 }
 </style>

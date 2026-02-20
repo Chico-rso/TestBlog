@@ -760,6 +760,44 @@ body {
     padding-bottom: 24px;
 }
 
+@media (min-width: $tablet) and (max-width: 1023px) {
+    .hero__inner {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'content'
+            'visual'
+            'stats';
+        gap: 20px;
+        align-items: start;
+    }
+
+    .hero__title-main {
+        font-size: clamp(56px, 8vw, 82px);
+    }
+
+    .hero__title-role {
+        font-size: clamp(20px, 2.9vw, 30px);
+    }
+
+    .hero__visual {
+        width: min(100%, 620px);
+        min-height: 320px;
+        justify-self: stretch;
+    }
+
+    .hero__stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-card__value {
+        font-size: 18px;
+    }
+}
+
 @media (max-width: 720px) {
     .hero {
         padding: 92px 0 60px;

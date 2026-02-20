@@ -1,6 +1,7 @@
 export const useTheme = () => {
     const theme = useState('theme', () => 'light');
     const initialized = useState('theme-initialized', () => false);
+    let stopThemeSync;
     
     const applyTheme = (value) => {
         if (!process.client) {
@@ -25,33 +26,36 @@ export const useTheme = () => {
     
     const toggleTheme = () => {
         theme.value = theme.value === 'dark' ? 'light' : 'dark';
-        applyTheme(theme.value);
-        persistTheme(theme.value);
     };
-    
-    if (process.client && !initialized.value) {
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'light' || savedTheme === 'dark') {
-            theme.value = savedTheme;
-        } else {
-            theme.value = prefersDark ? 'dark' : 'light';
-        }
-        applyTheme(theme.value);
-        
-        watch(
-            theme,
-            (value) => {
-                applyTheme(value);
-                persistTheme(value);
-            },
-        );
-        
-        initialized.value = true;
-    }
-    
+
     onMounted(() => {
+        if (!initialized.value) {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'light' || savedTheme === 'dark') {
+                theme.value = savedTheme;
+            } else {
+                theme.value = prefersDark ? 'dark' : 'light';
+            }
+
+            stopThemeSync = watch(
+                theme,
+                (value) => {
+                    applyTheme(value);
+                    persistTheme(value);
+                },
+            );
+
+            initialized.value = true;
+        }
+
         applyTheme(theme.value);
+    });
+
+    onBeforeUnmount(() => {
+        if (stopThemeSync) {
+            stopThemeSync();
+        }
     });
     
     return {theme, toggleTheme};
