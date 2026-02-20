@@ -16,6 +16,8 @@ export default defineNuxtConfig({
                 },
                 {name: 'author', content: 'Amiran Bestaev'},
                 {name: 'robots', content: 'index,follow'},
+                {name: 'application-name', content: 'Amiran Bestaev'},
+                {name: 'apple-mobile-web-app-title', content: 'Amiran Bestaev'},
                 {name: 'theme-color', content: '#f2f4ff'},
                 {property: 'og:image', content: '/og-image.png'},
                 {property: 'og:site_name', content: 'Amiran Bestaev'},
@@ -25,6 +27,7 @@ export default defineNuxtConfig({
             link: [
                 {rel: 'icon', href: '/favicon.ico'},
                 {rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'},
+                {rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png'},
                 {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png'},
                 {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png'},
                 {rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png'},
