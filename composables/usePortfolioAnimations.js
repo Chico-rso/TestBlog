@@ -17,40 +17,48 @@ export const usePortfolioAnimations = (rootRef) => {
         gsap.registerPlugin(ScrollTrigger);
         
         gsapContext = gsap.context(() => {
-            gsap.from('.hero__boot p', {
+            const heroTimeline = gsap.timeline();
+
+            heroTimeline.from('.hero__boot p', {
                 opacity: 0,
-                x: -16,
+                x: -14,
+                duration: 0.25,
+                stagger: 0.08,
+                ease: 'none',
+            });
+            heroTimeline.from('.hero__eyebrow', {opacity: 0, y: 12, duration: 0.35, ease: 'none'}, '-=0.04');
+            heroTimeline.from('.hero__title-reveal', {
+                opacity: 0,
+                y: 36,
+                duration: 0.45,
+                stagger: 0.08,
+                ease: 'none',
+            }, '-=0.08');
+            heroTimeline.from('.hero__subtitle', {opacity: 0, y: 14, duration: 0.35, ease: 'none'}, '-=0.05');
+            heroTimeline.from('.hero__meta', {opacity: 0, y: 12, duration: 0.35, ease: 'none'}, '-=0.1');
+            heroTimeline.from('.hero__cta .btn', {
+                opacity: 0,
+                y: 12,
                 duration: 0.35,
                 stagger: 0.12,
-                ease: 'power2.out',
-            });
-            gsap.from('.hero__eyebrow', {opacity: 0, y: 20, duration: 0.6, ease: 'power3.out'});
-            gsap.from('.hero__title-main', {opacity: 0, y: 30, duration: 0.7, delay: 0.05, ease: 'power3.out'});
-            gsap.from('.hero__title-role', {opacity: 0, y: 30, duration: 0.7, delay: 0.15, ease: 'power3.out'});
-            gsap.from('.hero__subtitle', {opacity: 0, y: 24, duration: 0.6, delay: 0.2, ease: 'power3.out'});
-            gsap.from('.hero__meta', {opacity: 0, y: 20, duration: 0.6, delay: 0.3, ease: 'power3.out'});
-            gsap.from('.hero__cta .btn', {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                delay: 0.35,
-                stagger: 0.1,
-                ease: 'power3.out',
-            });
+                ease: 'none',
+            }, '-=0.08');
+            heroTimeline.from('.hero__command-hint', {opacity: 0, y: 8, duration: 0.3, ease: 'none'}, '-=0.08');
+
             gsap.from('.stat-card', {
                 opacity: 0,
-                y: 20,
-                duration: 0.5,
-                delay: 0.45,
-                stagger: 0.12,
-                ease: 'power3.out',
+                y: 14,
+                duration: 0.45,
+                delay: 0.5,
+                stagger: 0.1,
+                ease: 'none',
             });
             gsap.from('.hero__visual', {
                 opacity: 0,
-                scale: 0.9,
-                duration: 0.9,
-                delay: 0.2,
-                ease: 'power3.out',
+                scale: 0.94,
+                duration: 0.55,
+                delay: 0.45,
+                ease: 'none',
             });
             
             gsap.to('.hero__glow', {
@@ -94,13 +102,33 @@ export const usePortfolioAnimations = (rootRef) => {
                 },
             });
             
+            gsap.to('.hero__signal--one', {
+                xPercent: 6,
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            });
+
+            gsap.to('.hero__signal--two', {
+                xPercent: -6,
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            });
+
             gsap.utils.toArray('.reveal').forEach((el, index) => {
                 gsap.from(el, {
                     opacity: 0,
-                    y: 36,
-                    duration: 0.6,
+                    y: 28,
+                    duration: 0.5,
                     delay: Math.min(index * 0.03, 0.18),
-                    ease: 'power3.out',
+                    ease: 'none',
                     scrollTrigger: {
                         trigger: el,
                         start: 'top 85%',

@@ -10,20 +10,30 @@
                    :aria-current="activeSection === item.id ? 'location' : undefined">{{ item.label }}</a>
             </nav>
             <div class="site-actions">
+                <button class="command-toggle" type="button" @click="openCommandPalette"
+                        :aria-label="lang === 'ru' ? 'Открыть командную палитру' : 'Open command palette'">
+                    <span>{{ lang === 'ru' ? 'Команды' : 'Command' }}</span>
+                    <kbd>⌘K</kbd>
+                </button>
                 <button class="theme-toggle" type="button" @click="toggleTheme"
-                        :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'">
+                        :aria-label="theme === 'dark'
+                            ? (lang === 'ru' ? 'Переключить на светлую тему' : 'Switch to light theme')
+                            : (lang === 'ru' ? 'Переключить на тёмную тему' : 'Switch to dark theme')">
                     <span class="theme-toggle__track" :class="{ 'is-dark': theme === 'dark' }">
                         <span class="theme-toggle__thumb"></span>
                     </span>
-                    <span class="theme-toggle__text">{{ theme === 'dark' ? 'Dark' : 'Light' }}</span>
+                    <span class="theme-toggle__text">
+                        {{ theme === 'dark' ? (lang === 'ru' ? 'Тёмная' : 'Dark') : (lang === 'ru' ? 'Светлая' : 'Light') }}
+                    </span>
                 </button>
-                <button class="lang-toggle" type="button" @click="toggleLang" aria-label="Toggle language">
+                <button class="lang-toggle" type="button" @click="toggleLang"
+                        :aria-label="lang === 'ru' ? 'Сменить язык' : 'Toggle language'">
                     <span :class="{ active: lang === 'ru' }">RU</span>
                     <span>/</span>
                     <span :class="{ active: lang === 'en' }">EN</span>
                 </button>
                 <a class="contact-pill" :href="`https://t.me/${telegram}`" target="_blank" rel="noreferrer">
-                    Telegram
+                    {{ lang === 'ru' ? 'Телеграм' : 'Telegram' }}
                 </a>
             </div>
         </div>
@@ -40,12 +50,12 @@ const {telegram} = portfolioConfig;
 const navItems = computed(() => {
     if (lang.value === 'ru') {
         return [
-            {id: 'profile', label: 'PROFILE'},
-            {id: 'approach', label: 'APPROACH'},
-            {id: 'work', label: 'CASES'},
-            {id: 'stack', label: 'STACK'},
-            {id: 'principles', label: 'PRINCIPLES'},
-            {id: 'contact', label: 'CONTACT'},
+            {id: 'profile', label: 'ПРОФИЛЬ'},
+            {id: 'approach', label: 'ПОДХОД'},
+            {id: 'work', label: 'КЕЙСЫ'},
+            {id: 'stack', label: 'СТЕК'},
+            {id: 'principles', label: 'ПРИНЦИПЫ'},
+            {id: 'contact', label: 'КОНТАКТ'},
         ];
     }
     
@@ -64,6 +74,13 @@ const scrollToTop = () => {
         return;
     }
     window.scrollTo({top: 0, behavior: 'smooth'});
+};
+
+const openCommandPalette = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    window.dispatchEvent(new Event('portfolio:command-open'));
 };
 </script>
 
@@ -162,6 +179,39 @@ const scrollToTop = () => {
     cursor: pointer;
 }
 
+.command-toggle {
+    border: 1px solid var(--portfolio-border);
+    border-radius: 10px;
+    padding: 6px 10px;
+    background: var(--portfolio-surface);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--portfolio-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    transition: border-color 0.2s linear, color 0.2s linear;
+
+    kbd {
+        border: 1px solid var(--portfolio-border);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 11px;
+        color: var(--portfolio-title);
+        background: var(--portfolio-surface-strong);
+    }
+}
+
+@media (hover: hover) {
+    .command-toggle:hover {
+        border-color: color-mix(in srgb, var(--portfolio-accent) 40%, var(--portfolio-border));
+        color: var(--portfolio-title);
+    }
+}
+
 .theme-toggle__track {
     width: 34px;
     height: 18px;
@@ -232,6 +282,10 @@ const scrollToTop = () => {
 }
 
 @media (max-width: 720px) {
+    .command-toggle span {
+        display: none;
+    }
+
     .site-header .container {
         padding-left: 16px;
         padding-right: 16px;

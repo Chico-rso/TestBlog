@@ -251,8 +251,8 @@
   "footer": {
 	"title": "Давайте обсудим проект или команду.",
 	"subtitle": "Открыт к предложениям по frontend-разработке (Vue / Nuxt / TypeScript).",
-	"telegramLabel": "Telegram",
-	"emailLabel": "Email",
+	"telegramLabel": "Телеграм",
+	"emailLabel": "Почта",
 	"locationLabel": "Локация"
   }
 }

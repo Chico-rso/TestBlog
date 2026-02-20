@@ -9,8 +9,12 @@
                 </div>
                 <p class="hero__eyebrow">{{ system.stack }}</p>
                 <h1 id="hero-title" class="hero__title">
-                    <span class="hero__title-main">{{ system.title }}</span>
-                    <em class="hero__title-role">{{ system.lead }}</em>
+                    <span class="hero__title-reveal">
+                        <span class="hero__title-main">{{ system.title }}</span>
+                    </span>
+                    <span class="hero__title-reveal">
+                        <em class="hero__title-role">{{ system.lead }}</em>
+                    </span>
                 </h1>
                 <p class="hero__subtitle">{{ copy.hero.subtitle }}</p>
                 <div class="hero__meta">
@@ -21,12 +25,15 @@
                     <a class="btn btn--primary" href="#work">{{ system.ctaPrimary }}</a>
                     <a class="btn btn--ghost" href="#contact">{{ system.ctaSecondary }}</a>
                 </div>
+                <p v-if="system.commandHint" class="hero__command-hint">{{ system.commandHint }}</p>
             </div>
             <div class="hero__visual" aria-hidden="true">
                 <div class="hero__orb hero__orb--main"></div>
                 <div class="hero__orb hero__orb--accent"></div>
                 <div class="hero__ring hero__ring--one"></div>
                 <div class="hero__ring hero__ring--two"></div>
+                <div class="hero__signal hero__signal--one"></div>
+                <div class="hero__signal hero__signal--two"></div>
                 <div class="hero__visual-card">
                     <span>{{ copy.stats[1].value }}</span>
                     <span>{{ copy.stats[2].value }}</span>

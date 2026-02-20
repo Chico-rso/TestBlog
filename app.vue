@@ -1,12 +1,17 @@
 <template>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">{{ lang === 'ru' ? 'Перейти к контенту' : 'Skip to content' }}</a>
     <Header/>
     <main id="main-content">
         <NuxtPage/>
     </main>
     <Footer/>
+    <CommandPalette/>
     <Sprite/>
 </template>
+
+<script setup>
+const {lang} = useLanguage();
+</script>
 
 <style>
 main

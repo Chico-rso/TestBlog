@@ -7,15 +7,15 @@
             </div>
             <address class="site-footer__links">
                 <div>
-                    <span>TELEGRAM</span>
+                    <span>{{ t.footer.telegramLabel }}</span>
                     <a :href="`https://t.me/${telegram}`" target="_blank" rel="noreferrer">@{{ telegram }}</a>
                 </div>
                 <div>
-                    <span>EMAIL</span>
+                    <span>{{ t.footer.emailLabel }}</span>
                     <a :href="`mailto:${email}`">{{ email }}</a>
                 </div>
                 <div>
-                    <span>LOCATION</span>
+                    <span>{{ t.footer.locationLabel }}</span>
                     <strong>{{ t.hero.location }}</strong>
                 </div>
             </address>
