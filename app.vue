@@ -19,11 +19,11 @@ main
     position: absolute;
     left: 12px;
     top: -40px;
-    background: #ffffff;
-    color: #1c1c1f;
+    background: var(--portfolio-surface-strong);
+    color: var(--portfolio-text);
     padding: 8px 12px;
     border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(28, 28, 31, 0.15);
+    box-shadow: 0 10px 20px var(--portfolio-shadow-soft);
     z-index: 100;
     transition: top 0.2s ease;
 }

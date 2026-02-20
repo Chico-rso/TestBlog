@@ -35,8 +35,9 @@ const {email, telegram} = portfolioConfig;
 <style lang="scss" scoped>
 .site-footer {
     padding: 80px 0 50px;
-    background: #151518;
-    color: #f4f4f6;
+    background: linear-gradient(170deg, color-mix(in srgb, var(--portfolio-bg) 78%, #05060b), color-mix(in srgb, var(--portfolio-bg-soft) 62%, #0a0f1d));
+    color: var(--portfolio-text);
+    border-top: 1px solid var(--portfolio-border);
 }
 
 .site-footer__inner {
@@ -52,7 +53,7 @@ const {email, telegram} = portfolioConfig;
 
     p {
         margin: 0;
-        color: rgba(244, 244, 246, 0.7);
+        color: var(--portfolio-muted);
         max-width: 520px;
     }
 }
@@ -71,19 +72,19 @@ const {email, telegram} = portfolioConfig;
         font-size: 12px;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: rgba(244, 244, 246, 0.6);
+        color: var(--portfolio-muted);
     }
 
     a,
     strong {
-        color: #fff;
-        font-weight: 600;
+        color: var(--portfolio-title);
+        font-weight: 700;
     }
 }
 
 .site-footer__meta {
     font-size: 12px;
-    color: rgba(244, 244, 246, 0.5);
+    color: var(--portfolio-muted);
 }
 
 @media (min-width: $tablet) {

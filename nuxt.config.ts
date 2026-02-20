@@ -16,7 +16,7 @@ export default defineNuxtConfig({
                 },
                 {name: 'author', content: 'Amiran Bestaev'},
                 {name: 'robots', content: 'index,follow'},
-                {name: 'theme-color', content: '#f8f5f0'},
+                {name: 'theme-color', content: '#f2f4ff'},
                 {property: 'og:image', content: '/og-image.png'},
                 {property: 'og:site_name', content: 'Amiran Bestaev'},
                 {name: 'twitter:card', content: 'summary_large_image'},

@@ -6,8 +6,8 @@
             <div class="hero__content">
                 <p class="hero__eyebrow">{{ copy.hero.eyebrow }}</p>
                 <h1 id="hero-title" class="hero__title">
-                    <span>{{ copy.hero.name }}</span>
-                    <em>{{ copy.hero.role }}</em>
+                    <span class="hero__title-main">{{ copy.hero.name }}</span>
+                    <em class="hero__title-role">{{ copy.hero.role }}</em>
                 </h1>
                 <p class="hero__subtitle">{{ copy.hero.subtitle }}</p>
                 <div class="hero__meta">
@@ -22,6 +22,16 @@
                     <a class="btn btn--ghost btn--download" :href="resumeUrl" download>
                         {{ copy.hero.ctaCv }}
                     </a>
+                </div>
+            </div>
+            <div class="hero__visual" aria-hidden="true">
+                <div class="hero__orb hero__orb--main"></div>
+                <div class="hero__orb hero__orb--accent"></div>
+                <div class="hero__ring hero__ring--one"></div>
+                <div class="hero__ring hero__ring--two"></div>
+                <div class="hero__visual-card">
+                    <span>{{ copy.stats[1].value }}</span>
+                    <span>{{ copy.stats[2].value }}</span>
                 </div>
             </div>
             <div class="hero__stats">
