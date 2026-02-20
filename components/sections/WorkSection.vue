@@ -2,19 +2,26 @@
     <section class="section section--work" aria-labelledby="work-title">
         <div class="container">
             <div class="section__head reveal">
-                <h2 id="work-title">{{ copy.sections.work.title }}</h2>
-                <p>{{ copy.sections.work.subtitle }}</p>
+                <h2 id="work-title">{{ system.title }}</h2>
+                <p>{{ system.subtitle }}</p>
             </div>
             <ul class="work-grid" role="list">
-                <li v-for="project in copy.projects" :key="project.name">
+                <li v-for="(project, index) in copy.projects" :key="project.name">
                     <article class="work-card reveal">
                         <div class="work-card__top">
-                            <h3>{{ project.name }}</h3>
+                            <h3>PROJECT_{{ String(index + 1).padStart(2, '0') }} · {{ project.name }}</h3>
                             <span>{{ project.type }}</span>
                         </div>
-                        <p class="work-card__desc">{{ project.description }}</p>
-                        <ul class="work-card__tags" role="list">
-                            <li v-for="tag in project.tags" :key="tag">{{ tag }}</li>
+                        <ul class="work-card__meta" role="list">
+                            <li>STATUS: <b>{{ system.status }}</b></li>
+                            <li>ROLE: <b>{{ system.role }}</b></li>
+                            <li>STACK: <b>{{ project.tags.join(' / ') }}</b></li>
+                            <li>RESULT: <b>{{ system.result }}</b></li>
+                        </ul>
+                        <ul class="work-card__details" role="list">
+                            <li>{{ system.problem }}: {{ project.description }}</li>
+                            <li>{{ system.solution }}: {{ project.tags.join(', ') }}</li>
+                            <li>{{ system.impact }}: {{ system.metric }}</li>
                         </ul>
                         <div class="work-card__links">
                             <template v-if="project.links.length">
@@ -35,5 +42,6 @@
 <script setup>
 defineProps({
     copy: {type: Object, required: true},
+    system: {type: Object, required: true},
 });
 </script>

@@ -2,25 +2,24 @@
     <div ref="root" class="portfolio" id="top">
         <HeroSection
             :copy="t"
-            :email="config.email"
-            :telegram="config.telegram"
-            :resume-url="config.resumeUrl"
+            :system="system.hero"
         />
-        <WorkSection id="work" :copy="t"/>
-        <ExperienceSection id="experience" :copy="t"/>
-        <SkillsSection id="skills" :copy="t"/>
-        <AboutSection id="about" :copy="t" :email="config.email" :telegram="config.telegram"/>
+        <AboutSection id="profile" :system="system.profile"/>
+        <ExperienceSection id="approach" :system="system.approach"/>
+        <WorkSection id="work" :copy="t" :system="system.cases"/>
+        <SkillsSection id="stack" :system="system.stack"/>
+        <PrinciplesSection id="principles" :system="system.principles"/>
     </div>
 </template>
 
 <script setup>
-import { portfolioConfig } from '~/data/portfolioConfig.js';
+import { systemSections } from '~/data/systemSections.js';
 
 const root = ref(null);
-const {t} = useLanguage();
+const {t, lang} = useLanguage();
 
 usePortfolioHead();
 usePortfolioAnimations(root);
 
-const config = portfolioConfig;
+const system = computed(() => systemSections[lang.value] || systemSections.en);
 </script>

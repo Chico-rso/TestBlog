@@ -2,21 +2,18 @@
     <section class="section section--experience" aria-labelledby="experience-title">
         <div class="container">
             <div class="section__head reveal">
-                <h2 id="experience-title">{{ copy.sections.experience.title }}</h2>
-                <p>{{ copy.sections.experience.subtitle }}</p>
+                <h2 id="experience-title">{{ system.title }}</h2>
             </div>
-            <ol class="timeline" role="list">
-                <li v-for="item in copy.experience" :key="item.company" class="timeline__item reveal">
-                    <div class="timeline__meta">
-                        <h3>{{ item.company }}</h3>
-                        <span>{{ item.period }}</span>
-                    </div>
-                    <div class="timeline__body">
-                        <p class="timeline__role">{{ item.role }}</p>
-                        <p class="timeline__stack">{{ item.stack }}</p>
-                        <ul role="list">
-                            <li v-for="point in item.bullets" :key="point">{{ point }}</li>
-                        </ul>
+            <ol class="approach-timeline" role="list">
+                <li v-for="(item, index) in system.items" :key="item.step" class="approach-item reveal"
+                    :class="{ 'is-active': activeStep === index }">
+                    <button class="approach-item__head" type="button" @click="activeStep = index">
+                        <span class="approach-item__step">{{ item.step }}</span>
+                        <span class="approach-item__title">{{ item.title }}</span>
+                    </button>
+                    <p class="approach-item__short">{{ item.short }}</p>
+                    <div class="approach-item__details" :aria-hidden="activeStep !== index">
+                        <p>{{ item.full }}</p>
                     </div>
                 </li>
             </ol>
@@ -25,7 +22,9 @@
 </template>
 
 <script setup>
+const activeStep = ref(0);
+
 defineProps({
-    copy: {type: Object, required: true},
+    system: {type: Object, required: true},
 });
 </script>

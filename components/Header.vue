@@ -5,16 +5,9 @@
                 <span>AB</span>
             </a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="#work" :class="{ active: activeSection === 'work' }"
-                   :aria-current="activeSection === 'work' ? 'location' : undefined">{{ t.nav.work }}</a>
-                <a href="#experience" :class="{ active: activeSection === 'experience' }"
-                   :aria-current="activeSection === 'experience' ? 'location' : undefined">{{ t.nav.experience }}</a>
-                <a href="#skills" :class="{ active: activeSection === 'skills' }"
-                   :aria-current="activeSection === 'skills' ? 'location' : undefined">{{ t.nav.skills }}</a>
-                <a href="#about" :class="{ active: activeSection === 'about' }"
-                   :aria-current="activeSection === 'about' ? 'location' : undefined">{{ t.nav.about }}</a>
-                <a href="#contact" :class="{ active: activeSection === 'contact' }"
-                   :aria-current="activeSection === 'contact' ? 'location' : undefined">{{ t.nav.contact }}</a>
+                <a v-for="item in navItems" :key="item.id" :href="`#${item.id}`"
+                   :class="{ active: activeSection === item.id }"
+                   :aria-current="activeSection === item.id ? 'location' : undefined">{{ item.label }}</a>
             </nav>
             <div class="site-actions">
                 <button class="theme-toggle" type="button" @click="toggleTheme"
@@ -40,10 +33,31 @@
 <script setup>
 import { portfolioConfig } from '~/data/portfolioConfig.js';
 
-const {lang, t, toggleLang} = useLanguage();
+const {lang, toggleLang} = useLanguage();
 const {theme, toggleTheme} = useTheme();
-const {activeSection} = useActiveSection(['work', 'experience', 'skills', 'about', 'contact']);
+const {activeSection} = useActiveSection(['profile', 'approach', 'work', 'stack', 'principles', 'contact']);
 const {telegram} = portfolioConfig;
+const navItems = computed(() => {
+    if (lang.value === 'ru') {
+        return [
+            {id: 'profile', label: 'PROFILE'},
+            {id: 'approach', label: 'APPROACH'},
+            {id: 'work', label: 'CASES'},
+            {id: 'stack', label: 'STACK'},
+            {id: 'principles', label: 'PRINCIPLES'},
+            {id: 'contact', label: 'CONTACT'},
+        ];
+    }
+    
+    return [
+        {id: 'profile', label: 'PROFILE'},
+        {id: 'approach', label: 'APPROACH'},
+        {id: 'work', label: 'CASES'},
+        {id: 'stack', label: 'STACK'},
+        {id: 'principles', label: 'PRINCIPLES'},
+        {id: 'contact', label: 'CONTACT'},
+    ];
+});
 
 const scrollToTop = () => {
     if (typeof window === 'undefined') {
@@ -96,7 +110,10 @@ const scrollToTop = () => {
 .site-nav {
     display: none;
     gap: 18px;
-    font-size: 14px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     color: var(--portfolio-muted);
 
     a {
@@ -180,6 +197,8 @@ const scrollToTop = () => {
     font-weight: 700;
     letter-spacing: 0.4px;
     color: var(--portfolio-muted);
+    font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    text-transform: uppercase;
 }
 
 .lang-toggle {
@@ -201,11 +220,14 @@ const scrollToTop = () => {
 
 .contact-pill {
     padding: 8px 14px;
-    border-radius: 999px;
-    background: linear-gradient(140deg, var(--portfolio-accent), var(--portfolio-accent-2));
-    color: #fff;
+    border-radius: 12px;
+    background: var(--portfolio-accent);
+    color: #04141a;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     box-shadow: 0 12px 24px var(--portfolio-shadow-strong);
 }
 

@@ -17,6 +17,13 @@ export const usePortfolioAnimations = (rootRef) => {
         gsap.registerPlugin(ScrollTrigger);
         
         gsapContext = gsap.context(() => {
+            gsap.from('.hero__boot p', {
+                opacity: 0,
+                x: -16,
+                duration: 0.35,
+                stagger: 0.12,
+                ease: 'power2.out',
+            });
             gsap.from('.hero__eyebrow', {opacity: 0, y: 20, duration: 0.6, ease: 'power3.out'});
             gsap.from('.hero__title-main', {opacity: 0, y: 30, duration: 0.7, delay: 0.05, ease: 'power3.out'});
             gsap.from('.hero__title-role', {opacity: 0, y: 30, duration: 0.7, delay: 0.15, ease: 'power3.out'});

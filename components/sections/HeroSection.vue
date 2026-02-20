@@ -4,10 +4,13 @@
         <div class="hero__grid"></div>
         <div class="container hero__inner">
             <div class="hero__content">
-                <p class="hero__eyebrow">{{ copy.hero.eyebrow }}</p>
+                <div class="hero__boot">
+                    <p v-for="line in system.boot" :key="line">{{ line }}</p>
+                </div>
+                <p class="hero__eyebrow">{{ system.stack }}</p>
                 <h1 id="hero-title" class="hero__title">
-                    <span class="hero__title-main">{{ copy.hero.name }}</span>
-                    <em class="hero__title-role">{{ copy.hero.role }}</em>
+                    <span class="hero__title-main">{{ system.title }}</span>
+                    <em class="hero__title-role">{{ system.lead }}</em>
                 </h1>
                 <p class="hero__subtitle">{{ copy.hero.subtitle }}</p>
                 <div class="hero__meta">
@@ -15,13 +18,8 @@
                     <span>{{ copy.hero.status }}</span>
                 </div>
                 <div class="hero__cta">
-                    <a class="btn btn--primary" :href="`mailto:${email}`">{{ copy.hero.ctaPrimary }}</a>
-                    <a class="btn btn--ghost" :href="`https://t.me/${telegram}`" target="_blank" rel="noreferrer">
-                        {{ copy.hero.ctaSecondary }}
-                    </a>
-                    <a class="btn btn--ghost btn--download" :href="resumeUrl" download>
-                        {{ copy.hero.ctaCv }}
-                    </a>
+                    <a class="btn btn--primary" href="#work">{{ system.ctaPrimary }}</a>
+                    <a class="btn btn--ghost" href="#contact">{{ system.ctaSecondary }}</a>
                 </div>
             </div>
             <div class="hero__visual" aria-hidden="true">
@@ -47,8 +45,6 @@
 <script setup>
 defineProps({
     copy: {type: Object, required: true},
-    email: {type: String, required: true},
-    telegram: {type: String, required: true},
-    resumeUrl: {type: String, required: true},
+    system: {type: Object, required: true},
 });
 </script>
