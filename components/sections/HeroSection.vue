@@ -24,6 +24,7 @@
                 <div class="hero__cta">
                     <a class="btn btn--primary" href="#work">{{ system.ctaPrimary }}</a>
                     <a class="btn btn--ghost" href="#contact">{{ system.ctaSecondary }}</a>
+                    <a class="btn btn--ghost" :href="resumeUrl" download>{{ copy.hero.ctaCv }}</a>
                 </div>
                 <p v-if="system.commandHint" class="hero__command-hint">{{ system.commandHint }}</p>
             </div>
@@ -50,8 +51,12 @@
 </template>
 
 <script setup>
+import { portfolioConfig } from '~/data/portfolioConfig.js';
+
 defineProps({
     copy: {type: Object, required: true},
     system: {type: Object, required: true},
 });
+
+const {resumeUrl} = portfolioConfig;
 </script>
