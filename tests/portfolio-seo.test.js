@@ -58,14 +58,7 @@ const createMetrikaHarness = () => {
                         scripts.splice(index, 1);
                     }
                 },
-                installYmOnLoad: true,
                 dispatch: (name) => {
-                    if (name === 'load' && script.installYmOnLoad) {
-                        const queuedCalls = window.ym?.a || [];
-                        const ym = (...args) => ym.a.push(args);
-                        ym.a = queuedCalls;
-                        window.ym = ym;
-                    }
                     listeners.get(name)?.();
                 },
             };
@@ -363,15 +356,43 @@ test('Yandex Metrika reuses an existing matching script instead of loading a dup
     assert.equal(harness.window.ym.a.filter((call) => call[1] === 'hit').length, 1);
 });
 
-test('Yandex Metrika retries when a loaded script does not install the API', () => {
+test('Yandex Metrika initializes through the retained bootstrap queue after load', () => {
     const harness = createMetrikaHarness();
 
     harness.runFirst(harness.idleCallbacks);
-    harness.scripts[0].installYmOnLoad = false;
+    const bootstrapQueue = harness.window.ym;
     harness.scripts[0].dispatch('load');
+
+    assert.equal(harness.window.ym, bootstrapQueue);
+    assert.equal(harness.window.ym.a.filter((call) => call[1] === 'init').length, 1);
+    assert.equal(harness.window.ym.a.filter((call) => call[1] === 'hit').length, 1);
+    assert.equal(harness.scripts.length, 1);
+    assert.equal(harness.timeoutCallbacks.size, 0);
+
+    harness.hooks.get('page:finish')();
+    assert.equal(harness.window.ym.a.length, 2);
+    assert.equal(harness.scripts.length, 1);
+});
+
+test('Yandex Metrika retries when the script does not load within the timeout', () => {
+    const harness = createMetrikaHarness();
+
+    harness.runFirst(harness.idleCallbacks);
+    assert.equal(harness.scripts.length, 1);
+    assert.equal(harness.timeoutCallbacks.size, 1);
+
+    harness.runFirst(harness.timeoutCallbacks);
     assert.equal(harness.scripts.length, 0);
     assert.equal(typeof harness.window.ym, 'undefined');
     assert.equal(harness.timeoutCallbacks.size, 1);
+
+    harness.runFirst(harness.timeoutCallbacks);
+    assert.equal(harness.scripts.length, 1);
+
+    harness.scripts[0].dispatch('load');
+    assert.equal(harness.window.ym.a.filter((call) => call[1] === 'init').length, 1);
+    assert.equal(harness.window.ym.a.filter((call) => call[1] === 'hit').length, 1);
+    assert.equal(harness.timeoutCallbacks.size, 0);
 });
 
 test('Yandex Metrika restores its route hook after a BFCache page resumes', () => {

@@ -4,6 +4,7 @@ const INITIALIZED_MARKER = '__portfolioYandexMetrikaInitialized';
 const LAST_TRACKED_URL_MARKER = '__portfolioYandexMetrikaLastTrackedUrl';
 const QUEUE_MARKER = '__portfolioYandexMetrikaQueue';
 const RETRY_DELAY = 3000;
+const SCRIPT_LOAD_TIMEOUT = 10000;
 const MAX_RETRIES = 1;
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -12,6 +13,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     let idleHandle;
     let retryCount = 0;
     let retryHandle;
+    let scriptLoadTimeoutHandle;
     let timeoutHandle;
     let waitingForLoad = false;
     let removePageFinishHook = () => {};
@@ -96,8 +98,18 @@ export default defineNuxtPlugin((nuxtApp) => {
         activeScript?.removeEventListener('error', onScriptError);
     };
 
+    const clearScriptLoadTimeout = () => {
+        if (scriptLoadTimeoutHandle === undefined) {
+            return;
+        }
+
+        window.clearTimeout(scriptLoadTimeoutHandle);
+        scriptLoadTimeoutHandle = undefined;
+    };
+
     const failActiveScript = () => {
         const failedScript = activeScript;
+        clearScriptLoadTimeout();
         detachScriptListeners();
         activeScript = undefined;
         failedScript?.remove();
@@ -115,11 +127,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
 
         activeScript.dataset.loaded = 'true';
+        clearScriptLoadTimeout();
         detachScriptListeners();
-        if (typeof window.ym !== 'function' || window.ym[QUEUE_MARKER]) {
-            failActiveScript();
-            return;
-        }
         initialize();
     };
 
@@ -128,9 +137,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     };
 
     const watchScript = (script) => {
+        clearScriptLoadTimeout();
         activeScript = script;
         activeScript.addEventListener('load', onScriptLoad, {once: true});
         activeScript.addEventListener('error', onScriptError, {once: true});
+        scriptLoadTimeoutHandle = window.setTimeout(failActiveScript, SCRIPT_LOAD_TIMEOUT);
     };
 
     function loadScript() {
@@ -212,6 +223,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             window.clearTimeout(retryHandle);
             retryHandle = undefined;
         }
+        clearScriptLoadTimeout();
         detachScriptListeners();
     };
 
