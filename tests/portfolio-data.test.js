@@ -374,3 +374,114 @@ test('navigation orders live sections by document position and protects modal in
     assert.match(palette, /event\.button !== 0 \|\| event\.metaKey \|\| event\.ctrlKey \|\| event\.shiftKey \|\| event\.altKey/);
     assert.match(palette, /:aria-label="lang === 'ru' \? 'Закрыть' : 'Close'"/);
 });
+
+test('U2 case page composes all approved evidence sections in order', () => {
+    const source = readFileSync(new URL('../components/case/U2CasePage.vue', import.meta.url), 'utf8');
+    const componentOrder = [
+        'CaseHero',
+        'CaseFacts',
+        'CaseNarrative',
+        'CaseGallery',
+        'CaseResult',
+        'CaseNavigation',
+    ].map((component) => source.indexOf(`<${ component }`));
+
+    assert.ok(componentOrder.every((index) => index >= 0));
+    assert.deepEqual([...componentOrder].sort((left, right) => left - right), componentOrder);
+    assert.match(source, /<div ref="root" class="case-page" data-case-page="u2">/);
+    assert.match(source, /const \{t, lang\} = useLanguage\(\);/);
+    assert.match(source, /\.find\(\(\{id\}\) => id === 'u2'\)/);
+    assert.match(source, /const caseData = computed\(\(\) => project\.value\?\.case\);/);
+    assert.match(source, /createError\(\{statusCode: 404, statusMessage: 'U2 case not found'\}\)/);
+    assert.match(source, /portfolioRoutes\[lang\.value\]\.home/);
+    assert.match(source, /project\.value\.links\[0\]\.url/);
+    assert.match(source, /usePortfolioAnimations\(root\);/);
+    assert.match(source, /usePortfolioHead\('u2'\);/);
+});
+
+test('localized U2 route wrappers stay thin and case children stay prop-only', () => {
+    const wrappers = [
+        readFileSync(new URL('../pages/projects/u2.vue', import.meta.url), 'utf8'),
+        readFileSync(new URL('../pages/en/projects/u2.vue', import.meta.url), 'utf8'),
+    ];
+    const childNames = ['CaseHero', 'CaseFacts', 'CaseNarrative', 'CaseGallery', 'CaseResult', 'CaseNavigation'];
+
+    wrappers.forEach((source) => {
+        assert.equal(source.trim(), '<template>\n\t<U2CasePage/>\n</template>');
+    });
+
+    childNames.forEach((name) => {
+        const source = readFileSync(new URL(`../components/case/${ name }.vue`, import.meta.url), 'utf8');
+        assert.match(source, /defineProps\(/, `${ name } must declare its inputs`);
+        assert.doesNotMatch(source, /useLanguage|portfolioCopy|data\/portfolio\/(?:ru|en)\.json/);
+    });
+});
+
+test('U2 case evidence renders truthful semantic count surfaces and resilient media', () => {
+    const copy = loadCopy();
+    const facts = readFileSync(new URL('../components/case/CaseFacts.vue', import.meta.url), 'utf8');
+    const narrative = readFileSync(new URL('../components/case/CaseNarrative.vue', import.meta.url), 'utf8');
+    const gallery = readFileSync(new URL('../components/case/CaseGallery.vue', import.meta.url), 'utf8');
+
+    for (const locale of ['ru', 'en']) {
+        const caseData = copy[locale].projects.find(({id}) => id === 'u2').case;
+        assert.equal(caseData.facts.length, 4);
+        assert.equal(caseData.narrative.length, 4);
+        assert.equal(caseData.gallery.length, 4);
+    }
+
+    assert.match(facts, /<dl/);
+    assert.match(facts, /data-case-fact/);
+    assert.match(facts, /<dt>/);
+    assert.match(facts, /<dd>/);
+
+    assert.match(narrative, /<section/);
+    assert.match(narrative, /<article[^>]*v-for="item in items"[^>]*:key="item\.id"[^>]*:id="`case-\$\{item\.id\}`"[^>]*data-case-narrative/s);
+    assert.doesNotMatch(narrative, /v-html/);
+
+    assert.match(gallery, /<figure[^>]*data-case-media/);
+    assert.match(gallery, /<picture/);
+    assert.match(gallery, /type="image\/avif"/);
+    assert.match(gallery, /:src="item\?\.webp"/);
+    assert.match(gallery, /:width="item\?\.width"/);
+    assert.match(gallery, /:height="item\?\.height"/);
+    assert.match(gallery, /:alt="item\?\.alt \|\| ''"/);
+    assert.match(gallery, /decoding="async"/);
+    assert.match(gallery, /:loading="index === 0 \? 'eager' : 'lazy'"/);
+    assert.match(gallery, /reactive\(new Set\(\)\)/);
+    assert.match(gallery, /@error="markFailed\(item, index\)"/);
+    assert.match(gallery, /class="case-media__fallback"/);
+    assert.match(gallery, /<figcaption>/);
+});
+
+test('U2 case hero, result, and navigation preserve media and safe-link contracts', () => {
+    const hero = readFileSync(new URL('../components/case/CaseHero.vue', import.meta.url), 'utf8');
+    const result = readFileSync(new URL('../components/case/CaseResult.vue', import.meta.url), 'utf8');
+    const navigation = readFileSync(new URL('../components/case/CaseNavigation.vue', import.meta.url), 'utf8');
+
+    assert.match(hero, /<h1[^>]*>\{\{ project\.name \}\}<\/h1>/);
+    assert.match(hero, /caseData\.eyebrow/);
+    assert.match(hero, /caseData\.summary/);
+    assert.match(hero, /project\.teaserMedia\.avif/);
+    assert.match(hero, /type="image\/avif"/);
+    assert.match(hero, /project\.teaserMedia\.webp/);
+    assert.match(hero, /:width="project\.teaserMedia\.width"/);
+    assert.match(hero, /:height="project\.teaserMedia\.height"/);
+    assert.match(hero, /:alt="project\.teaserMedia\.alt"/);
+    assert.match(hero, /fetchpriority="high"/);
+    assert.match(hero, /decoding="async"/);
+    assert.match(hero, /target="_blank"/);
+    assert.match(hero, /rel="noreferrer"/);
+
+    assert.match(result, /\{\{ result \}\}/);
+    assert.match(result, /v-for="technology in technologies"/);
+    assert.doesNotMatch(result, /\d+%|\d+x/i);
+
+    assert.match(navigation, /<NuxtLink :to="homePath">/);
+    assert.match(navigation, /caseData\.backLabel/);
+    assert.match(navigation, /caseData\.externalLabel/);
+    assert.match(navigation, /caseData\.nextLabel/);
+    assert.match(navigation, /https:\/\/novaya\.ru\//);
+    assert.equal(navigation.match(/target="_blank"/g)?.length, 2);
+    assert.equal(navigation.match(/rel="noreferrer"/g)?.length, 2);
+});
