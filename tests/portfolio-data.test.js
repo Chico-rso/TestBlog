@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {existsSync, readFileSync, statSync} from 'node:fs';
 import test from 'node:test';
 
 import {validatePortfolioCopy} from '../lib/portfolio/validate.js';
@@ -329,6 +329,97 @@ test('portfolio styles include pointer glow, section accents, and reduced-motion
     assert.match(source, /\.work-card__glow/);
     assert.match(source, /--accent-progress/);
     assert.match(source, /prefers-reduced-motion: reduce/);
+});
+
+test('Montserrat CSS declares exactly two variable WOFF2 faces', () => {
+    const source = readFileSync(new URL('../assets/scss/base/fonts.scss', import.meta.url), 'utf8');
+    const faces = source.match(/@font-face\s*\{/g) || [];
+
+    assert.equal(faces.length, 2);
+    assert.match(source, /Montserrat-VariableFont_wght\.woff2/);
+    assert.match(source, /Montserrat-Italic-VariableFont_wght\.woff2/);
+    assert.match(source, /url\(['"]\/fonts\/Montserrat-VariableFont_wght\.woff2['"]\)/);
+    assert.match(source, /url\(['"]\/fonts\/Montserrat-Italic-VariableFont_wght\.woff2['"]\)/);
+    assert.equal(source.match(/font-weight:\s*100 900/g)?.length, 2);
+    assert.match(source, /font-style:\s*normal/);
+    assert.match(source, /font-style:\s*italic/);
+    assert.equal(source.match(/font-display:\s*swap/g)?.length, 2);
+    assert.doesNotMatch(source, /\.ttf/i);
+});
+
+test('generated Montserrat WOFF2 files are valid and reasonably sized', () => {
+    const conversionScript = readFileSync(new URL('../scripts/convert-fonts.py', import.meta.url), 'utf8');
+    const fontUrls = [
+        new URL('../public/fonts/Montserrat-VariableFont_wght.woff2', import.meta.url),
+        new URL('../public/fonts/Montserrat-Italic-VariableFont_wght.woff2', import.meta.url),
+    ];
+    let totalSize = 0;
+
+    fontUrls.forEach((fontUrl) => {
+        assert.equal(existsSync(fontUrl), true, `${ fontUrl.pathname } must exist`);
+        const size = statSync(fontUrl).size;
+        totalSize += size;
+        assert.ok(size > 100_000 && size < 1_000_000, `${ fontUrl.pathname } has an unexpected size`);
+        assert.equal(readFileSync(fontUrl).subarray(0, 4).toString('ascii'), 'wOF2');
+    });
+
+    assert.ok(totalSize < 1_500_000, 'variable fonts should stay smaller than the static font set');
+    assert.match(conversionScript, /TTFont\(source_path, recalcTimestamp=False\)/);
+});
+
+test('Nuxt preloads only the upright Montserrat variable font', () => {
+    const source = readFileSync(new URL('../nuxt.config.ts', import.meta.url), 'utf8');
+
+    assert.match(source, /rel:\s*['"]preload['"]/);
+    assert.match(source, /href:\s*['"]\/fonts\/Montserrat-VariableFont_wght\.woff2['"]/);
+    assert.match(source, /as:\s*['"]font['"]/);
+    assert.match(source, /type:\s*['"]font\/woff2['"]/);
+    assert.match(source, /crossorigin:\s*['"]anonymous['"]/);
+    assert.doesNotMatch(source, /preload[^\n]*Montserrat-Italic-VariableFont_wght\.woff2/);
+});
+
+test('portfolio animation loading is progressive, guarded, and cancellable', () => {
+    const source = readFileSync(new URL('../composables/usePortfolioAnimations.js', import.meta.url), 'utf8');
+
+    assert.match(source, /requestIdleCallback/);
+    assert.match(source, /cancelIdleCallback/);
+    assert.match(source, /setTimeout/);
+    assert.match(source, /clearTimeout/);
+    assert.match(source, /prefers-reduced-motion:\s*reduce/);
+    assert.match(source, /\(hover: hover\) and \(pointer: fine\)/);
+    assert.match(source, /try\s*\{/);
+    assert.match(source, /catch\s*\{/);
+    assert.match(source, /import\(['"]gsap['"]\)/);
+    assert.match(source, /import\(['"]gsap\/ScrollTrigger['"]\)/);
+    assert.match(source, /cleanupCallbacks\.splice/);
+    assert.doesNotMatch(source, /gsap\.set\(/);
+    assert.doesNotMatch(source, /style\.(?:opacity|visibility)\s*=\s*['"]?0/);
+});
+
+test('portfolio styles expose responsive home and U2 case layout contracts', () => {
+    const source = readFileSync(new URL('../assets/scss/portfolio.scss', import.meta.url), 'utf8');
+    const selectors = [
+        '.featured-case',
+        '.featured-case__media',
+        '.career-list',
+        '.career-entry',
+        '.case-page',
+        '.case-hero',
+        '.case-facts',
+        '.case-narrative',
+        '.case-gallery',
+        '.case-media__visual',
+        '.case-media__fallback',
+        '.case-result',
+        '.case-navigation',
+    ];
+
+    selectors.forEach((selector) => assert.match(source, new RegExp(selector.replace('.', '\\\.'))));
+    assert.match(source, /min-width:\s*0/);
+    assert.match(source, /overflow-wrap:\s*anywhere/);
+    assert.match(source, /object-fit:\s*(?:cover|contain)/);
+    assert.match(source, /aspect-ratio/);
+    assert.match(source, /@media\s*\(max-width:\s*420px\)/);
 });
 
 test('portfolio animation composable scopes pointer motion and cleanup', () => {

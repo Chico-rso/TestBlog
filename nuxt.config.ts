@@ -25,6 +25,13 @@ export default defineNuxtConfig({
                 {name: 'twitter:image', content: '/og-image.png'}
             ],
             link: [
+                {
+                    rel: 'preload',
+                    href: '/fonts/Montserrat-VariableFont_wght.woff2',
+                    as: 'font',
+                    type: 'font/woff2',
+                    crossorigin: 'anonymous'
+                },
                 {rel: 'icon', href: '/favicon.ico'},
                 {rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg'},
                 {rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png'},
