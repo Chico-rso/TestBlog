@@ -126,6 +126,16 @@ test('validator requires the English U2 case narrative', () => {
     );
 });
 
+test('validator requires the ordered U2 technology contract', () => {
+    const copy = loadCopy();
+    copy.en.projects.find((project) => project.id === 'u2').case.technologies[0] = 'React';
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[1\]\.case\.technologies must match the U2 technology contract/,
+    );
+});
+
 test('work cards render contributions without repeated generic metadata', () => {
     const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
 

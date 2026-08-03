@@ -27,8 +27,8 @@
   },
   "stats": [
 	{
-	  "value": "5+ years",
-	  "label": "of commercial experience"
+	  "value": "5+",
+	  "label": "years of commercial experience"
 	},
 	{
 	  "value": "Vue 2/3 · Nuxt 2/3",
@@ -49,11 +49,11 @@
 	  "subtitle": "Focused on Vue/Nuxt, TypeScript, performance, and production stability."
 	},
 	"projects": {
-	  "title": "Projects",
+	  "title": "Other projects",
 	  "subtitle": "Interfaces for real estate, e-commerce, and services with clear user journeys."
 	},
 	"skills": {
-	  "title": "Skills",
+	  "title": "Stack",
 	  "subtitle": "My everyday stack."
 	},
 	"principles": {
