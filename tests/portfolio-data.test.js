@@ -82,3 +82,13 @@ test('portfolio styles include pointer glow, section accents, and reduced-motion
     assert.match(source, /--accent-progress/);
     assert.match(source, /prefers-reduced-motion: reduce/);
 });
+
+test('portfolio animation composable scopes pointer motion and cleanup', () => {
+    const source = readFileSync(new URL('../composables/usePortfolioAnimations.js', import.meta.url), 'utf8');
+
+    assert.match(source, /setupHeroPointerMotion/);
+    assert.match(source, /setupProjectCardMotion/);
+    assert.match(source, /setupMagneticButtons/);
+    assert.match(source, /cleanupCallbacks\.splice/);
+    assert.match(source, /\(hover: hover\) and \(pointer: fine\)/);
+});
