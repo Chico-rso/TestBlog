@@ -1,32 +1,32 @@
 <template>
     <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__glow"></div>
-        <div class="hero__grid"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__grid" aria-hidden="true"></div>
         <div class="container hero__inner">
             <div class="hero__content">
                 <div class="hero__boot">
-                    <p v-for="line in system.boot" :key="line">{{ line }}</p>
+                    <p>&gt; {{ copy.hero.eyebrow }}</p>
                 </div>
-                <p class="hero__eyebrow">{{ system.stack }}</p>
-                <h1 id="hero-title" class="hero__title">
+                <h1 id="hero-title" class="hero__title" data-hero-identity>
                     <span class="hero__title-reveal">
-                        <span class="hero__title-main">{{ system.title }}</span>
-                    </span>
-                    <span class="hero__title-reveal">
-                        <em class="hero__title-role">{{ system.lead }}</em>
+                        <span class="hero__title-main">{{ copy.hero.name }}</span>
                     </span>
                 </h1>
+                <p class="hero__title-reveal">
+                    <strong class="hero__title-role" data-hero-role>{{ copy.hero.role }}</strong>
+                </p>
                 <p class="hero__subtitle">{{ copy.hero.subtitle }}</p>
                 <div class="hero__meta">
                     <span>{{ copy.hero.location }}</span>
                     <span>{{ copy.hero.status }}</span>
                 </div>
                 <div class="hero__cta">
-                    <a class="btn btn--primary" href="#work">{{ system.ctaPrimary }}</a>
-                    <a class="btn btn--ghost" href="#contact">{{ system.ctaSecondary }}</a>
-                    <a class="btn btn--ghost" :href="resumeUrl" download>{{ copy.hero.ctaCv }}</a>
+                    <NuxtLink class="btn btn--primary" :to="featuredProject.casePath" data-hero-cta>
+                        {{ copy.hero.ctaPrimary }}
+                    </NuxtLink>
+                    <a class="btn btn--ghost" :href="resumeUrl" download data-hero-cta>{{ copy.hero.ctaCv }}</a>
+                    <a class="btn btn--ghost" href="#contact" data-hero-cta>{{ copy.hero.ctaSecondary }}</a>
                 </div>
-                <p v-if="system.commandHint" class="hero__command-hint">{{ system.commandHint }}</p>
             </div>
             <div class="hero__visual" aria-hidden="true">
                 <div class="hero__orb hero__orb--main"></div>
@@ -55,7 +55,7 @@ import { portfolioConfig } from '~/data/portfolioConfig.js';
 
 defineProps({
     copy: {type: Object, required: true},
-    system: {type: Object, required: true},
+    featuredProject: {type: Object, required: true},
 });
 
 const {resumeUrl} = portfolioConfig;

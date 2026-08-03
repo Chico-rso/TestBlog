@@ -2,17 +2,14 @@
     <section class="section section--work" aria-labelledby="work-title">
         <div class="container">
             <div class="section__head reveal">
-                <h2 id="work-title">{{ system.title }}</h2>
-                <p>{{ system.subtitle }}</p>
+                <h2 id="work-title">{{ copy.sections.projects.title }}</h2>
+                <p>{{ copy.sections.projects.subtitle }}</p>
             </div>
             <ul class="work-grid" role="list">
-                <li v-for="(project, index) in copy.projects" :key="project.id">
+                <li v-for="project in projects" :key="project.id">
                     <article class="work-card reveal" data-project-card>
                         <span class="work-card__glow" aria-hidden="true"></span>
                         <header class="work-card__top">
-                            <span class="work-card__index">
-                                {{ system.projectPrefix }}_{{ String(index + 1).padStart(2, '0') }}
-                            </span>
                             <div>
                                 <h3>{{ project.name }}</h3>
                                 <p>{{ project.type }}</p>
@@ -20,7 +17,6 @@
                         </header>
                         <p class="work-card__summary">{{ project.description }}</p>
                         <div class="work-card__contribution">
-                            <span>{{ system.contributionLabel }}</span>
                             <ul role="list">
                                 <li v-for="item in project.contributions" :key="item">{{ item }}</li>
                             </ul>
@@ -29,12 +25,9 @@
                             <li v-for="tag in project.tags" :key="tag">{{ tag }}</li>
                         </ul>
                         <div class="work-card__links">
-                            <template v-if="project.links.length">
-                                <a v-for="link in project.links" :key="link.url" :href="link.url" target="_blank"
-                                   rel="noreferrer">
-                                    {{ link.label }} <span aria-hidden="true">↗</span>
-                                </a>
-                            </template>
+                            <a v-if="project.links[0]" :href="project.links[0].url" target="_blank" rel="noreferrer">
+                                {{ project.links[0].label }} <span aria-hidden="true">↗</span>
+                            </a>
                             <span v-else class="work-card__nda">{{ copy.labels.nda }}</span>
                         </div>
                         <span class="work-card__signal" aria-hidden="true"></span>
@@ -46,8 +39,9 @@
 </template>
 
 <script setup>
-defineProps({
+const {copy} = defineProps({
     copy: {type: Object, required: true},
-    system: {type: Object, required: true},
 });
+
+const projects = computed(() => copy.projects.filter(project => !project.featured));
 </script>

@@ -197,13 +197,107 @@ test('validator requires the ordered U2 narrative contract', () => {
     );
 });
 
-test('work cards render contributions without repeated generic metadata', () => {
-    const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
+test('portfolio home composes the identity, flagship case, career, and supporting work in order', () => {
+    const source = readFileSync(new URL('../components/portfolio/PortfolioHome.vue', import.meta.url), 'utf8');
+    const sectionOrder = [
+        '<HeroSection',
+        '<FeaturedCaseSection',
+        '<CareerSection',
+        '<WorkSection',
+        '<SkillsSection',
+        '<PrinciplesSection',
+    ].map((component) => source.indexOf(component));
 
+    assert.ok(sectionOrder.every((index) => index >= 0));
+    assert.deepEqual([...sectionOrder].sort((a, b) => a - b), sectionOrder);
+    assert.match(source, /<HeroSection\s+:copy="t"\s+:featured-project="featuredProject"/);
+    assert.match(source, /<FeaturedCaseSection\s+id="u2"\s+:project="featuredProject"\s+:section="t\.sections\.featured"/);
+    assert.match(source, /<CareerSection\s+id="experience"\s+:items="t\.experience"\s+:section="t\.sections\.experience"/);
+    assert.match(source, /<WorkSection\s+id="projects"\s+:copy="t"/);
+    assert.match(source, /<SkillsSection\s+id="stack"\s+:copy="t"/);
+    assert.match(source, /<PrinciplesSection\s+id="principles"\s+:copy="t"/);
+    assert.match(source, /\.find\(\(\{featured\}\) => featured\)/);
+    assert.doesNotMatch(source, /<AboutSection|<ExperienceSection/);
+});
+
+test('hero renders data-driven identity and exactly three approved calls to action', () => {
+    const source = readFileSync(new URL('../components/sections/HeroSection.vue', import.meta.url), 'utf8');
+    const ctaOrder = [
+        'featuredProject.casePath',
+        'resumeUrl',
+        '#contact',
+    ].map((value) => source.indexOf(value));
+
+    assert.match(source, /data-hero-identity/);
+    assert.match(source, /copy\.hero\.name/);
+    assert.match(source, /data-hero-role/);
+    assert.match(source, /copy\.hero\.role/);
+    assert.equal(source.match(/data-hero-cta/g)?.length, 3);
+    assert.deepEqual([...ctaOrder].sort((a, b) => a - b), ctaOrder);
+    assert.match(source, /copy\.hero\.ctaPrimary/);
+    assert.match(source, /copy\.hero\.ctaCv/);
+    assert.match(source, /copy\.hero\.ctaSecondary/);
+    assert.match(source, /aria-labelledby="hero-title"/);
+    assert.match(source, /class="hero__glow" aria-hidden="true"/);
+    assert.match(source, /class="hero__grid" aria-hidden="true"/);
+    assert.match(source, /class="hero__visual" aria-hidden="true"/);
+    assert.doesNotMatch(source, /style="[^"]*(?:opacity|transform)/);
+});
+
+test('featured case and career components expose their semantic content contracts', () => {
+    const featured = readFileSync(new URL('../components/sections/FeaturedCaseSection.vue', import.meta.url), 'utf8');
+    const career = readFileSync(new URL('../components/sections/CareerSection.vue', import.meta.url), 'utf8');
+
+    assert.match(featured, /data-featured-case="u2"/);
+    assert.equal(featured.match(/data-featured-case="u2"/g)?.length, 1);
+    assert.match(featured, /<picture/);
+    assert.match(featured, /type="image\/avif"/);
+    assert.match(featured, /project\.teaserMedia\.webp/);
+    assert.match(featured, /fetchpriority="high"/);
+    assert.match(featured, /<NuxtLink/);
+    assert.match(featured, /target="_blank"/);
+    assert.match(featured, /rel="noreferrer"/);
+    assert.match(featured, /aria-labelledby="featured-case-title"/);
+
+    assert.match(career, /<ol/);
+    assert.match(career, /data-career-entry/);
+    assert.match(career, /item\.company/);
+    assert.match(career, /item\.role/);
+    assert.match(career, /item\.period/);
+    assert.match(career, /item\.stack/);
+    assert.match(career, /item\.bullets/);
+    assert.match(career, /aria-labelledby="career-title"/);
+});
+
+test('supporting work excludes the featured project and renders compact truthful cards', () => {
+    const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
+    const copy = loadCopy();
+
+    assert.match(source, /copy\.projects\.filter\(project => !project\.featured\)/);
     assert.match(source, /:key="project\.id"/);
-    assert.match(source, /project\.contributions/);
     assert.match(source, /data-project-card/);
-    assert.doesNotMatch(source, /system\.statusLabel|system\.roleLabel|system\.resultLabel/);
+    assert.match(source, /project\.name/);
+    assert.match(source, /project\.type/);
+    assert.match(source, /project\.description/);
+    assert.match(source, /project\.contributions/);
+    assert.match(source, /project\.tags/);
+    assert.match(source, /project\.links\[0\]/);
+    assert.match(source, /target="_blank"/);
+    assert.match(source, /rel="noreferrer"/);
+    assert.equal(copy.en.projects.filter((project) => !project.featured).length, 6);
+});
+
+test('skills and principles use localized section copy while preserving their source data', () => {
+    const skills = readFileSync(new URL('../components/sections/SkillsSection.vue', import.meta.url), 'utf8');
+    const principles = readFileSync(new URL('../components/sections/PrinciplesSection.vue', import.meta.url), 'utf8');
+
+    assert.match(skills, /copy\.sections\.skills\.title/);
+    assert.match(skills, /copy\.sections\.skills\.subtitle/);
+    assert.match(skills, /copy\.skills/);
+    assert.match(principles, /copy\.sections\.principles\.title/);
+    assert.match(principles, /copy\.sections\.principles\.subtitle/);
+    assert.match(principles, /systemSections/);
+    assert.doesNotMatch(principles, /<button|aria-expanded/);
 });
 
 test('portfolio styles include pointer glow, section accents, and reduced-motion fallbacks', () => {

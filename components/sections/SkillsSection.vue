@@ -2,11 +2,12 @@
     <section class="section section--skills" aria-labelledby="skills-title">
         <div class="container">
             <div class="section__head reveal">
-                <h2 id="skills-title">{{ system.title }}</h2>
+                <h2 id="skills-title">{{ copy.sections.skills.title }}</h2>
+                <p>{{ copy.sections.skills.subtitle }}</p>
             </div>
             <ul class="skills-grid" role="list">
-                <li v-for="group in system.groups" :key="group.title" class="skill-card reveal">
-                    <h3>{{ group.title }}</h3>
+                <li v-for="group in copy.skills" :key="group.group" class="skill-card reveal">
+                    <h3>{{ group.group }}</h3>
                     <ul role="list">
                         <li v-for="item in group.items" :key="item">{{ item }}</li>
                     </ul>
@@ -18,6 +19,6 @@
 
 <script setup>
 defineProps({
-    system: {type: Object, required: true},
+    copy: {type: Object, required: true},
 });
 </script>
