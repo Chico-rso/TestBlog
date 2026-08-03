@@ -1,7 +1,8 @@
-import { mkdir, mkdtemp, rename, rm } from 'node:fs/promises'
+import { mkdir, mkdtemp, rm } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
+import { publishDirectoryAtomic } from './lib/publish-u2-assets.mjs'
 
 const sourceDirectory = fileURLToPath(new URL('../output/u2-source/', import.meta.url))
 const destinationDirectory = fileURLToPath(new URL('../public/projects/u2/', import.meta.url))
@@ -12,8 +13,8 @@ const assets = [
 	['u2-filters-mobile.png', 'u2-filters-mobile']
 ]
 
-await mkdir(destinationDirectory, { recursive: true })
-const temporaryDirectory = await mkdtemp(join(dirname(destinationDirectory), 'u2-tmp-'))
+await mkdir(dirname(destinationDirectory), { recursive: true })
+const temporaryDirectory = await mkdtemp(join(dirname(destinationDirectory), 'u2-staging-'))
 
 try
 {
@@ -30,11 +31,10 @@ try
 			.toFile(`${temporaryPath}.webp`)
 	}
 
-	for (const [, destinationName] of assets)
-	{
-		await rename(join(temporaryDirectory, `${destinationName}.avif`), join(destinationDirectory, `${destinationName}.avif`))
-		await rename(join(temporaryDirectory, `${destinationName}.webp`), join(destinationDirectory, `${destinationName}.webp`))
-	}
+	await publishDirectoryAtomic({
+		stagingDirectory: temporaryDirectory,
+		destinationDirectory
+	})
 }
 finally
 {

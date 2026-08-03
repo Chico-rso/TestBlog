@@ -59,7 +59,20 @@ async function waitForVisualReadiness(page, capture)
 		})
 	}
 
-	await page.evaluate(() => document.fonts.ready)
+	await page.evaluate(timeout => new Promise((resolve, reject) =>
+	{
+		const timer = setTimeout(() => reject(new Error('Timed out waiting for web fonts')), timeout)
+
+		document.fonts.ready.then(() =>
+		{
+			clearTimeout(timer)
+			resolve()
+		}, error =>
+		{
+			clearTimeout(timer)
+			reject(error)
+		})
+	}), visualTimeout)
 }
 
 async function dismissAsyncConsent(page)

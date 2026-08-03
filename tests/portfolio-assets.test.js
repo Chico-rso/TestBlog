@@ -66,6 +66,7 @@ test('U2 capture pipeline declares its runtime, source exclusion, and readiness 
 	assert.match(gitignoreContents, /^output\/u2-source\/$/m)
 	assert.match(captureContents, /response\.ok/)
 	assert.match(captureContents, /document\.fonts\.ready/)
+	assert.match(captureContents, /Timed out waiting for web fonts/)
 	assert.match(captureContents, /const frozenVideoTime = 1/)
 	assert.match(captureContents, /video\.currentTime = frozenVideoTime/)
 	assert.match(captureContents, /video\.addEventListener\('seeked'/)
