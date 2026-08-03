@@ -8,12 +8,16 @@ export const useLanguage = () => {
 
     const toggleLang = () => {
         const target = lang.value === 'ru' ? 'en' : 'ru';
+        const destination = getRouteForLocale(route.path, target);
 
         if (process.client) {
-            localStorage.setItem('lang', target);
+            try {
+                localStorage.setItem('lang', target);
+            } catch {
+            }
         }
 
-        return navigateTo(getRouteForLocale(route.path, target));
+        return navigateTo(destination);
     };
 
     return {lang, t, toggleLang};
