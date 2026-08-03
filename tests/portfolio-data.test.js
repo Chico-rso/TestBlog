@@ -34,3 +34,33 @@ test('project locales stay aligned and replace FoodMap with Novaya', () => {
 
     assert.doesNotThrow(() => validatePortfolioCopy(copy));
 });
+
+test('validator rejects duplicate project ids', () => {
+    const copy = loadCopy();
+    copy.ru.projects[1].id = copy.ru.projects[0].id;
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /ru\.projects contains duplicate id/,
+    );
+});
+
+test('validator rejects duplicate project URLs', () => {
+    const copy = loadCopy();
+    copy.ru.projects[1].links[0].url = copy.ru.projects[0].links[0].url;
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /ru\.projects contains duplicate URL/,
+    );
+});
+
+test('validator rejects locale project drift', () => {
+    const copy = loadCopy();
+    copy.en.projects[0].id = 'unexpected-project';
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /ru and en project ids must match in order/,
+    );
+});
