@@ -53,10 +53,12 @@ export type PortfolioProjectLink = {
 };
 
 export type PortfolioProject = {
+    id: string;
     name: string;
     type: string;
     description: string;
     tags: string[];
+    contributions: string[];
     links: PortfolioProjectLink[];
 };
 

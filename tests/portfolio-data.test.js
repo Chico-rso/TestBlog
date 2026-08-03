@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import test from 'node:test';
+
+import {validatePortfolioCopy} from '../lib/portfolio/validate.js';
+
+const readJson = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
+const loadCopy = () => ({
+    ru: readJson('../data/portfolio/ru.json'),
+    en: readJson('../data/portfolio/en.json'),
+});
+
+test('project locales stay aligned and replace FoodMap with Novaya', () => {
+    const copy = loadCopy();
+    const ruIds = copy.ru.projects.map((project) => project.id);
+    const enIds = copy.en.projects.map((project) => project.id);
+
+    assert.deepEqual(enIds, ruIds);
+    assert.equal(ruIds.filter((id) => id === 'novaya').length, 1);
+    assert.equal(ruIds.includes('foodmap-delivery'), false);
+
+    for (const [locale, data] of Object.entries(copy)) {
+        const deliveryLinks = data.projects
+            .flatMap((project) => project.links)
+            .filter((link) => link.url === 'https://vkusnoibistro.com/application/');
+
+        assert.equal(deliveryLinks.length, 1, `${locale} must contain one delivery URL`);
+        assert.equal(data.projects.find((project) => project.id === 'novaya')?.links[0]?.url, 'https://novaya.ru/');
+        data.projects.forEach((project) => {
+            assert.ok(project.id.length > 0);
+            assert.ok(project.contributions.length > 0, `${locale}.${project.id} needs contributions`);
+        });
+    }
+
+    assert.doesNotThrow(() => validatePortfolioCopy(copy));
+});

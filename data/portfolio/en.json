@@ -59,6 +59,7 @@
   },
   "projects": [
     {
+      "id": "fordewind",
       "name": "Fordewind",
       "type": "Corporate website & product pages",
       "description": "UI build with a focus on visual storytelling, responsive layout, and readability.",
@@ -66,6 +67,10 @@
         "Vue",
         "SCSS",
         "Responsive"
+      ],
+      "contributions": [
+        "Responsive implementation of visual product sections",
+        "Component structure and interface styling"
       ],
       "links": [
         {
@@ -75,6 +80,7 @@
       ]
     },
     {
+      "id": "u2",
       "name": "U2",
       "type": "Real estate sales platform",
       "description": "Property showcase, filters, and interactive selection scenarios.",
@@ -82,6 +88,10 @@
         "Nuxt",
         "TypeScript",
         "Filters"
+      ],
+      "contributions": [
+        "Property showcase and selection flows",
+        "Real-estate filters and typed logic"
       ],
       "links": [
         {
@@ -91,6 +101,7 @@
       ]
     },
     {
+      "id": "massandra-park",
       "name": "Massandra Park",
       "type": "Real estate sales platform",
       "description": "Property catalog with strong visuals and clear navigation.",
@@ -98,6 +109,10 @@
         "Nuxt",
         "UI",
         "Performance"
+      ],
+      "contributions": [
+        "Property catalog and visual sections",
+        "Navigation and loading optimization"
       ],
       "links": [
         {
@@ -107,6 +122,7 @@
       ]
     },
     {
+      "id": "maks",
       "name": "Maks",
       "type": "Real estate sales platform",
       "description": "Promo and property showcase with an emphasis on premium UI.",
@@ -114,6 +130,10 @@
         "Vue",
         "SSR",
         "Landing"
+      ],
+      "contributions": [
+        "Promotional UI and responsive flows",
+        "SSR pages and property presentation"
       ],
       "links": [
         {
@@ -123,23 +143,30 @@
       ]
     },
     {
-      "name": "FoodMap Delivery",
-      "type": "Map-based food ordering and delivery",
-      "description": "Map search and filters, fast selection of restaurants and couriers, interactive states for users.",
+      "id": "novaya",
+      "name": "Novaya",
+      "type": "Real-estate developer platform",
+      "description": "A product interface with real-estate filters, an interactive masterplan, and motion-rich homepage storytelling.",
       "tags": [
         "Vue",
         "Nuxt",
-        "Maps",
-        "GSAP"
+        "GSAP",
+        "Performance"
+      ],
+      "contributions": [
+        "Homepage motion and complex content sections",
+        "Property filters and project detail page",
+        "Interactive masterplan and performance optimization"
       ],
       "links": [
         {
           "label": "Website",
-          "url": "https://vkusnoibistro.com/application/"
+          "url": "https://novaya.ru/"
         }
       ]
     },
     {
+      "id": "vkusno-i-bystro",
       "name": "Vkusno i Bystro",
 	  "type": "Food delivery service",
 	  "description": "Animated UI components, improved user flow, and stable production performance.",
@@ -147,6 +174,10 @@
 		"Vue 2/3",
 		"GSAP",
 		"TypeScript"
+	  ],
+	  "contributions": [
+		"Animated components and user flows",
+		"Production UI support and stability"
 	  ],
 	  "links": [
 		{
@@ -156,6 +187,7 @@
 	  ]
 	},
 	{
+	  "id": "tsvet-divanov",
 	  "name": "Tsvet Divanov",
 	  "type": "Furniture e-commerce",
 	  "description": "Catalog, filters, and product cards optimized for speed and easy selection.",
@@ -163,6 +195,10 @@
 		"Nuxt",
 		"SSR",
 		"E-commerce"
+	  ],
+	  "contributions": [
+		"Catalog, filters, and product cards",
+		"SSR and storefront performance optimization"
 	  ],
 	  "links": [
 		{
