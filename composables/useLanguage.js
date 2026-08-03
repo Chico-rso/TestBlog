@@ -1,33 +1,20 @@
 import { portfolioCopy } from '~/data/portfolioCopy.js';
+import { getLocaleFromPath, getRouteForLocale } from '~/lib/portfolio/routes.js';
 
 export const useLanguage = () => {
-    const lang = useState('lang', () => 'ru');
-    const initialized = useState('lang-initialized', () => false);
+    const route = useRoute();
+    const lang = computed(() => getLocaleFromPath(route.path));
     const t = computed(() => portfolioCopy[lang.value]);
-    
+
     const toggleLang = () => {
-        lang.value = lang.value === 'ru' ? 'en' : 'ru';
-    };
-    
-    if (!initialized.value) {
+        const target = lang.value === 'ru' ? 'en' : 'ru';
+
         if (process.client) {
-            const saved = localStorage.getItem('lang');
-            if (saved === 'ru' || saved === 'en') {
-                lang.value = saved;
-            }
+            localStorage.setItem('lang', target);
         }
-        
-        watch(
-            lang,
-            (value) => {
-                if (process.client) {
-                    localStorage.setItem('lang', value);
-                }
-            },
-        );
-        
-        initialized.value = true;
-    }
-    
+
+        return navigateTo(getRouteForLocale(route.path, target));
+    };
+
     return {lang, t, toggleLang};
 };
