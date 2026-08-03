@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFile, stat } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
@@ -22,6 +23,15 @@ const expectedDimensions = {
 	'u2-flat-desktop': { width: 1600, height: 1000 },
 	'u2-filters-mobile': { width: 780, height: 1688 }
 }
+
+test('public CV is the approved resume PDF', async () =>
+{
+	const contents = await readFile(new URL('public/cv-amiran-bestaev.pdf', projectRoot))
+	const checksum = createHash('sha256').update(contents).digest('hex')
+
+	assert.equal(contents.subarray(0, 5).toString(), '%PDF-')
+	assert.equal(checksum, '89d1bc6dc8f5a9d06877eb734b49ce4624931d820b1a73680707c6c077ab7307')
+})
 
 test('U2 evidence assets exist and are meaningful image files', async () =>
 {
