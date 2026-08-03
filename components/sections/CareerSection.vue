@@ -5,7 +5,7 @@
                 <h2 id="career-title">{{ section.title }}</h2>
                 <p>{{ section.subtitle }}</p>
             </div>
-            <ol class="career-list">
+            <ol class="career-list" role="list">
                 <li v-for="item in items" :key="`${item.company}-${item.period}`" class="career-entry reveal"
                     data-career-entry>
                     <div class="career-entry__head">

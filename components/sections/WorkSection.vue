@@ -39,9 +39,9 @@
 </template>
 
 <script setup>
-const {copy} = defineProps({
+const props = defineProps({
     copy: {type: Object, required: true},
 });
 
-const projects = computed(() => copy.projects.filter(project => !project.featured));
+const projects = computed(() => props.copy.projects.filter(project => !project.featured));
 </script>

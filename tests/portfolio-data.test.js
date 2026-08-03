@@ -259,7 +259,7 @@ test('featured case and career components expose their semantic content contract
     assert.match(featured, /rel="noreferrer"/);
     assert.match(featured, /aria-labelledby="featured-case-title"/);
 
-    assert.match(career, /<ol/);
+    assert.match(career, /<ol[^>]*role="list"/);
     assert.match(career, /data-career-entry/);
     assert.match(career, /item\.company/);
     assert.match(career, /item\.role/);
@@ -273,7 +273,9 @@ test('supporting work excludes the featured project and renders compact truthful
     const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
     const copy = loadCopy();
 
-    assert.match(source, /copy\.projects\.filter\(project => !project\.featured\)/);
+    assert.match(source, /const props = defineProps/);
+    assert.match(source, /props\.copy\.projects\.filter\(project => !project\.featured\)/);
+    assert.doesNotMatch(source, /const \{copy\} = defineProps/);
     assert.match(source, /:key="project\.id"/);
     assert.match(source, /data-project-card/);
     assert.match(source, /project\.name/);
