@@ -11,10 +11,10 @@ export type PortfolioLabels = {
 };
 
 export type PortfolioNav = {
-    work: string;
     experience: string;
-    skills: string;
-    about: string;
+    u2: string;
+    projects: string;
+    stack: string;
     contact: string;
 };
 
@@ -41,15 +41,48 @@ export type PortfolioSectionCopy = {
 };
 
 export type PortfolioSections = {
-    work: PortfolioSectionCopy;
+    featured: PortfolioSectionCopy;
     experience: PortfolioSectionCopy;
+    projects: PortfolioSectionCopy;
     skills: PortfolioSectionCopy;
-    about: PortfolioSectionCopy;
+    principles: PortfolioSectionCopy;
 };
 
 export type PortfolioProjectLink = {
     label: string;
     url: string;
+};
+
+export type PortfolioMedia = {
+    avif: string;
+    webp: string;
+    alt: string;
+    width: number;
+    height: number;
+};
+
+export type PortfolioCaseFact = {
+    label: string;
+    value: string;
+};
+
+export type PortfolioCaseNarrative = {
+    id: 'task' | 'contribution' | 'approach' | 'result';
+    title: string;
+    text: string;
+};
+
+export type PortfolioCase = {
+    eyebrow: string;
+    summary: string;
+    facts: PortfolioCaseFact[];
+    narrative: PortfolioCaseNarrative[];
+    gallery: PortfolioMedia[];
+    technologies: string[];
+    result: string;
+    backLabel: string;
+    externalLabel: string;
+    nextLabel: string;
 };
 
 export type PortfolioProject = {
@@ -60,6 +93,10 @@ export type PortfolioProject = {
     tags: string[];
     contributions: string[];
     links: PortfolioProjectLink[];
+    featured: boolean;
+    casePath?: string;
+    teaserMedia?: PortfolioMedia;
+    case?: PortfolioCase;
 };
 
 export type PortfolioExperience = {

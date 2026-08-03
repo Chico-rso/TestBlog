@@ -65,6 +65,67 @@ test('validator rejects locale project drift', () => {
     );
 });
 
+test('both locales expose the featured U2 case contract', () => {
+    const copy = loadCopy();
+    const expectations = {
+        ru: {
+            casePath: '/projects/u2',
+            teaserAlt: 'Главная страница жилого комплекса ЮТУ',
+        },
+        en: {
+            casePath: '/en/projects/u2',
+            teaserAlt: 'U2 residential project homepage',
+        },
+    };
+
+    for (const [locale, expected] of Object.entries(expectations)) {
+        const featuredProjects = copy[locale].projects.filter((project) => project.featured);
+        assert.equal(featuredProjects.length, 1, `${ locale } must have exactly one featured project`);
+
+        const [u2] = featuredProjects;
+        assert.equal(u2.id, 'u2');
+        assert.equal(u2.casePath, expected.casePath);
+        assert.deepEqual(u2.teaserMedia, {
+            avif: '/projects/u2/u2-home-desktop.avif',
+            webp: '/projects/u2/u2-home-desktop.webp',
+            alt: expected.teaserAlt,
+            width: 1600,
+            height: 1000,
+        });
+        assert.equal(u2.case.gallery.length, 4);
+        assert.equal(u2.case.facts.length, 4);
+        assert.equal(u2.case.narrative.length, 4);
+
+        [...u2.case.gallery, u2.teaserMedia].forEach((media) => {
+            assert.match(media.avif, /^\/projects\/u2\//);
+            assert.match(media.webp, /^\/projects\/u2\//);
+            assert.ok(media.alt.trim().length > 0);
+            assert.ok(media.width > 0);
+            assert.ok(media.height > 0);
+        });
+    }
+});
+
+test('validator rejects more than one featured project', () => {
+    const copy = loadCopy();
+    copy.ru.projects[0].featured = true;
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /ru\.projects must contain exactly one featured project/,
+    );
+});
+
+test('validator requires the English U2 case narrative', () => {
+    const copy = loadCopy();
+    delete copy.en.projects.find((project) => project.id === 'u2').case.narrative;
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[1\]\.case\.narrative must be an array/,
+    );
+});
+
 test('work cards render contributions without repeated generic metadata', () => {
     const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
 

@@ -8,53 +8,57 @@
 	"nda": "Private"
   },
   "nav": {
-	"work": "Work",
 	"experience": "Experience",
-	"skills": "Skills",
-	"about": "About",
+	"u2": "U2",
+	"projects": "Projects",
+	"stack": "Stack",
 	"contact": "Contact"
   },
   "hero": {
 	"eyebrow": "Frontend · Vue/Nuxt · TypeScript",
 	"name": "Amiran Bestaev",
-	"role": "Frontend Developer",
+	"role": "Frontend Engineer",
 	"subtitle": "I make interfaces for product services with catalogs, maps, filters, and complex business logic. Vue/Nuxt/ TypeScript, focus on stability and scalability.",
 	"status": "Open to opportunities: remote, hybrid, on-site",
 	"location": "Moscow",
-	"ctaPrimary": "Contact",
-	"ctaSecondary": "Telegram",
+	"ctaPrimary": "View U2",
+	"ctaSecondary": "Contact",
 	"ctaCv": "Download CV"
   },
   "stats": [
 	{
-	  "value": "5+",
-	  "label": "years of commercial experience"
+	  "value": "5+ years",
+	  "label": "of commercial experience"
 	},
 	{
-	  "value": "Vue/Nuxt",
-	  "label": "2/3 generations"
+	  "value": "Vue 2/3 · Nuxt 2/3",
+	  "label": "product stack"
 	},
 	{
-	  "value": "GSAP",
-	  "label": "advanced motion & interaction"
+	  "value": "2",
+	  "label": "product companies"
 	}
   ],
   "sections": {
-	"work": {
-	  "title": "Selected Work",
-	  "subtitle": "Projects in e-commerce, delivery, and real estate with rich UI and complex logic."
+    "featured": {
+	  "title": "Featured case",
+	  "subtitle": "U2: a residential showcase with apartment discovery, filters, and selection flows."
 	},
 	"experience": {
 	  "title": "Experience",
 	  "subtitle": "Focused on Vue/Nuxt, TypeScript, performance, and production stability."
 	},
+	"projects": {
+	  "title": "Projects",
+	  "subtitle": "Interfaces for real estate, e-commerce, and services with clear user journeys."
+	},
 	"skills": {
 	  "title": "Skills",
 	  "subtitle": "My everyday stack."
 	},
-	"about": {
-	  "title": "About",
-	  "subtitle": "Frontend is a developer with 5+ years of commercial experience. I specialize in developing product interfaces for Vue.js and Nuxt.js (Vue 2/3, Nuxt 2/3) using TypeScript. He worked with legacy code, participated in the design of SPA architecture and SSR applications, applied business logic to composables and implemented testing in existing projects. In my work, I focus on readable code, predictable architecture, and stability in production. Projects with real users, complex logic, and a long lifecycle are interesting."
+	"principles": {
+	  "title": "Principles",
+	  "subtitle": "Readable code, predictable architecture, and stable production interfaces."
 	}
   },
   "projects": [
@@ -63,6 +67,7 @@
       "name": "Fordewind",
       "type": "Corporate website & product pages",
       "description": "UI build with a focus on visual storytelling, responsive layout, and readability.",
+      "featured": false,
       "tags": [
         "Vue",
         "SCSS",
@@ -84,6 +89,42 @@
       "name": "U2",
       "type": "Real estate sales platform",
       "description": "Property showcase, filters, and interactive selection scenarios.",
+      "featured": true,
+      "casePath": "/en/projects/u2",
+      "teaserMedia": {
+        "avif": "/projects/u2/u2-home-desktop.avif",
+        "webp": "/projects/u2/u2-home-desktop.webp",
+        "alt": "U2 residential project homepage",
+        "width": 1600,
+        "height": 1000
+      },
+      "case": {
+        "eyebrow": "Flagship case",
+        "summary": "A digital residential showcase with apartment discovery, filters, and detailed property-selection flows.",
+        "facts": [
+          {"label": "Role", "value": "Frontend Engineer"},
+          {"label": "Focus", "value": "Catalog, filters, apartment detail"},
+          {"label": "Stack", "value": "Nuxt · Vue · TypeScript · GSAP"},
+          {"label": "Status", "value": "In production"}
+        ],
+        "narrative": [
+          {"id": "task", "title": "Task", "text": "Build a content-rich residential product showcase and connect its presentation layer to a clear apartment-selection journey."},
+          {"id": "contribution", "title": "My contribution", "text": "I developed the homepage and complex content sections, property filters, apartment detail page, masterplan, and animated interface scenarios."},
+          {"id": "approach", "title": "Technical approach", "text": "A component architecture with Vue and Nuxt, typed filtering logic, controlled GSAP animation, and focused performance work for visually heavy sections."},
+          {"id": "result", "title": "Result", "text": "A working product journey from project discovery to filtering and reviewing a specific apartment, available on the public website."}
+        ],
+        "gallery": [
+          {"avif": "/projects/u2/u2-home-desktop.avif", "webp": "/projects/u2/u2-home-desktop.webp", "alt": "U2 primary presentation page", "width": 1600, "height": 1000},
+          {"avif": "/projects/u2/u2-filters-desktop.avif", "webp": "/projects/u2/u2-filters-desktop.webp", "alt": "U2 apartment catalog and filters", "width": 1600, "height": 1000},
+          {"avif": "/projects/u2/u2-flat-desktop.avif", "webp": "/projects/u2/u2-flat-desktop.webp", "alt": "U2 apartment detail page", "width": 1600, "height": 1000},
+          {"avif": "/projects/u2/u2-filters-mobile.avif", "webp": "/projects/u2/u2-filters-mobile.webp", "alt": "U2 mobile apartment catalog and filters", "width": 780, "height": 1688}
+        ],
+        "technologies": ["Vue", "Nuxt", "TypeScript", "GSAP", "SCSS", "SSR"],
+        "result": "The public interface connects project presentation, catalog browsing, filtering, and apartment detail without unsupported numerical claims.",
+        "backLabel": "Back home",
+        "externalLabel": "Open U2",
+        "nextLabel": "Next project: Novaya"
+      },
       "tags": [
         "Nuxt",
         "TypeScript",
@@ -105,6 +146,7 @@
       "name": "Massandra Park",
       "type": "Real estate sales platform",
       "description": "Property catalog with strong visuals and clear navigation.",
+      "featured": false,
       "tags": [
         "Nuxt",
         "UI",
@@ -126,6 +168,7 @@
       "name": "Maks",
       "type": "Real estate sales platform",
       "description": "Promo and property showcase with an emphasis on premium UI.",
+      "featured": false,
       "tags": [
         "Vue",
         "SSR",
@@ -147,6 +190,7 @@
       "name": "Novaya",
       "type": "Real-estate developer platform",
       "description": "A product interface with real-estate filters, an interactive masterplan, and motion-rich homepage storytelling.",
+      "featured": false,
       "tags": [
         "Vue",
         "Nuxt",
@@ -170,6 +214,7 @@
       "name": "Vkusno i Bystro",
 	  "type": "Food delivery service",
 	  "description": "Animated UI components, improved user flow, and stable production performance.",
+	  "featured": false,
 	  "tags": [
 		"Vue 2/3",
 		"GSAP",
@@ -191,6 +236,7 @@
 	  "name": "Tsvet Divanov",
 	  "type": "Furniture e-commerce",
 	  "description": "Catalog, filters, and product cards optimized for speed and easy selection.",
+	  "featured": false,
 	  "tags": [
 		"Nuxt",
 		"SSR",
