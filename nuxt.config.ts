@@ -44,15 +44,16 @@ export default defineNuxtConfig({
             headers: {'cache-control': 'public, max-age=31536000, immutable'},
         },
         '/fonts/**': {
-            headers: {'cache-control': 'public, max-age=31536000, immutable'},
+            headers: {'cache-control': 'public, max-age=86400, must-revalidate'},
         },
         '/**': {
             headers: {
+                'cache-control': 'public, max-age=0, must-revalidate',
                 'strict-transport-security': 'max-age=31536000; includeSubDomains',
                 'x-content-type-options': 'nosniff',
                 'referrer-policy': 'strict-origin-when-cross-origin',
                 'permissions-policy': 'camera=(), microphone=(), geolocation=()',
-                'content-security-policy-report-only': "default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://t.me",
+                'content-security-policy-report-only': "default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://t.me",
             },
         },
     },
