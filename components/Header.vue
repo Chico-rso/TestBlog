@@ -1,17 +1,17 @@
 <template>
     <header class="site-header">
         <div class="container site-header__inner">
-            <NuxtLink class="brand" :to="homePath" :aria-label="lang === 'ru' ? 'Домой' : 'Home'">
+            <NuxtLink class="brand" :to="homePath" :aria-label="lang === 'ru' ? 'Домой' : 'Home'" @click="scrollToTop($event)">
                 <span>AB</span>
             </NuxtLink>
             <nav class="site-nav" :aria-label="lang === 'ru' ? 'Основная навигация' : 'Primary navigation'">
                 <NuxtLink v-for="item in navItems" :key="item.id" :to="sectionTarget(item.id)"
-                          :class="{ active: activeSection === item.id }"
-                          :aria-current="activeSection === item.id ? 'location' : undefined"
+                          :class="{ active: isHomeRoute && activeSection === item.id }"
+                          :aria-current="isHomeRoute && activeSection === item.id ? 'location' : undefined"
                           @click="scrollToSection($event, item.id)">{{ item.label }}</NuxtLink>
             </nav>
             <div class="site-actions site-actions--desktop">
-                <button class="command-toggle" type="button" @click="openCommandPalette"
+                <button class="command-toggle" type="button" @click="openCommandPalette($event)"
                         :aria-label="lang === 'ru' ? 'Открыть командную палитру' : 'Open command palette'">
                     <span>{{ lang === 'ru' ? 'Команды' : 'Command' }}</span>
                     <kbd>⌘K</kbd>
@@ -58,21 +58,23 @@
         <div v-if="isMenuOpen" class="mobile-menu-backdrop" @click="closeMobileMenu"></div>
     </Transition>
     <Transition name="menu-slide">
-        <aside v-if="isMenuOpen" class="mobile-menu" role="dialog" aria-modal="true"
-              :aria-label="lang === 'ru' ? 'Мобильное меню' : 'Mobile menu'">
+        <aside v-if="isMenuOpen" ref="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true"
+              :aria-label="lang === 'ru' ? 'Мобильное меню' : 'Mobile menu'"
+              @keydown="trapFocus($event, mobileMenu)">
             <div class="mobile-menu__head">
                 <strong>{{ lang === 'ru' ? 'Навигация' : 'Navigation' }}</strong>
                 <button ref="closeButton" type="button" class="mobile-menu__close" :aria-label="closeLabel" @click="closeMobileMenu">Esc</button>
             </div>
             <nav class="mobile-nav" :aria-label="lang === 'ru' ? 'Мобильная навигация' : 'Mobile navigation'">
                 <NuxtLink v-for="item in navItems" :key="item.id" :to="sectionTarget(item.id)"
-                   :class="{ active: activeSection === item.id }"
+                   :class="{ active: isHomeRoute && activeSection === item.id }"
+                   :aria-current="isHomeRoute && activeSection === item.id ? 'location' : undefined"
                    @click="scrollToSection($event, item.id)">
                     {{ item.label }}
                 </NuxtLink>
             </nav>
             <div class="mobile-actions">
-                <button class="command-toggle command-toggle--mobile" type="button" @click="openCommandPaletteFromMenu"
+                <button class="command-toggle command-toggle--mobile" type="button" @click="openCommandPaletteFromMenu($event)"
                         :aria-label="lang === 'ru' ? 'Открыть командную палитру' : 'Open command palette'">
                     <span>{{ lang === 'ru' ? 'Команды' : 'Command' }}</span>
                     <kbd>⌘K</kbd>
@@ -110,6 +112,7 @@ const {telegram} = portfolioConfig;
 const isMenuOpen = ref(false);
 const burgerButton = ref(null);
 const closeButton = ref(null);
+const mobileMenu = ref(null);
 
 const openLabel = computed(() => (lang.value === 'ru' ? 'Открыть меню' : 'Open menu'));
 const closeLabel = computed(() => (lang.value === 'ru' ? 'Закрыть меню' : 'Close menu'));
@@ -117,11 +120,33 @@ const homePath = computed(() => portfolioRoutes[lang.value].home);
 const isHomeRoute = computed(() => route.path === homePath.value);
 const navItems = computed(() => navigationIds.map((id) => ({id, label: t.value.nav[id]})));
 const sectionTarget = (id) => `${homePath.value}#${id}`;
+const isPlainPrimaryClick = (event) => !(event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+const trapFocus = (event, container) => {
+    if (event.key !== 'Tab') {
+        return;
+    }
+
+    const focusableElements = [...(container?.querySelectorAll(focusableSelector) || [])];
+    if (!focusableElements.length) {
+        event.preventDefault();
+        return;
+    }
+
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+    const nextIndex = event.shiftKey
+        ? (currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1)
+        : (currentIndex === focusableElements.length - 1 ? 0 : currentIndex + 1);
+
+    event.preventDefault();
+    focusableElements[nextIndex].focus();
+};
 
 const scrollToSection = (event, id) => {
     closeMobileMenu();
 
-    if (!isHomeRoute.value || typeof document === 'undefined') {
+    if (!isPlainPrimaryClick(event) || !isHomeRoute.value || typeof document === 'undefined') {
         return;
     }
 
@@ -132,6 +157,18 @@ const scrollToSection = (event, id) => {
 
     event.preventDefault();
     section.scrollIntoView({behavior: 'smooth', block: 'start'});
+};
+
+const scrollToTop = (event) => {
+    if (!isPlainPrimaryClick(event) || !isHomeRoute.value || typeof window === 'undefined') {
+        return;
+    }
+
+    event.preventDefault();
+    if (route.hash) {
+        navigateTo(homePath.value, {replace: true});
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
 };
 
 const toggleMobileMenu = () => {
@@ -165,16 +202,16 @@ const onResize = () => {
     }
 };
 
-const openCommandPalette = () => {
+const openCommandPalette = (event, opener = event?.currentTarget) => {
     if (typeof window === 'undefined') {
         return;
     }
-    window.dispatchEvent(new Event('portfolio:command-open'));
+    window.dispatchEvent(new CustomEvent('portfolio:command-open', {detail: {opener}}));
 };
 
-const openCommandPaletteFromMenu = () => {
-    closeMobileMenu();
-    openCommandPalette();
+const openCommandPaletteFromMenu = (event) => {
+    closeMobileMenu(false);
+    openCommandPalette(event, burgerButton.value);
 };
 
 watch(isMenuOpen, (isOpen) => {

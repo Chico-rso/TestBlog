@@ -5,6 +5,7 @@ export const useActiveSection = (sectionIds, options = {}) => {
     let rafId;
     let sections = [];
     let onScroll;
+    let updateActive = () => {};
     let lockUntil = 0;
     
     const setFromHash = (hash) => {
@@ -31,14 +32,17 @@ export const useActiveSection = (sectionIds, options = {}) => {
         if (typeof document === 'undefined') {
             return;
         }
-        sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+        sections = sectionIds
+            .map((id) => document.getElementById(id))
+            .filter(Boolean)
+            .sort((left, right) => left.offsetTop - right.offsetTop);
     };
 
     onMounted(() => {
         refreshSections();
         setFromHash(route.hash);
 
-        if (!sections.length || typeof window === 'undefined') {
+        if (typeof window === 'undefined') {
             return;
         }
         
@@ -46,13 +50,11 @@ export const useActiveSection = (sectionIds, options = {}) => {
         const bottomOffset = options.bottomOffset ?? 4;
         const contactThreshold = options.contactThreshold ?? 0.8;
 
-        const updateActive = () => {
+        updateActive = () => {
             if (Date.now() < lockUntil) {
                 return;
             }
-            if (sections.length < sectionIds.length) {
-                refreshSections();
-            }
+            refreshSections();
             if (!sections.length) {
                 return;
             }
@@ -71,8 +73,8 @@ export const useActiveSection = (sectionIds, options = {}) => {
                 return;
             }
             
-            const lastId = sectionIds[sectionIds.length - 1];
-            const contactSection = sections.find((section) => section.id === lastId);
+            const lastSection = sections[sections.length - 1];
+            const contactSection = sections.find((section) => section.id === 'contact');
             if (contactSection) {
                 const rect = contactSection.getBoundingClientRect();
                 if (rect.top <= window.innerHeight * contactThreshold) {
@@ -81,7 +83,7 @@ export const useActiveSection = (sectionIds, options = {}) => {
             }
 
             if (window.innerHeight + window.scrollY >= document.body.scrollHeight - bottomOffset) {
-                current = lastId || current;
+                current = lastSection?.id || current;
             }
             
             activeSection.value = current;
@@ -113,6 +115,19 @@ export const useActiveSection = (sectionIds, options = {}) => {
         () => route.hash,
         (hash) => {
             setFromHash(hash);
+        },
+    );
+
+    watch(
+        () => route.path,
+        () => {
+            activeSection.value = '';
+            lockUntil = 0;
+            nextTick(() => {
+                refreshSections();
+                setFromHash(route.hash);
+                updateActive();
+            });
         },
     );
     

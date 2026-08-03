@@ -1,12 +1,12 @@
 <template>
     <Teleport to="body">
         <div v-if="isOpen" class="command-overlay" @click="close">
-            <section class="command-panel" role="dialog" aria-modal="true"
+            <section ref="palettePanel" class="command-panel" role="dialog" aria-modal="true" tabindex="-1"
                      :aria-label="lang === 'ru' ? 'Командная палитра' : 'Command palette'"
-                     @click.stop>
+                     @click.stop @keydown="trapFocus($event, palettePanel)">
                 <header class="command-panel__head">
                     <h2>{{ lang === 'ru' ? 'Быстрая навигация' : 'Quick navigation' }}</h2>
-                    <button type="button" @click="close" aria-label="Close">Esc</button>
+                    <button ref="closeButton" type="button" @click="close" :aria-label="lang === 'ru' ? 'Закрыть' : 'Close'">Esc</button>
                 </header>
                 <ul class="command-list" role="list">
                     <li v-for="item in items" :key="item.id">
@@ -27,23 +27,60 @@ import {portfolioRoutes} from '~/lib/portfolio/routes.js';
 const {t, lang} = useLanguage();
 const route = useRoute();
 const isOpen = ref(false);
+const opener = ref(null);
+const palettePanel = ref(null);
+const closeButton = ref(null);
 const navigationIds = ['experience', 'u2', 'projects', 'stack', 'contact'];
 const homePath = computed(() => portfolioRoutes[lang.value].home);
 const isHomeRoute = computed(() => route.path === homePath.value);
 const sectionTarget = (id) => `${homePath.value}#${id}`;
+const isPlainPrimaryClick = (event) => !(event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const items = computed(() => navigationIds.map((id) => ({id, label: t.value.nav[id]})));
 
-const close = () => {
-    isOpen.value = false;
+const trapFocus = (event, container) => {
+    if (event.key !== 'Tab') {
+        return;
+    }
+
+    const focusableElements = [...(container?.querySelectorAll(focusableSelector) || [])];
+    if (!focusableElements.length) {
+        event.preventDefault();
+        return;
+    }
+
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+    const nextIndex = event.shiftKey
+        ? (currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1)
+        : (currentIndex === focusableElements.length - 1 ? 0 : currentIndex + 1);
+
+    event.preventDefault();
+    focusableElements[nextIndex].focus();
 };
 
-const open = () => {
+const close = (restoreFocus = true) => {
+    const wasOpen = isOpen.value;
+    const restoreTarget = opener.value;
+    isOpen.value = false;
+    opener.value = null;
+
+    if (wasOpen && restoreFocus && restoreTarget?.isConnected) {
+        nextTick(() => restoreTarget?.isConnected && restoreTarget.focus());
+    }
+};
+
+const open = (event) => {
+    const candidate = event?.detail?.opener;
+    opener.value = candidate?.isConnected
+        ? candidate
+        : (typeof document === 'undefined' ? null : document.activeElement);
     isOpen.value = true;
+    nextTick(() => closeButton.value?.focus());
 };
 
 const goTo = (event, id) => {
-    if (!isHomeRoute.value || typeof document === 'undefined') {
+    if (!isPlainPrimaryClick(event) || !isHomeRoute.value || typeof document === 'undefined') {
         return;
     }
 
@@ -61,7 +98,11 @@ const onKeyDown = (event) => {
     const isShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k';
     if (isShortcut) {
         event.preventDefault();
-        isOpen.value = !isOpen.value;
+        if (isOpen.value) {
+            close();
+        } else {
+            open();
+        }
         return;
     }
 

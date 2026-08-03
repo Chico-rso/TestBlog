@@ -349,3 +349,28 @@ test('global navigation uses route-aware Nuxt links, approved section ids, and s
     assert.match(footer, /t\.footer\.subtitle/);
     assert.doesNotMatch(footer, /systemSections/);
 });
+
+test('navigation orders live sections by document position and protects modal interaction', () => {
+    const header = readFileSync(new URL('../components/Header.vue', import.meta.url), 'utf8');
+    const palette = readFileSync(new URL('../components/CommandPalette.vue', import.meta.url), 'utf8');
+    const activeSection = readFileSync(new URL('../composables/useActiveSection.js', import.meta.url), 'utf8');
+
+    assert.match(activeSection, /\.sort\(\(left, right\) => left\.offsetTop - right\.offsetTop\)/);
+    assert.match(activeSection, /\(\) => route\.path/);
+    assert.match(header, /isHomeRoute && activeSection === item\.id/);
+    assert.match(header, /const isPlainPrimaryClick = \(event\)/);
+    assert.match(header, /@click="scrollToTop\(\$event\)"/);
+    assert.match(header, /event\.button !== 0 \|\| event\.metaKey \|\| event\.ctrlKey \|\| event\.shiftKey \|\| event\.altKey/);
+    assert.match(header, /ref="mobileMenu"/);
+    assert.match(header, /@keydown="trapFocus\(\$event, mobileMenu\)"/);
+    assert.match(header, /closeMobileMenu\(false\);/);
+    assert.match(header, /new CustomEvent\('portfolio:command-open'/);
+
+    assert.match(palette, /ref="palettePanel"/);
+    assert.match(palette, /@keydown="trapFocus\(\$event, palettePanel\)"/);
+    assert.match(palette, /const opener = ref\(null\);/);
+    assert.match(palette, /nextTick\(\(\) => closeButton\.value\?\.focus\(\)\)/);
+    assert.match(palette, /restoreTarget\?\.isConnected/);
+    assert.match(palette, /event\.button !== 0 \|\| event\.metaKey \|\| event\.ctrlKey \|\| event\.shiftKey \|\| event\.altKey/);
+    assert.match(palette, /:aria-label="lang === 'ru' \? 'Закрыть' : 'Close'"/);
+});
