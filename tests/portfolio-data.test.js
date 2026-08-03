@@ -73,3 +73,12 @@ test('work cards render contributions without repeated generic metadata', () => 
     assert.match(source, /data-project-card/);
     assert.doesNotMatch(source, /system\.statusLabel|system\.roleLabel|system\.resultLabel/);
 });
+
+test('portfolio styles include pointer glow, section accents, and reduced-motion fallbacks', () => {
+    const source = readFileSync(new URL('../assets/scss/portfolio.scss', import.meta.url), 'utf8');
+
+    assert.match(source, /--pointer-x/);
+    assert.match(source, /\.work-card__glow/);
+    assert.match(source, /--accent-progress/);
+    assert.match(source, /prefers-reduced-motion: reduce/);
+});
