@@ -7,6 +7,7 @@
 	"generate": "nuxt generate",
 	"preview": "nuxt preview",
 	"test": "node --experimental-default-type=module --test tests/portfolio-data.test.js",
+	"test:ui": "playwright test",
 	"postinstall": "nuxt prepare"
   },
   "devDependencies": {

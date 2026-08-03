@@ -18,6 +18,10 @@ logs
 .fleet
 .idea
 .worktrees/
+.superpowers/
+output/playwright/
+playwright-report/
+test-results/
 
 # Local env files
 .env
