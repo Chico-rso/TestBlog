@@ -62,7 +62,7 @@ test('U2 capture pipeline declares its runtime, source exclusion, and readiness 
 	])
 	const packageJson = JSON.parse(packageContents)
 
-	assert.equal(packageJson.engines?.node, '>=20.9.0')
+	assert.equal(packageJson.engines?.node, '>=20.10.0')
 	assert.match(gitignoreContents, /^output\/u2-source\/$/m)
 	assert.match(captureContents, /response\.ok/)
 	assert.match(captureContents, /document\.fonts\.ready/)

@@ -10,19 +10,11 @@ export default defineNuxtConfig({
             meta: [
                 {charset: 'utf-8'},
                 {name: 'viewport', content: 'width=device-width,initial-scale=1'},
-                {
-                    name: 'description',
-                    content: 'Frontend-разработчик. Vue/Nuxt/TypeScript, сложные интерфейсы и анимации.'
-                },
                 {name: 'author', content: 'Amiran Bestaev'},
                 {name: 'robots', content: 'index,follow'},
                 {name: 'application-name', content: 'Amiran Bestaev'},
                 {name: 'apple-mobile-web-app-title', content: 'Amiran Bestaev'},
-                {name: 'theme-color', content: '#f2f4ff'},
-                {property: 'og:image', content: '/og-image.png'},
-                {property: 'og:site_name', content: 'Amiran Bestaev'},
-                {name: 'twitter:card', content: 'summary_large_image'},
-                {name: 'twitter:image', content: '/og-image.png'}
+                {name: 'theme-color', content: '#f2f4ff'}
             ],
             link: [
                 {
@@ -39,40 +31,30 @@ export default defineNuxtConfig({
                 {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png'},
                 {rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png'},
                 {rel: 'manifest', href: '/site.webmanifest'}
-            ],
-            script: [
-                {
-                    key: 'yandex-metrika',
-                    type: 'text/javascript',
-                    innerHTML: `
-(function(m,e,t,r,i,k,a){
-    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106719755', 'ym');
-
-ym(106719755, 'init', {
-    ssr: true,
-    webvisor: true,
-    clickmap: true,
-    ecommerce: "dataLayer",
-    referrer: document.referrer,
-    url: location.href,
-    accurateTrackBounce: true,
-    trackLinks: true
-});
-                    `.trim()
-                }
-            ],
-            noscript: [
-                {
-                    key: 'yandex-metrika-noscript',
-                    tagPosition: 'bodyOpen',
-                    innerHTML: '<div><img src="https://mc.yandex.ru/watch/106719755" style="position:absolute; left:-9999px;" alt="" /></div>'
-                }
             ]
         }
+    },
+    nitro: {
+        prerender: {
+            routes: ['/', '/en', '/projects/u2', '/en/projects/u2'],
+        },
+    },
+    routeRules: {
+        '/_nuxt/**': {
+            headers: {'cache-control': 'public, max-age=31536000, immutable'},
+        },
+        '/fonts/**': {
+            headers: {'cache-control': 'public, max-age=31536000, immutable'},
+        },
+        '/**': {
+            headers: {
+                'strict-transport-security': 'max-age=31536000; includeSubDomains',
+                'x-content-type-options': 'nosniff',
+                'referrer-policy': 'strict-origin-when-cross-origin',
+                'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+                'content-security-policy-report-only': "default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://t.me",
+            },
+        },
     },
     components: [
         {

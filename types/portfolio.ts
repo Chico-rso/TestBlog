@@ -139,6 +139,7 @@ export type PortfolioCopy = {
 };
 
 export type PortfolioConfig = {
+    siteUrl: string;
     email: string;
     telegram: string;
     resumeUrl: string;

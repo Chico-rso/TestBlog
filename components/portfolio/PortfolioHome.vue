@@ -14,6 +14,6 @@ const root = ref(null);
 const {t} = useLanguage();
 const featuredProject = computed(() => t.value.projects.find(({featured}) => featured));
 
-usePortfolioHead();
+usePortfolioHead('home');
 usePortfolioAnimations(root);
 </script>

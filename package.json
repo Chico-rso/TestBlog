@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
 	"engines": {
-	"node": ">=20.9.0"
+	"node": ">=20.10.0"
 	},
 	"scripts": {
 	"assets:u2": "node scripts/capture-u2-assets.mjs && node scripts/optimize-u2-assets.mjs",
