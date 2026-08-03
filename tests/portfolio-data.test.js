@@ -106,6 +106,34 @@ test('both locales expose the featured U2 case contract', () => {
     }
 });
 
+test('localized portfolio copy preserves the approved hero, proof, navigation, and section contract', () => {
+    const copy = loadCopy();
+    const expectations = {
+        ru: {
+            ctas: ['Смотреть U2', 'Связаться', 'Скачать CV'],
+            nav: {experience: 'Опыт', u2: 'U2', projects: 'Проекты', stack: 'Стек', contact: 'Контакты'},
+            sections: {featured: 'Флагманский кейс', experience: 'Опыт', projects: 'Другие проекты', skills: 'Стек', principles: 'Принципы'},
+        },
+        en: {
+            ctas: ['View U2', 'Contact', 'Download CV'],
+            nav: {experience: 'Experience', u2: 'U2', projects: 'Projects', stack: 'Stack', contact: 'Contact'},
+            sections: {featured: 'Featured case', experience: 'Experience', projects: 'Other projects', skills: 'Stack', principles: 'Principles'},
+        },
+    };
+
+    for (const [locale, expected] of Object.entries(expectations)) {
+        const data = copy[locale];
+        assert.equal(data.hero.role, 'Frontend Engineer');
+        assert.deepEqual([data.hero.ctaPrimary, data.hero.ctaSecondary, data.hero.ctaCv], expected.ctas);
+        assert.deepEqual(data.stats.map((stat) => stat.value), ['5+', 'Vue 2/3 · Nuxt 2/3', '2']);
+        assert.deepEqual(data.nav, expected.nav);
+        assert.deepEqual(
+            Object.fromEntries(Object.entries(data.sections).map(([key, section]) => [key, section.title])),
+            expected.sections,
+        );
+    }
+});
+
 test('validator rejects more than one featured project', () => {
     const copy = loadCopy();
     copy.ru.projects[0].featured = true;
@@ -122,7 +150,7 @@ test('validator requires the English U2 case narrative', () => {
 
     assert.throws(
         () => validatePortfolioCopy(copy),
-        /en\.projects\[1\]\.case\.narrative must be an array/,
+        /en\.projects\[\d+\]\.case\.narrative must be an array/,
     );
 });
 
@@ -132,7 +160,40 @@ test('validator requires the ordered U2 technology contract', () => {
 
     assert.throws(
         () => validatePortfolioCopy(copy),
-        /en\.projects\[1\]\.case\.technologies must match the U2 technology contract/,
+        /en\.projects\[\d+\]\.case\.technologies must match the U2 technology contract/,
+    );
+});
+
+test('validator rejects duplicate U2 gallery media', () => {
+    const copy = loadCopy();
+    const gallery = copy.en.projects.find((project) => project.id === 'u2').case.gallery;
+    gallery[1] = {...gallery[0]};
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[\d+\]\.case\.gallery\[1\]\.avif must match the canonical U2 media path/,
+    );
+});
+
+test('validator rejects traversal U2 gallery media', () => {
+    const copy = loadCopy();
+    const gallery = copy.en.projects.find((project) => project.id === 'u2').case.gallery;
+    gallery[0].avif = '/projects/u2/../u2-home-desktop.avif';
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[\d+\]\.case\.gallery\[0\]\.avif must match the canonical U2 media path/,
+    );
+});
+
+test('validator requires the ordered U2 narrative contract', () => {
+    const copy = loadCopy();
+    const narrative = copy.en.projects.find((project) => project.id === 'u2').case.narrative;
+    [narrative[0], narrative[1]] = [narrative[1], narrative[0]];
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[\d+\]\.case\.narrative must match the U2 narrative order/,
     );
 });
 
