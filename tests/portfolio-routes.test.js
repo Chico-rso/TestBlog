@@ -5,7 +5,24 @@ import {
     getLocaleFromPath,
     getPageKeyFromPath,
     getRouteForLocale,
+    portfolioRoutes,
 } from '../lib/portfolio/routes.js';
+
+test('exposes the exact frozen locale route table for shared navigation consumers', () => {
+    assert.deepEqual(portfolioRoutes, {
+        ru: {
+            home: '/',
+            u2: '/projects/u2',
+        },
+        en: {
+            home: '/en',
+            u2: '/en/projects/u2',
+        },
+    });
+    assert.equal(Object.isFrozen(portfolioRoutes), true);
+    assert.equal(Object.isFrozen(portfolioRoutes.ru), true);
+    assert.equal(Object.isFrozen(portfolioRoutes.en), true);
+});
 
 test('derives locale only from the exact English URL prefix', () => {
     assert.equal(getLocaleFromPath('/'), 'ru');
