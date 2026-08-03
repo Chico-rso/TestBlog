@@ -23,11 +23,11 @@
 						@error="markFailed(item, index)"
 					>
 				</picture>
-				<div v-show="hasFailed(item, index) || !item?.webp" class="case-media__fallback">
+				<div v-show="hasFailed(item, index) || !item?.webp" class="case-media__fallback" aria-hidden="true">
 					{{ item?.alt || fallbackText }}
 				</div>
 			</div>
-			<figcaption>{{ item?.alt || fallbackText }}</figcaption>
+			<figcaption aria-hidden="true">{{ item?.alt || fallbackText }}</figcaption>
 		</figure>
 	</div>
 </template>

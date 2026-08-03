@@ -197,6 +197,26 @@ test('validator requires the ordered U2 narrative contract', () => {
     );
 });
 
+test('validator rejects a featured U2 project without a public link', () => {
+    const copy = loadCopy();
+    copy.en.projects.find((project) => project.id === 'u2').links = [];
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /en\.projects\[\d+\]\.links\[0\]\.url must be the canonical public U2 URL/,
+    );
+});
+
+test('validator rejects a non-canonical featured U2 public link', () => {
+    const copy = loadCopy();
+    copy.ru.projects.find((project) => project.id === 'u2').links[0].url = 'https://example.com/u2';
+
+    assert.throws(
+        () => validatePortfolioCopy(copy),
+        /ru\.projects\[\d+\]\.links\[0\]\.url must be the canonical public U2 URL/,
+    );
+});
+
 test('portfolio home composes the identity, flagship case, career, and supporting work in order', () => {
     const source = readFileSync(new URL('../components/portfolio/PortfolioHome.vue', import.meta.url), 'utf8');
     const sectionOrder = [
@@ -394,7 +414,8 @@ test('U2 case page composes all approved evidence sections in order', () => {
     assert.match(source, /const caseData = computed\(\(\) => project\.value\?\.case\);/);
     assert.match(source, /createError\(\{statusCode: 404, statusMessage: 'U2 case not found'\}\)/);
     assert.match(source, /portfolioRoutes\[lang\.value\]\.home/);
-    assert.match(source, /project\.value\.links\[0\]\.url/);
+    assert.match(source, /const externalUrl = computed\(\(\) => project\.value\?\.links\?\.\[0\]\?\.url\);/);
+    assert.match(source, /!project\.value \|\| !caseData\.value \|\| !externalUrl\.value/);
     assert.match(source, /usePortfolioAnimations\(root\);/);
     assert.match(source, /usePortfolioHead\('u2'\);/);
 });
@@ -450,8 +471,8 @@ test('U2 case evidence renders truthful semantic count surfaces and resilient me
     assert.match(gallery, /:loading="index === 0 \? 'eager' : 'lazy'"/);
     assert.match(gallery, /reactive\(new Set\(\)\)/);
     assert.match(gallery, /@error="markFailed\(item, index\)"/);
-    assert.match(gallery, /class="case-media__fallback"/);
-    assert.match(gallery, /<figcaption>/);
+    assert.match(gallery, /class="case-media__fallback" aria-hidden="true"/);
+    assert.match(gallery, /<figcaption aria-hidden="true">/);
 });
 
 test('U2 case hero, result, and navigation preserve media and safe-link contracts', () => {

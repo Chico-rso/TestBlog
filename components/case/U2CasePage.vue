@@ -22,13 +22,13 @@ const root = ref(null);
 const {t, lang} = useLanguage();
 const project = computed(() => t.value.projects.find(({id}) => id === 'u2'));
 const caseData = computed(() => project.value?.case);
+const externalUrl = computed(() => project.value?.links?.[0]?.url);
 
-if (!project.value || !caseData.value) {
+if (!project.value || !caseData.value || !externalUrl.value) {
 	throw createError({statusCode: 404, statusMessage: 'U2 case not found'});
 }
 
 const homePath = computed(() => portfolioRoutes[lang.value].home);
-const externalUrl = computed(() => project.value.links[0].url);
 const nextProjectUrl = 'https://novaya.ru/';
 const resultHeading = computed(() => (
 	caseData.value.narrative.find(({id}) => id === 'result')?.title || caseData.value.eyebrow
