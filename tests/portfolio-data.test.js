@@ -466,13 +466,22 @@ test('U2 case evidence renders truthful semantic count surfaces and resilient me
     assert.match(gallery, /:src="item\?\.webp"/);
     assert.match(gallery, /:width="item\?\.width"/);
     assert.match(gallery, /:height="item\?\.height"/);
-    assert.match(gallery, /:alt="item\?\.alt \|\| ''"/);
+    assert.match(gallery, /:alt="item\.alt"/);
     assert.match(gallery, /decoding="async"/);
     assert.match(gallery, /:loading="index === 0 \? 'eager' : 'lazy'"/);
     assert.match(gallery, /reactive\(new Set\(\)\)/);
     assert.match(gallery, /@error="markFailed\(item, index\)"/);
     assert.match(gallery, /class="case-media__fallback" aria-hidden="true"/);
-    assert.match(gallery, /<figcaption aria-hidden="true">/);
+});
+
+test('U2 gallery exposes its visible caption to assistive technology after media failure', () => {
+    const gallery = readFileSync(new URL('../components/case/CaseGallery.vue', import.meta.url), 'utf8');
+
+    assert.match(
+        gallery,
+        /<figcaption :aria-hidden="hasFailed\(item, index\) \? undefined : 'true'">/,
+    );
+    assert.doesNotMatch(gallery, /<figcaption aria-hidden="true">/);
 });
 
 test('U2 case hero, result, and navigation preserve media and safe-link contracts', () => {

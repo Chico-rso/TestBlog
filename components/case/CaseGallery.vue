@@ -17,7 +17,7 @@
 						:src="item?.webp"
 						:width="item?.width"
 						:height="item?.height"
-						:alt="item?.alt || ''"
+						:alt="item.alt"
 						:loading="index === 0 ? 'eager' : 'lazy'"
 						decoding="async"
 						@error="markFailed(item, index)"
@@ -27,7 +27,7 @@
 					{{ item?.alt || fallbackText }}
 				</div>
 			</div>
-			<figcaption aria-hidden="true">{{ item?.alt || fallbackText }}</figcaption>
+			<figcaption :aria-hidden="hasFailed(item, index) ? undefined : 'true'">{{ item?.alt || fallbackText }}</figcaption>
 		</figure>
 	</div>
 </template>
