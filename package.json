@@ -1,12 +1,13 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "scripts": {
+	"scripts": {
+	"assets:u2": "node scripts/capture-u2-assets.mjs && node scripts/optimize-u2-assets.mjs",
 	"build": "nuxt build",
 	"dev": "nuxt dev",
 	"generate": "nuxt generate",
 	"preview": "nuxt preview",
-	"test": "node --experimental-default-type=module --test tests/portfolio-data.test.js",
+	"test": "node --experimental-default-type=module --test tests/*.test.js",
 	"test:ui": "playwright test",
 	"postinstall": "nuxt prepare"
   },
@@ -16,7 +17,8 @@
 	"nuxt": "^3.7.3",
 	"playwright": "^1.58.1",
 	"png-to-ico": "^3.0.1",
-	"sass": "^1.77.8"
+	"sass": "^1.77.8",
+	"sharp": "^0.35.3"
   },
   "overrides": {
 	"vue": "latest"
