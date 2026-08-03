@@ -1,5 +1,5 @@
 <template>
-	<div class="case-gallery container">
+	<div ref="galleryRoot" class="case-gallery container">
 		<figure
 			v-for="(item, index) in items"
 			:key="getMediaKey(item, index)"
@@ -20,6 +20,7 @@
 						:alt="item.alt"
 						:loading="index === 0 ? 'eager' : 'lazy'"
 						decoding="async"
+						:data-media-index="index"
 						@error="markFailed(item, index)"
 					>
 				</picture>
@@ -39,11 +40,23 @@ const props = defineProps({
 });
 
 const failedItems = reactive(new Set());
+const galleryRoot = ref(null);
 const getMediaKey = (item, index) => item?.webp || item?.avif || `${props.fallbackText}-${index}`;
 const hasFailed = (item, index) => failedItems.has(getMediaKey(item, index));
 const markFailed = (item, index) => failedItems.add(getMediaKey(item, index));
 const mediaStyle = (item) => ({
 	'--case-media-ratio': `${item?.width || 1} / ${item?.height || 1}`,
+});
+
+onMounted(() => {
+	galleryRoot.value?.querySelectorAll('.case-media__picture img').forEach((image) => {
+		if (!image.complete || image.naturalWidth) {
+			return;
+		}
+
+		const index = Number(image.dataset.mediaIndex);
+		markFailed(props.items[index], index);
+	});
 });
 </script>
 
