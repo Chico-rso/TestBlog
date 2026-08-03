@@ -20,6 +20,7 @@ logs
 .worktrees/
 .superpowers/
 output/playwright/
+output/u2-source/
 playwright-report/
 test-results/
 

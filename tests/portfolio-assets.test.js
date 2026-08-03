@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict'
 import { readFile, stat } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 import test from 'node:test'
+import sharp from 'sharp'
 
 const assetDirectory = new URL('../public/projects/u2/', import.meta.url)
+const projectRoot = new URL('../', import.meta.url)
 const assetNames = [
 	'u2-home-desktop.avif',
 	'u2-home-desktop.webp',
@@ -13,6 +16,12 @@ const assetNames = [
 	'u2-filters-mobile.avif',
 	'u2-filters-mobile.webp'
 ]
+const expectedDimensions = {
+	'u2-home-desktop': { width: 1600, height: 1000 },
+	'u2-filters-desktop': { width: 1600, height: 1000 },
+	'u2-flat-desktop': { width: 1600, height: 1000 },
+	'u2-filters-mobile': { width: 780, height: 1688 }
+}
 
 test('U2 evidence assets exist and are meaningful image files', async () =>
 {
@@ -32,5 +41,33 @@ test('U2 evidence assets exist and are meaningful image files', async () =>
 			assert.equal(contents.subarray(0, 4).toString(), 'RIFF')
 			assert.equal(contents.subarray(8, 12).toString(), 'WEBP')
 		}
+
+		const { data, info } = await sharp(fileURLToPath(assetUrl))
+			.raw()
+			.toBuffer({ resolveWithObject: true })
+		const expectedSize = expectedDimensions[assetName.replace(/\.(avif|webp)$/, '')]
+
+		assert.equal(info.width, expectedSize.width, `${assetName} width`)
+		assert.equal(info.height, expectedSize.height, `${assetName} height`)
+		assert.ok(data.length > 0, `${assetName} must decode into pixels`)
 	}
+})
+
+test('U2 capture pipeline declares its runtime, source exclusion, and readiness safeguards', async () =>
+{
+	const [packageContents, gitignoreContents, captureContents] = await Promise.all([
+		readFile(new URL('package.json', projectRoot), 'utf8'),
+		readFile(new URL('.gitignore', projectRoot), 'utf8'),
+		readFile(new URL('scripts/capture-u2-assets.mjs', projectRoot), 'utf8')
+	])
+	const packageJson = JSON.parse(packageContents)
+
+	assert.equal(packageJson.engines?.node, '>=20.9.0')
+	assert.match(gitignoreContents, /^output\/u2-source\/$/m)
+	assert.match(captureContents, /response\.ok/)
+	assert.match(captureContents, /document\.fonts\.ready/)
+	assert.match(captureContents, /const frozenVideoTime = 1/)
+	assert.match(captureContents, /video\.currentTime = frozenVideoTime/)
+	assert.match(captureContents, /video\.addEventListener\('seeked'/)
+	assert.match(captureContents, /consentOverlay/)
 })

@@ -1,4 +1,5 @@
-import { mkdir } from 'node:fs/promises'
+import { mkdir, mkdtemp, rename, rm } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
@@ -12,16 +13,30 @@ const assets = [
 ]
 
 await mkdir(destinationDirectory, { recursive: true })
+const temporaryDirectory = await mkdtemp(join(dirname(destinationDirectory), 'u2-tmp-'))
 
-for (const [sourceName, destinationName] of assets)
+try
 {
-	const sourcePath = `${sourceDirectory}/${sourceName}`
-	const destinationPath = `${destinationDirectory}/${destinationName}`
+	for (const [sourceName, destinationName] of assets)
+	{
+		const sourcePath = `${sourceDirectory}/${sourceName}`
+		const temporaryPath = join(temporaryDirectory, destinationName)
 
-	await sharp(sourcePath)
-		.avif({ quality: 64, effort: 6 })
-		.toFile(`${destinationPath}.avif`)
-	await sharp(sourcePath)
-		.webp({ quality: 76, effort: 6 })
-		.toFile(`${destinationPath}.webp`)
+		await sharp(sourcePath)
+			.avif({ quality: 64, effort: 6 })
+			.toFile(`${temporaryPath}.avif`)
+		await sharp(sourcePath)
+			.webp({ quality: 76, effort: 6 })
+			.toFile(`${temporaryPath}.webp`)
+	}
+
+	for (const [, destinationName] of assets)
+	{
+		await rename(join(temporaryDirectory, `${destinationName}.avif`), join(destinationDirectory, `${destinationName}.avif`))
+		await rename(join(temporaryDirectory, `${destinationName}.webp`), join(destinationDirectory, `${destinationName}.webp`))
+	}
+}
+finally
+{
+	await rm(temporaryDirectory, { recursive: true, force: true })
 }
