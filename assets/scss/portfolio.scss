@@ -7,6 +7,8 @@
     --portfolio-accent: #00b7ff;
     --portfolio-accent-2: #55d4ff;
     --portfolio-accent-3: #00b7ff;
+    --portfolio-accent-ink: #006b8f;
+    --portfolio-focus: #006b8f;
     --portfolio-surface: rgba(255, 255, 255, 0.88);
     --portfolio-surface-strong: #ffffff;
     --portfolio-border: rgba(17, 28, 44, 0.14);
@@ -25,6 +27,8 @@
     --portfolio-accent: #2ad1ff;
     --portfolio-accent-2: #68e1ff;
     --portfolio-accent-3: #2ad1ff;
+    --portfolio-accent-ink: #68e1ff;
+    --portfolio-focus: #68e1ff;
     --portfolio-surface: rgba(16, 25, 38, 0.86);
     --portfolio-surface-strong: #121f30;
     --portfolio-border: rgba(117, 149, 184, 0.26);
@@ -46,6 +50,12 @@ body {
 
 .portfolio {
     overflow: hidden;
+}
+
+.portfolio :where(a, button):focus-visible,
+.case-page :where(a, button):focus-visible {
+    outline: 2px solid var(--portfolio-focus);
+    outline-offset: 3px;
 }
 
 .hero {
@@ -129,7 +139,7 @@ body {
     font-size: 12px;
     letter-spacing: 2.2px;
     text-transform: uppercase;
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
     font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
@@ -157,7 +167,7 @@ body {
 .hero__title-role {
     font-style: normal;
     font-size: clamp(21px, 2.8vw, 34px);
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
     font-weight: 600;
     letter-spacing: 0.8px;
 }
@@ -227,8 +237,8 @@ body {
     }
 
     &:focus-visible {
-        outline: 1px solid var(--portfolio-accent);
-        outline-offset: 2px;
+        outline: 2px solid var(--portfolio-focus);
+        outline-offset: 3px;
     }
 }
 
@@ -243,7 +253,7 @@ body {
 
     .btn--ghost:hover {
         border-color: var(--portfolio-accent);
-        color: var(--portfolio-accent);
+        color: var(--portfolio-accent-ink);
     }
 }
 
@@ -471,7 +481,7 @@ body {
         font-size: 11px;
         letter-spacing: 1.6px;
         text-transform: uppercase;
-        color: var(--portfolio-accent);
+        color: var(--portfolio-accent-ink);
         font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     }
 
@@ -538,7 +548,7 @@ body {
 .approach-item__step {
     font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     font-size: 12px;
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
 }
 
 .approach-item__title {
@@ -593,7 +603,7 @@ body {
 
 .approach-item.is-active .approach-item__plus {
     transform: rotate(45deg);
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
     border-color: color-mix(in srgb, var(--portfolio-accent) 44%, var(--portfolio-border));
 }
 
@@ -672,7 +682,7 @@ body {
 
 .work-card__index,
 .work-card__contribution > span {
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
     font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
     font-size: 11px;
     font-weight: 700;
@@ -753,7 +763,7 @@ body {
         padding: 6px 10px;
         border: 1px solid color-mix(in srgb, var(--portfolio-accent) 45%, transparent);
         border-radius: 9px;
-        color: var(--portfolio-accent);
+        color: var(--portfolio-accent-ink);
         transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
         span {
@@ -872,7 +882,7 @@ body {
 
 .principle-card__mark {
     font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-ink);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -896,7 +906,7 @@ body {
 .btn:focus-visible,
 .approach-item__head:focus-visible,
 .work-card__links a:focus-visible {
-    outline: 2px solid var(--portfolio-accent);
+    outline: 2px solid var(--portfolio-focus);
     outline-offset: 3px;
 }
 
@@ -1044,7 +1054,7 @@ body {
 	font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	font-size: 10px;
 	letter-spacing: 0.14em;
-	color: var(--portfolio-accent);
+	color: var(--portfolio-accent-ink);
 }
 
 .hero__stats {
@@ -1141,13 +1151,14 @@ body {
 	min-width: 0;
 }
 
-.portfolio .featured-case__type,
+.portfolio .section .featured-case__type,
 .case-page[data-case-page='u2'] .case-hero__eyebrow {
 	font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	font-size: 11px;
 	font-weight: 700;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
+	color: var(--portfolio-accent-ink);
 }
 
 .portfolio .featured-case__content > p:not(.featured-case__type),
@@ -1209,6 +1220,10 @@ body {
 	font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	font-size: 12px;
 	overflow-wrap: anywhere;
+}
+
+.portfolio .career-list .career-entry__role {
+	color: var(--portfolio-accent-ink);
 }
 
 @media (min-width: 1120px) {
@@ -1280,11 +1295,16 @@ body {
 	padding: 9px 13px;
 	border: 1px solid color-mix(in srgb, var(--portfolio-accent) 44%, var(--portfolio-border));
 	border-radius: 9px;
-	color: var(--portfolio-accent);
+	color: var(--portfolio-accent-ink);
 	font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	font-size: 12px;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
+}
+
+.case-page[data-case-page='u2'] .case-hero__content > a:focus-visible {
+	outline: 2px solid var(--portfolio-focus);
+	outline-offset: 3px;
 }
 
 .case-page[data-case-page='u2'] .case-hero__media {
@@ -1317,7 +1337,7 @@ body {
 	font-size: 10px;
 	letter-spacing: 0.13em;
 	text-transform: uppercase;
-	color: var(--portfolio-accent);
+	color: var(--portfolio-accent-ink);
 }
 
 .case-page[data-case-page='u2'] .case-fact dd {
@@ -1465,7 +1485,7 @@ body {
 }
 
 .case-page[data-case-page='u2'] .case-navigation a:focus-visible {
-	outline: 2px solid var(--portfolio-accent);
+	outline: 2px solid var(--portfolio-focus);
 	outline-offset: 3px;
 }
 
@@ -1473,7 +1493,7 @@ body {
 	.case-page[data-case-page='u2'] .case-navigation a:hover {
 		transform: translateY(-2px);
 		border-color: var(--portfolio-accent);
-		color: var(--portfolio-accent);
+		color: var(--portfolio-accent-ink);
 	}
 }
 
@@ -1488,7 +1508,7 @@ body {
 	}
 }
 
-@media (max-width: 420px) {
+@media (max-width: 640px) {
 	.portfolio,
 	.case-page[data-case-page='u2'] {
 		width: 100%;
@@ -1673,7 +1693,6 @@ body {
 		font-size: clamp(58px, 22vw, 86px);
 	}
 
-	.case-page[data-case-page='u2'] .case-facts,
 	.case-page[data-case-page='u2'] .case-gallery,
 	.case-page[data-case-page='u2'] .case-navigation {
 		grid-template-columns: minmax(0, 1fr);

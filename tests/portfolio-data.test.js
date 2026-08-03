@@ -10,6 +10,23 @@ const loadCopy = () => ({
     en: readJson('../data/portfolio/en.json'),
 });
 
+const readCssToken = (source, selector, token) => {
+    const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const block = source.match(new RegExp(`${ escapedSelector }\\s*\\{([^}]*)\\}`))?.[1] || '';
+    return block.match(new RegExp(`${ token }\\s*:\\s*(#[0-9a-f]{6})`, 'i'))?.[1];
+};
+const relativeLuminance = (hex) => {
+    const channels = hex.slice(1).match(/.{2}/g).map((channel) => parseInt(channel, 16) / 255);
+    const linear = channels.map((channel) => (
+        channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4
+    ));
+    return (0.2126 * linear[0]) + (0.7152 * linear[1]) + (0.0722 * linear[2]);
+};
+const contrastRatio = (foreground, background) => {
+    const values = [relativeLuminance(foreground), relativeLuminance(background)].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+};
+
 test('project locales stay aligned and replace FoodMap with Novaya', () => {
     const copy = loadCopy();
     const ruIds = copy.ru.projects.map((project) => project.id);
@@ -331,6 +348,59 @@ test('portfolio styles include pointer glow, section accents, and reduced-motion
     assert.match(source, /prefers-reduced-motion: reduce/);
 });
 
+test('portfolio foreground and focus tokens meet light and dark contrast thresholds', () => {
+    const source = readFileSync(new URL('../assets/scss/portfolio.scss', import.meta.url), 'utf8');
+    const themes = [
+        {
+            selector: ':root',
+            surfaces: ['#ffffff', '#f2f6fd'],
+        },
+        {
+            selector: ":root[data-theme='dark']",
+            surfaces: ['#121f30', '#090f17'],
+        },
+    ];
+
+    themes.forEach(({selector, surfaces}) => {
+        const accentInk = readCssToken(source, selector, '--portfolio-accent-ink');
+        const focus = readCssToken(source, selector, '--portfolio-focus');
+
+        assert.ok(accentInk, `${ selector } must define --portfolio-accent-ink`);
+        assert.ok(focus, `${ selector } must define --portfolio-focus`);
+        surfaces.forEach((surface) => {
+            assert.ok(contrastRatio(accentInk, surface) >= 4.5, `${ selector } accent ink must meet 4.5:1`);
+            assert.ok(contrastRatio(focus, surface) >= 3, `${ selector } focus must meet 3:1`);
+        });
+    });
+});
+
+test('portfolio and case links keep visible keyboard focus after the global outline reset', () => {
+    const source = readFileSync(new URL('../assets/scss/portfolio.scss', import.meta.url), 'utf8');
+
+    assert.match(
+        source,
+        /\.portfolio :where\(a, button\):focus-visible,\s*\.case-page :where\(a, button\):focus-visible\s*\{[^}]*outline:\s*2px solid var\(--portfolio-focus\);[^}]*outline-offset:\s*3px;/s,
+    );
+    assert.match(
+        source,
+        /\.case-page\[data-case-page='u2'\] \.case-hero__content > a:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--portfolio-focus\);/s,
+    );
+});
+
+test('small portfolio accent labels and links use the high-contrast ink token', () => {
+    const source = readFileSync(new URL('../assets/scss/portfolio.scss', import.meta.url), 'utf8');
+    const selectorContracts = [
+        /\.hero__title-role\s*\{[^}]*color:\s*var\(--portfolio-accent-ink\)/s,
+        /\.portfolio \.section \.featured-case__type,[^{]+\{[^}]*color:\s*var\(--portfolio-accent-ink\)/s,
+        /\.portfolio \.career-list \.career-entry__role\s*\{[^}]*color:\s*var\(--portfolio-accent-ink\)/s,
+        /\.work-card__links\s*\{[\s\S]*?a\s*\{[^}]*color:\s*var\(--portfolio-accent-ink\)/,
+        /\.case-page\[data-case-page='u2'\] \.case-hero__content > a\s*\{[^}]*color:\s*var\(--portfolio-accent-ink\)/s,
+        /\.case-page\[data-case-page='u2'\] \.case-fact dt\s*\{[^}]*color:\s*var\(--portfolio-accent-ink\)/s,
+    ];
+
+    selectorContracts.forEach((contract) => assert.match(source, contract));
+});
+
 test('Montserrat CSS declares exactly two variable WOFF2 faces', () => {
     const source = readFileSync(new URL('../assets/scss/base/fonts.scss', import.meta.url), 'utf8');
     const faces = source.match(/@font-face\s*\{/g) || [];
@@ -419,7 +489,8 @@ test('portfolio styles expose responsive home and U2 case layout contracts', () 
     assert.match(source, /overflow-wrap:\s*anywhere/);
     assert.match(source, /object-fit:\s*(?:cover|contain)/);
     assert.match(source, /aspect-ratio/);
-    assert.match(source, /@media\s*\(max-width:\s*420px\)/);
+    assert.match(source, /@media\s*\(max-width:\s*6[0-8]0px\)/);
+    assert.doesNotMatch(source, /@media\s*\(max-width:\s*420px\)/);
 });
 
 test('portfolio animation composable scopes pointer motion and cleanup', () => {
