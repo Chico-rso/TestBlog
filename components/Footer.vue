@@ -2,8 +2,8 @@
     <footer class="site-footer" id="contact">
         <div class="container site-footer__inner">
             <div class="site-footer__copy">
-                <h2>{{ system.build.title }}</h2>
-                <p>{{ system.build.subtitle }}</p>
+                <h2>{{ t.footer.title }}</h2>
+                <p>{{ t.footer.subtitle }}</p>
             </div>
             <address class="site-footer__links">
                 <div>
@@ -26,12 +26,10 @@
 
 <script setup>
 import { portfolioConfig } from '~/data/portfolioConfig.js';
-import { systemSections } from '~/data/systemSections.js';
 
-const {t, lang} = useLanguage();
+const {t} = useLanguage();
 const year = new Date().getFullYear();
 const {email, telegram} = portfolioConfig;
-const system = computed(() => systemSections[lang.value] || systemSections.en);
 </script>
 
 <style lang="scss" scoped>

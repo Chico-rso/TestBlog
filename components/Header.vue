@@ -1,13 +1,14 @@
 <template>
     <header class="site-header">
         <div class="container site-header__inner">
-            <a class="brand" href="#top" :aria-label="lang === 'ru' ? 'Домой' : 'Home'" @click.prevent="scrollToTop">
+            <NuxtLink class="brand" :to="homePath" :aria-label="lang === 'ru' ? 'Домой' : 'Home'">
                 <span>AB</span>
-            </a>
+            </NuxtLink>
             <nav class="site-nav" :aria-label="lang === 'ru' ? 'Основная навигация' : 'Primary navigation'">
-                <a v-for="item in navItems" :key="item.id" :href="`#${item.id}`"
-                   :class="{ active: activeSection === item.id }"
-                   :aria-current="activeSection === item.id ? 'location' : undefined">{{ item.label }}</a>
+                <NuxtLink v-for="item in navItems" :key="item.id" :to="sectionTarget(item.id)"
+                          :class="{ active: activeSection === item.id }"
+                          :aria-current="activeSection === item.id ? 'location' : undefined"
+                          @click="scrollToSection($event, item.id)">{{ item.label }}</NuxtLink>
             </nav>
             <div class="site-actions site-actions--desktop">
                 <button class="command-toggle" type="button" @click="openCommandPalette"
@@ -43,7 +44,7 @@
                     <span>/</span>
                     <span :class="{ active: lang === 'en' }">EN</span>
                 </button>
-                <button class="burger-toggle" type="button" :class="{ 'is-open': isMenuOpen }"
+                <button ref="burgerButton" class="burger-toggle" type="button" :class="{ 'is-open': isMenuOpen }"
                         :aria-expanded="isMenuOpen" :aria-label="isMenuOpen ? closeLabel : openLabel"
                         @click="toggleMobileMenu">
                     <span></span>
@@ -61,14 +62,14 @@
               :aria-label="lang === 'ru' ? 'Мобильное меню' : 'Mobile menu'">
             <div class="mobile-menu__head">
                 <strong>{{ lang === 'ru' ? 'Навигация' : 'Navigation' }}</strong>
-                <button type="button" class="mobile-menu__close" :aria-label="closeLabel" @click="closeMobileMenu">Esc</button>
+                <button ref="closeButton" type="button" class="mobile-menu__close" :aria-label="closeLabel" @click="closeMobileMenu">Esc</button>
             </div>
             <nav class="mobile-nav" :aria-label="lang === 'ru' ? 'Мобильная навигация' : 'Mobile navigation'">
-                <a v-for="item in navItems" :key="item.id" :href="`#${item.id}`"
+                <NuxtLink v-for="item in navItems" :key="item.id" :to="sectionTarget(item.id)"
                    :class="{ active: activeSection === item.id }"
-                   @click.prevent="scrollToSection(item.id)">
+                   @click="scrollToSection($event, item.id)">
                     {{ item.label }}
-                </a>
+                </NuxtLink>
             </nav>
             <div class="mobile-actions">
                 <button class="command-toggle command-toggle--mobile" type="button" @click="openCommandPaletteFromMenu"
@@ -98,67 +99,62 @@
 
 <script setup>
 import { portfolioConfig } from '~/data/portfolioConfig.js';
+import {portfolioRoutes} from '~/lib/portfolio/routes.js';
 
-const {lang, toggleLang} = useLanguage();
+const {t, lang, toggleLang} = useLanguage();
 const {theme, toggleTheme} = useTheme();
-const {activeSection} = useActiveSection(['profile', 'approach', 'work', 'stack', 'principles', 'contact']);
+const route = useRoute();
+const navigationIds = ['experience', 'u2', 'projects', 'stack', 'contact'];
+const {activeSection} = useActiveSection(navigationIds);
 const {telegram} = portfolioConfig;
 const isMenuOpen = ref(false);
+const burgerButton = ref(null);
+const closeButton = ref(null);
 
 const openLabel = computed(() => (lang.value === 'ru' ? 'Открыть меню' : 'Open menu'));
 const closeLabel = computed(() => (lang.value === 'ru' ? 'Закрыть меню' : 'Close menu'));
+const homePath = computed(() => portfolioRoutes[lang.value].home);
+const isHomeRoute = computed(() => route.path === homePath.value);
+const navItems = computed(() => navigationIds.map((id) => ({id, label: t.value.nav[id]})));
+const sectionTarget = (id) => `${homePath.value}#${id}`;
 
-const navItems = computed(() => {
-    if (lang.value === 'ru') {
-        return [
-            {id: 'profile', label: 'ПРОФИЛЬ'},
-            {id: 'approach', label: 'ПОДХОД'},
-            {id: 'work', label: 'КЕЙСЫ'},
-            {id: 'stack', label: 'СТЕК'},
-            {id: 'principles', label: 'ПРИНЦИПЫ'},
-            {id: 'contact', label: 'КОНТАКТ'},
-        ];
-    }
-    
-    return [
-        {id: 'profile', label: 'PROFILE'},
-        {id: 'approach', label: 'APPROACH'},
-        {id: 'work', label: 'CASES'},
-        {id: 'stack', label: 'STACK'},
-        {id: 'principles', label: 'PRINCIPLES'},
-        {id: 'contact', label: 'CONTACT'},
-    ];
-});
-
-const scrollToTop = () => {
-    if (typeof window === 'undefined') {
-        return;
-    }
+const scrollToSection = (event, id) => {
     closeMobileMenu();
-    window.scrollTo({top: 0, behavior: 'smooth'});
-};
 
-const scrollToSection = (id) => {
-    if (typeof window === 'undefined') {
+    if (!isHomeRoute.value || typeof document === 'undefined') {
         return;
     }
+
     const section = document.getElementById(id);
-    if (section) {
-        section.scrollIntoView({behavior: 'smooth', block: 'start'});
+    if (!section) {
+        return;
     }
-    closeMobileMenu();
+
+    event.preventDefault();
+    section.scrollIntoView({behavior: 'smooth', block: 'start'});
 };
 
 const toggleMobileMenu = () => {
-    isMenuOpen.value = !isMenuOpen.value;
+    if (isMenuOpen.value) {
+        closeMobileMenu();
+        return;
+    }
+
+    isMenuOpen.value = true;
+    nextTick(() => closeButton.value?.focus());
 };
 
-const closeMobileMenu = () => {
+const closeMobileMenu = (restoreFocus = true) => {
+    const wasMenuOpen = isMenuOpen.value;
     isMenuOpen.value = false;
+
+    if (wasMenuOpen && restoreFocus) {
+        nextTick(() => burgerButton.value?.focus());
+    }
 };
 
 const onEscape = (event) => {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && isMenuOpen.value) {
         closeMobileMenu();
     }
 };
@@ -187,6 +183,11 @@ watch(isMenuOpen, (isOpen) => {
     }
     document.body.classList.toggle('menu-open', isOpen);
 });
+
+watch(
+    () => route.fullPath,
+    () => closeMobileMenu(),
+);
 
 onMounted(() => {
     window.addEventListener('keydown', onEscape);

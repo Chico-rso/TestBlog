@@ -10,10 +10,10 @@
                 </header>
                 <ul class="command-list" role="list">
                     <li v-for="item in items" :key="item.id">
-                        <button type="button" @click="goTo(item.id)">
+                        <NuxtLink class="command-link" :to="sectionTarget(item.id)" @click="goTo($event, item.id)">
                             <span>{{ item.label }}</span>
                             <kbd>#{{ item.id }}</kbd>
-                        </button>
+                        </NuxtLink>
                     </li>
                 </ul>
             </section>
@@ -22,30 +22,17 @@
 </template>
 
 <script setup>
-const {lang} = useLanguage();
+import {portfolioRoutes} from '~/lib/portfolio/routes.js';
+
+const {t, lang} = useLanguage();
+const route = useRoute();
 const isOpen = ref(false);
+const navigationIds = ['experience', 'u2', 'projects', 'stack', 'contact'];
+const homePath = computed(() => portfolioRoutes[lang.value].home);
+const isHomeRoute = computed(() => route.path === homePath.value);
+const sectionTarget = (id) => `${homePath.value}#${id}`;
 
-const items = computed(() => {
-    if (lang.value === 'ru') {
-        return [
-            {id: 'profile', label: 'Профиль инженера'},
-            {id: 'approach', label: 'Системный подход'},
-            {id: 'work', label: 'Продакшн-кейсы'},
-            {id: 'stack', label: 'Технологический стек'},
-            {id: 'principles', label: 'Инженерные принципы'},
-            {id: 'contact', label: 'Контакт'},
-        ];
-    }
-
-    return [
-        {id: 'profile', label: 'Engineering profile'},
-        {id: 'approach', label: 'System approach'},
-        {id: 'work', label: 'Production cases'},
-        {id: 'stack', label: 'Tech stack'},
-        {id: 'principles', label: 'Principles'},
-        {id: 'contact', label: 'Contact'},
-    ];
-});
+const items = computed(() => navigationIds.map((id) => ({id, label: t.value.nav[id]})));
 
 const close = () => {
     isOpen.value = false;
@@ -55,11 +42,18 @@ const open = () => {
     isOpen.value = true;
 };
 
-const goTo = (id) => {
-    const node = document.getElementById(id);
-    if (node) {
-        node.scrollIntoView({behavior: 'smooth', block: 'start'});
+const goTo = (event, id) => {
+    if (!isHomeRoute.value || typeof document === 'undefined') {
+        return;
     }
+
+    const node = document.getElementById(id);
+    if (!node) {
+        return;
+    }
+
+    event.preventDefault();
+    node.scrollIntoView({behavior: 'smooth', block: 'start'});
     close();
 };
 
@@ -80,6 +74,11 @@ onMounted(() => {
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('portfolio:command-open', open);
 });
+
+watch(
+    () => route.fullPath,
+    () => close(),
+);
 
 onBeforeUnmount(() => {
     window.removeEventListener('keydown', onKeyDown);
@@ -145,7 +144,7 @@ onBeforeUnmount(() => {
     display: grid;
     gap: 6px;
 
-    button {
+    .command-link {
         width: 100%;
         border: 1px solid transparent;
         background: transparent;
@@ -171,7 +170,7 @@ onBeforeUnmount(() => {
 }
 
 @media (hover: hover) {
-    .command-list button:hover {
+    .command-list .command-link:hover {
         border-color: color-mix(in srgb, var(--portfolio-accent) 35%, var(--portfolio-border));
         background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
         transform: translateX(2px);

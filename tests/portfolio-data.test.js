@@ -320,3 +320,32 @@ test('portfolio animation composable scopes pointer motion and cleanup', () => {
     assert.match(source, /cleanupCallbacks\.splice/);
     assert.match(source, /\(hover: hover\) and \(pointer: fine\)/);
 });
+
+test('global navigation uses route-aware Nuxt links, approved section ids, and safe focus restoration', () => {
+    const header = readFileSync(new URL('../components/Header.vue', import.meta.url), 'utf8');
+    const palette = readFileSync(new URL('../components/CommandPalette.vue', import.meta.url), 'utf8');
+    const footer = readFileSync(new URL('../components/Footer.vue', import.meta.url), 'utf8');
+    const approvedIds = ['experience', 'u2', 'projects', 'stack', 'contact'];
+
+    for (const source of [header, palette]) {
+        assert.match(source, /import \{portfolioRoutes\} from '~\/lib\/portfolio\/routes\.js';/);
+        assert.match(source, /portfolioRoutes\[lang\.value\]\.home/);
+        assert.match(source, /<NuxtLink/);
+        assert.match(source, /:to="sectionTarget\(item\.id\)"/);
+        approvedIds.forEach((id) => assert.match(source, new RegExp(`['\"]${id}['\"]`)));
+        ['profile', 'approach', 'work', 'principles'].forEach((id) => {
+            assert.doesNotMatch(source, new RegExp(`id: ['\"]${id}['\"]`));
+        });
+    }
+
+    assert.match(header, /<NuxtLink class="brand" :to="homePath"/);
+    assert.match(header, /ref="burgerButton"/);
+    assert.match(header, /ref="closeButton"/);
+    assert.match(header, /nextTick\(\(\) => closeButton\.value\?\.focus\(\)\)/);
+    assert.match(header, /if \(wasMenuOpen && restoreFocus\)\s*\{\s*nextTick\(\(\) => burgerButton\.value\?\.focus\(\)\)/);
+    assert.match(header, /\(\) => route\.fullPath/);
+    assert.match(palette, /\(\) => route\.fullPath/);
+    assert.match(footer, /t\.footer\.title/);
+    assert.match(footer, /t\.footer\.subtitle/);
+    assert.doesNotMatch(footer, /systemSections/);
+});
