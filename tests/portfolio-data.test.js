@@ -64,3 +64,12 @@ test('validator rejects locale project drift', () => {
         /ru and en project ids must match in order/,
     );
 });
+
+test('work cards render contributions without repeated generic metadata', () => {
+    const source = readFileSync(new URL('../components/sections/WorkSection.vue', import.meta.url), 'utf8');
+
+    assert.match(source, /:key="project\.id"/);
+    assert.match(source, /project\.contributions/);
+    assert.match(source, /data-project-card/);
+    assert.doesNotMatch(source, /system\.statusLabel|system\.roleLabel|system\.resultLabel/);
+});
