@@ -1,65 +1,65 @@
 {
   "meta": {
-	"title": "Amiran Bestaev — Frontend Developer (Vue/Nuxt)",
-	"description": "Frontend developer with 5+ years of experience. Vue/Nuxt/TypeScript, complex UIs, GSAP animations, e2e testing."
+    "title": "Amiran Bestaev — Middle+ Frontend Engineer | Vue, Nuxt, TypeScript & AI-assisted Engineering",
+    "description": "Middle+ Frontend Engineer with 5+ years of commercial experience in Vue, Nuxt and TypeScript. Modular architecture, performance optimization, AI coding agents and code review."
   },
   "labels": {
-	"website": "Website",
-	"nda": "Private"
+    "website": "Website",
+    "nda": "Private"
   },
   "nav": {
-	"experience": "Experience",
-	"u2": "U2",
-	"projects": "Projects",
-	"stack": "Stack",
-	"contact": "Contact"
+    "experience": "Experience",
+    "u2": "U2",
+    "projects": "Projects",
+    "stack": "Stack",
+    "contact": "Contact"
   },
   "hero": {
-	"eyebrow": "Frontend · Vue/Nuxt · TypeScript",
-	"name": "Amiran Bestaev",
-	"role": "Frontend Engineer",
-	"subtitle": "I make interfaces for product services with catalogs, maps, filters, and complex business logic. Vue/Nuxt/ TypeScript, focus on stability and scalability.",
-	"status": "Open to opportunities: remote, hybrid, on-site",
-	"location": "Moscow",
-	"ctaPrimary": "View U2",
-	"ctaSecondary": "Contact",
-	"ctaCv": "Download CV"
+    "eyebrow": "Middle+ Frontend · Vue / Nuxt · TypeScript",
+    "name": "Amiran Bestaev",
+    "role": "Frontend Engineer",
+    "subtitle": "I design maintainable frontend systems with complex business logic, typed API contracts and a focus on performance. I use AI coding agents with human-led architecture and code review.",
+    "status": "Open to full-time remote opportunities",
+    "location": "Moscow",
+    "ctaPrimary": "View U2",
+    "ctaSecondary": "Contact",
+    "ctaCv": "Download CV"
   },
   "stats": [
-	{
-	  "value": "5+",
-	  "label": "years of commercial experience"
-	},
-	{
-	  "value": "Vue 2/3 · Nuxt 2/3",
-	  "label": "product stack"
-	},
-	{
-	  "value": "2",
-	  "label": "product companies"
-	}
+    {
+      "value": "5+",
+      "label": "years of commercial experience"
+    },
+    {
+      "value": "Vue 2/3 · Nuxt 2/3",
+      "label": "product stack"
+    },
+    {
+      "value": "2",
+      "label": "product companies"
+    }
   ],
   "sections": {
     "featured": {
-	  "title": "Featured case",
-	  "subtitle": "U2: a residential showcase with apartment discovery, filters, and selection flows."
-	},
-	"experience": {
-	  "title": "Experience",
-	  "subtitle": "Focused on Vue/Nuxt, TypeScript, performance, and production stability."
-	},
-	"projects": {
-	  "title": "Other projects",
-	  "subtitle": "Interfaces for real estate, e-commerce, and services with clear user journeys."
-	},
-	"skills": {
-	  "title": "Stack",
-	  "subtitle": "My everyday stack."
-	},
-	"principles": {
-	  "title": "Principles",
-	  "subtitle": "Readable code, predictable architecture, and stable production interfaces."
-	}
+      "title": "Featured case",
+      "subtitle": "U2: a residential showcase with apartment discovery, filters, and selection flows."
+    },
+    "experience": {
+      "title": "Experience",
+      "subtitle": "Module architecture, complex product logic and measurable production outcomes."
+    },
+    "projects": {
+      "title": "Other projects",
+      "subtitle": "Interfaces for real estate, e-commerce, and services with clear user journeys."
+    },
+    "skills": {
+      "title": "Stack",
+      "subtitle": "Production stack, testing, engineering practices and AI-assisted development."
+    },
+    "principles": {
+      "title": "Principles",
+      "subtitle": "Simple solutions, thoughtful architecture and verifiable code quality."
+    }
   },
   "projects": [
     {
@@ -102,24 +102,83 @@
         "eyebrow": "Flagship case",
         "summary": "A digital residential showcase with apartment discovery, filters, and detailed property-selection flows.",
         "facts": [
-          {"label": "Role", "value": "Frontend Engineer"},
-          {"label": "Focus", "value": "Catalog, filters, apartment detail"},
-          {"label": "Stack", "value": "Nuxt · Vue · TypeScript · GSAP"},
-          {"label": "Status", "value": "In production"}
+          {
+            "label": "Role",
+            "value": "Frontend Engineer"
+          },
+          {
+            "label": "Focus",
+            "value": "Catalog, filters, apartment detail"
+          },
+          {
+            "label": "Stack",
+            "value": "Nuxt · Vue · TypeScript · GSAP"
+          },
+          {
+            "label": "Status",
+            "value": "In production"
+          }
         ],
         "narrative": [
-          {"id": "task", "title": "Task", "text": "Build a content-rich residential product showcase and connect its presentation layer to a clear apartment-selection journey."},
-          {"id": "contribution", "title": "My contribution", "text": "I developed the homepage and complex content sections, property filters, apartment detail page, masterplan, and animated interface scenarios."},
-          {"id": "approach", "title": "Technical approach", "text": "A component architecture with Vue and Nuxt, typed filtering logic, controlled GSAP animation, and focused performance work for visually heavy sections."},
-          {"id": "result", "title": "Result", "text": "A working product journey from project discovery to filtering and reviewing a specific apartment, available on the public website."}
+          {
+            "id": "task",
+            "title": "Task",
+            "text": "Build a content-rich residential product showcase and connect its presentation layer to a clear apartment-selection journey."
+          },
+          {
+            "id": "contribution",
+            "title": "My contribution",
+            "text": "I developed the homepage and complex content sections, property filters, apartment detail page, masterplan, and animated interface scenarios."
+          },
+          {
+            "id": "approach",
+            "title": "Technical approach",
+            "text": "A component architecture with Vue and Nuxt, typed filtering logic, controlled GSAP animation, and focused performance work for visually heavy sections."
+          },
+          {
+            "id": "result",
+            "title": "Result",
+            "text": "A working product journey from project discovery to filtering and reviewing a specific apartment, available on the public website."
+          }
         ],
         "gallery": [
-          {"avif": "/projects/u2/u2-home-desktop.avif", "webp": "/projects/u2/u2-home-desktop.webp", "alt": "U2 primary presentation page", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-filters-desktop.avif", "webp": "/projects/u2/u2-filters-desktop.webp", "alt": "U2 apartment catalog and filters", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-flat-desktop.avif", "webp": "/projects/u2/u2-flat-desktop.webp", "alt": "U2 apartment detail page", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-filters-mobile.avif", "webp": "/projects/u2/u2-filters-mobile.webp", "alt": "U2 mobile apartment catalog and filters", "width": 780, "height": 1688}
+          {
+            "avif": "/projects/u2/u2-home-desktop.avif",
+            "webp": "/projects/u2/u2-home-desktop.webp",
+            "alt": "U2 primary presentation page",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-filters-desktop.avif",
+            "webp": "/projects/u2/u2-filters-desktop.webp",
+            "alt": "U2 apartment catalog and filters",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-flat-desktop.avif",
+            "webp": "/projects/u2/u2-flat-desktop.webp",
+            "alt": "U2 apartment detail page",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-filters-mobile.avif",
+            "webp": "/projects/u2/u2-filters-mobile.webp",
+            "alt": "U2 mobile apartment catalog and filters",
+            "width": 780,
+            "height": 1688
+          }
         ],
-        "technologies": ["Vue", "Nuxt", "TypeScript", "GSAP", "SCSS", "SSR"],
+        "technologies": [
+          "Vue",
+          "Nuxt",
+          "TypeScript",
+          "GSAP",
+          "SCSS",
+          "SSR"
+        ],
         "result": "The public interface connects project presentation, catalog browsing, filtering, and apartment detail without unsupported numerical claims.",
         "backLabel": "Back home",
         "externalLabel": "Open U2",
@@ -212,129 +271,176 @@
     {
       "id": "vkusno-i-bystro",
       "name": "Vkusno i Bystro",
-	  "type": "Food delivery service",
-	  "description": "Animated UI components, improved user flow, and stable production performance.",
-	  "featured": false,
-	  "tags": [
-		"Vue 2/3",
-		"GSAP",
-		"TypeScript"
-	  ],
-	  "contributions": [
-		"Animated components and user flows",
-		"Production UI support and stability"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://vkusnoibistro.com/application/"
-		}
-	  ]
-	},
-	{
-	  "id": "tsvet-divanov",
-	  "name": "Tsvet Divanov",
-	  "type": "Furniture e-commerce",
-	  "description": "Catalog, filters, and product cards optimized for speed and easy selection.",
-	  "featured": false,
-	  "tags": [
-		"Nuxt",
-		"SSR",
-		"E-commerce"
-	  ],
-	  "contributions": [
-		"Catalog, filters, and product cards",
-		"SSR and storefront performance optimization"
-	  ],
-	  "links": [
-		{
-		  "label": "Website",
-		  "url": "https://zvet.ru/"
-		}
-	  ]
-	}
+      "type": "Food delivery service",
+      "description": "Animated UI components, improved user flow, and stable production performance.",
+      "featured": false,
+      "tags": [
+        "Vue 2/3",
+        "GSAP",
+        "TypeScript"
+      ],
+      "contributions": [
+        "Animated components and user flows",
+        "Production UI support and stability"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://vkusnoibistro.com/application/"
+        }
+      ]
+    },
+    {
+      "id": "tsvet-divanov",
+      "name": "Tsvet Divanov",
+      "type": "Furniture e-commerce",
+      "description": "Catalog, filters, and product cards optimized for speed and easy selection.",
+      "featured": false,
+      "tags": [
+        "Nuxt",
+        "SSR",
+        "E-commerce"
+      ],
+      "contributions": [
+        "Catalog, filters, and product cards",
+        "SSR and storefront performance optimization"
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://zvet.ru/"
+        }
+      ]
+    }
   ],
   "experience": [
-	{
-	  "company": "IdaProject",
-	  "role": "Frontend Developer",
-	  "period": "July 2024 — Present",
-	  "stack": "Vue 2/3, Nuxt 2/3, TypeScript",
-	  "bullets": [
-		"Designed a multi-level filter (“queue → building → section”) and extracted logic into a reusable composable.",
-		"Built a universal calculator (mortgage/installments) with strong typing and extensible architecture.",
-		"Delivered advanced GSAP animations for a map interface with custom pins."
-	  ]
-	},
-	{
-	  "company": "O2",
-	  "role": "Frontend Developer",
-	  "period": "February 2021 — July 2024",
-	  "stack": "Nuxt 2, Vue 3, TypeScript",
-	  "bullets": [
-		"Migrated key modules from Vue 2 to Vue 3 + TypeScript and reduced client bundle size.",
-		"Introduced e2e testing (Cypress) and code review practices.",
-		"Integrated maps and optimized pages with lazy loading via Intersection Observer."
-	  ]
-	}
+    {
+      "company": "IdaProject",
+      "role": "Frontend Developer",
+      "period": "July 2024 — Present",
+      "stack": "Vue 2/3, Nuxt 2/3, TypeScript",
+      "bullets": [
+        "Designed a three-level property filter (phase → building → section) in a typed reusable composable, reducing invalid UI states.",
+        "Built a shared mortgage and installment calculator with typed API adapters instead of duplicated implementations.",
+        "Consolidated account functionality from two repositories, improved authentication flows and standardized a 14,000-city directory.",
+        "Optimized data fetching and legacy Vue/Nuxt modules; selected pages became 15–40% faster.",
+        "Contributed to task breakdown, code review, and an interactive property map with GSAP animations."
+      ]
+    },
+    {
+      "company": "O2",
+      "role": "Frontend Developer",
+      "period": "February 2021 — July 2024",
+      "stack": "Nuxt 2, Vue 3, TypeScript",
+      "bullets": [
+        "Helped migrate modules from Vue 2 to Vue 3 and TypeScript, adopting Composition API.",
+        "Reduced the loading time of a key furniture e-commerce screen from roughly 5 to 2 seconds using lazy loading and Intersection Observer.",
+        "Used Cypress for E2E coverage and Vitest for unit and component tests of critical user flows.",
+        "Built catalogs, product details, carts, REST API integrations, maps and animated UI components.",
+        "Contributed to code review and legacy refactoring in collaboration with backend developers, designers and QA."
+      ]
+    }
   ],
   "skills": [
-	{
-	  "group": "Frontend",
-	  "items": [
-		"Vue.js 2/3 (Composition API)",
-		"Nuxt.js 2/3 (SSR, routing, middleware)",
-		"TypeScript",
-		"JavaScript (ES6+)"
-	  ]
-	},
-	{
-	  "group": "State",
-	  "items": [
-		"Pinia",
-		"Vuex",
-		"REST API, Axios"
-	  ]
-	},
-	{
-	  "group": "Styling",
-	  "items": [
-		"SCSS/Sass",
-		"BEM",
-		"Adaptive and cross-browser layout",
-		"Cross-browser"
-	  ]
-	},
-	{
-	  "group": "Tooling",
-	  "items": [
-		"Vite",
-		"Webpack",
-		"Gulp",
-		"Git"
-	  ]
-	},
-	{
-	  "group": "Testing",
-	  "items": [
-		"Vitest",
-		"@nuxt/test-utils",
-		"Cypress (e2e)"
-	  ]
-	},
-	{
-	  "group": "Other",
-	  "items": [
-		"SSR",
-		"Map Integration (Maps)"
-	  ]
-	}
+    {
+      "group": "Frontend",
+      "items": [
+        "Vue.js 2/3 (Composition API)",
+        "Nuxt.js 2/3 (SSR, routing, middleware)",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "React (selected tasks)"
+      ]
+    },
+    {
+      "group": "State",
+      "items": [
+        "Pinia",
+        "Vuex",
+        "REST API, Axios"
+      ]
+    },
+    {
+      "group": "Styling",
+      "items": [
+        "SCSS / Sass",
+        "BEM",
+        "Responsive and cross-browser layouts",
+        "Tailwind CSS",
+        "Storybook"
+      ]
+    },
+    {
+      "group": "Tooling",
+      "items": [
+        "Vite",
+        "Webpack",
+        "Gulp",
+        "Git",
+        "ESLint",
+        "Prettier"
+      ]
+    },
+    {
+      "group": "Testing",
+      "items": [
+        "Vitest",
+        "@nuxt/test-utils",
+        "Cypress (e2e)"
+      ]
+    },
+    {
+      "group": "Other",
+      "items": [
+        "SSR",
+        "Map Integration (Maps)"
+      ]
+    },
+    {
+      "group": "Architecture & Quality",
+      "items": [
+        "Frontend module architecture",
+        "Typed API contracts & composables",
+        "Code review & refactoring",
+        "SOLID · DRY · KISS · YAGNI"
+      ]
+    },
+    {
+      "group": "AI-assisted Engineering",
+      "items": [
+        "Claude Code · OpenAI Codex",
+        "AI Coding Agents · Agent Harnesses",
+        "Custom Agent Skills for code review",
+        "Human-in-the-loop: code analysis, tests & edge cases"
+      ]
+    }
   ],
   "footer": {
-	"title": "Let's discuss the project or the team.",
-	"subtitle": "I am open to suggestions for frontend development (Vue / Nuxt / TypeScript).",
-	"telegramLabel": "Telegram",
-	"emailLabel": "Email",
-	"locationLabel": "Location"
+    "title": "Let's discuss the project or the team.",
+    "subtitle": "Open to full-time remote Middle+ frontend roles using Vue, Nuxt and TypeScript, especially products with challenging engineering problems.",
+    "telegramLabel": "Telegram",
+    "emailLabel": "Email",
+    "locationLabel": "Location"
+  },
+  "aiEngineering": {
+    "title": "AI-assisted Engineering",
+    "subtitle": "I use AI agents to support engineering work, not to replace architecture, review or ownership.",
+    "lead": "I work with Claude Code and OpenAI Codex: defining tasks, setting context and acceptance criteria, reviewing solutions and taking responsibility for the final code.",
+    "steps": [
+      {
+        "title": "Architecture & decomposition",
+        "description": "Before implementation, I define module boundaries, data contracts, dependencies, constraints and acceptance criteria so agents work within clear engineering guardrails."
+      },
+      {
+        "title": "Agent Harnesses",
+        "description": "I set up project instructions, context, tools and validation steps for agent workflows, focusing on predictable outcomes rather than generated code volume."
+      },
+      {
+        "title": "Reviewer Skills & code review",
+        "description": "I create custom reviewer skills for agents and check type safety, error handling, edge cases, testability and unnecessary abstractions."
+      }
+    ],
+    "qualityTitle": "Human-in-the-loop by design",
+    "qualityText": "I do not accept AI-generated code without independent review. Correctness, readability and maintainability come first; I apply KISS, DRY, YAGNI and SOLID pragmatically."
   }
 }

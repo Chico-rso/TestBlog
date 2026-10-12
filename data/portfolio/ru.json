@@ -1,65 +1,65 @@
 {
   "meta": {
-	"title": "Амиран Бестаев — Frontend-разработчик (Vue/Nuxt)",
-	"description": "Frontend-разработчик с 5+ лет коммерческого опыта. Vue/Nuxt/TypeScript, сложные интерфейсы, GSAP-анимации, e2e-тесты."
+    "title": "Амиран Бестаев — Frontend Middle+ | Vue, Nuxt, TypeScript и AI-assisted Engineering",
+    "description": "Frontend-разработчик Middle+ с 5+ годами коммерческого опыта: Vue 2/3, Nuxt 2/3, TypeScript, архитектура модулей, оптимизация, AI coding agents и code review."
   },
   "labels": {
-	"website": "Сайт",
-	"nda": "NDA"
+    "website": "Сайт",
+    "nda": "NDA"
   },
   "nav": {
-	"experience": "Опыт",
-	"u2": "U2",
-	"projects": "Проекты",
-	"stack": "Стек",
-	"contact": "Контакты"
+    "experience": "Опыт",
+    "u2": "U2",
+    "projects": "Проекты",
+    "stack": "Стек",
+    "contact": "Контакты"
   },
   "hero": {
-	"eyebrow": "Frontend · Vue/Nuxt · TypeScript",
-	"name": "Амиран Бестаев",
-	"role": "Frontend Engineer",
-	"subtitle": "Делаю интерфейсы для продуктовых сервисов с каталогами, картами, фильтрами и сложной бизнес-логикой. Vue / Nuxt / TypeScript, фокус на стабильность и масштабируемость.",
-	"status": "Открыт к предложениям: удаленно, гибрид, офис",
-	"location": "Москва",
-	"ctaPrimary": "Смотреть U2",
-	"ctaSecondary": "Связаться",
-	"ctaCv": "Скачать CV"
+    "eyebrow": "Middle+ Frontend · Vue / Nuxt · TypeScript",
+    "name": "Амиран Бестаев",
+    "role": "Frontend Engineer",
+    "subtitle": "Проектирую и развиваю frontend-системы: сложная бизнес-логика, типизированные API, производительность и поддерживаемая архитектура. Использую AI-агентов под инженерным контролем.",
+    "status": "Открыт к удалённой работе · полная занятость",
+    "location": "Москва",
+    "ctaPrimary": "Смотреть U2",
+    "ctaSecondary": "Связаться",
+    "ctaCv": "Скачать CV"
   },
   "stats": [
-	{
-	  "value": "5+",
-	  "label": "лет коммерческого опыта"
-	},
-	{
-	  "value": "Vue 2/3 · Nuxt 2/3",
-	  "label": "продуктовый стек"
-	},
-	{
-	  "value": "2",
-	  "label": "продуктовые компании"
-	}
+    {
+      "value": "5+",
+      "label": "лет коммерческого опыта"
+    },
+    {
+      "value": "Vue 2/3 · Nuxt 2/3",
+      "label": "продуктовый стек"
+    },
+    {
+      "value": "2",
+      "label": "продуктовые компании"
+    }
   ],
   "sections": {
     "featured": {
-	  "title": "Флагманский кейс",
-	  "subtitle": "U2: витрина жилого комплекса с каталогом, фильтрами и сценариями выбора квартиры."
-	},
-	"experience": {
-	  "title": "Опыт",
-	  "subtitle": "Фокус на Vue/Nuxt, TypeScript, производительность и стабильность в продакшене."
-	},
-	"projects": {
-	  "title": "Другие проекты",
-	  "subtitle": "Интерфейсы для недвижимости, e-commerce и сервисов с понятными пользовательскими сценариями."
-	},
-	"skills": {
-	  "title": "Стек",
-	  "subtitle": "Основной стек и инструменты, с которыми работаю в коммерческих проектах."
-	},
-	"principles": {
-	  "title": "Принципы",
-	  "subtitle": "Читаемый код, предсказуемая архитектура и устойчивые интерфейсы в продакшене."
-	}
+      "title": "Флагманский кейс",
+      "subtitle": "U2: витрина жилого комплекса с каталогом, фильтрами и сценариями выбора квартиры."
+    },
+    "experience": {
+      "title": "Опыт",
+      "subtitle": "Архитектура модулей, сложная бизнес-логика и измеримые результаты в production."
+    },
+    "projects": {
+      "title": "Другие проекты",
+      "subtitle": "Интерфейсы для недвижимости, e-commerce и сервисов с понятными пользовательскими сценариями."
+    },
+    "skills": {
+      "title": "Стек",
+      "subtitle": "Production-стек, тестирование, инженерные практики и AI-assisted разработка."
+    },
+    "principles": {
+      "title": "Принципы",
+      "subtitle": "Простые решения, осмысленная архитектура и проверяемое качество кода."
+    }
   },
   "projects": [
     {
@@ -102,24 +102,83 @@
         "eyebrow": "Флагманский кейс",
         "summary": "Цифровая витрина жилого комплекса с подбором квартир, фильтрами и детальными сценариями выбора недвижимости.",
         "facts": [
-          {"label": "Роль", "value": "Frontend Engineer"},
-          {"label": "Фокус", "value": "Каталог, фильтры, карточка квартиры"},
-          {"label": "Стек", "value": "Nuxt · Vue · TypeScript · GSAP"},
-          {"label": "Статус", "value": "В продакшене"}
+          {
+            "label": "Роль",
+            "value": "Frontend Engineer"
+          },
+          {
+            "label": "Фокус",
+            "value": "Каталог, фильтры, карточка квартиры"
+          },
+          {
+            "label": "Стек",
+            "value": "Nuxt · Vue · TypeScript · GSAP"
+          },
+          {
+            "label": "Статус",
+            "value": "В продакшене"
+          }
         ],
         "narrative": [
-          {"id": "task", "title": "Задача", "text": "Собрать насыщенную продуктовую витрину недвижимости и связать презентационный контент с понятным сценарием подбора квартиры."},
-          {"id": "contribution", "title": "Мой вклад", "text": "Разрабатывал главную страницу и сложные секции, фильтры недвижимости, детальную страницу объекта, генплан и анимационные сценарии интерфейса."},
-          {"id": "approach", "title": "Технический подход", "text": "Компонентная архитектура на Vue и Nuxt, типизированная логика фильтрации, управляемые GSAP-анимации и отдельная работа над производительностью тяжёлых визуальных секций."},
-          {"id": "result", "title": "Результат", "text": "Работающий продуктовый путь от знакомства с проектом до фильтрации и изучения конкретной квартиры, доступный на публичном сайте."}
+          {
+            "id": "task",
+            "title": "Задача",
+            "text": "Собрать насыщенную продуктовую витрину недвижимости и связать презентационный контент с понятным сценарием подбора квартиры."
+          },
+          {
+            "id": "contribution",
+            "title": "Мой вклад",
+            "text": "Разрабатывал главную страницу и сложные секции, фильтры недвижимости, детальную страницу объекта, генплан и анимационные сценарии интерфейса."
+          },
+          {
+            "id": "approach",
+            "title": "Технический подход",
+            "text": "Компонентная архитектура на Vue и Nuxt, типизированная логика фильтрации, управляемые GSAP-анимации и отдельная работа над производительностью тяжёлых визуальных секций."
+          },
+          {
+            "id": "result",
+            "title": "Результат",
+            "text": "Работающий продуктовый путь от знакомства с проектом до фильтрации и изучения конкретной квартиры, доступный на публичном сайте."
+          }
         ],
         "gallery": [
-          {"avif": "/projects/u2/u2-home-desktop.avif", "webp": "/projects/u2/u2-home-desktop.webp", "alt": "Главная презентационная страница ЮТУ", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-filters-desktop.avif", "webp": "/projects/u2/u2-filters-desktop.webp", "alt": "Каталог квартир ЮТУ с фильтрами", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-flat-desktop.avif", "webp": "/projects/u2/u2-flat-desktop.webp", "alt": "Детальная страница квартиры ЮТУ", "width": 1600, "height": 1000},
-          {"avif": "/projects/u2/u2-filters-mobile.avif", "webp": "/projects/u2/u2-filters-mobile.webp", "alt": "Мобильный каталог и фильтры квартир ЮТУ", "width": 780, "height": 1688}
+          {
+            "avif": "/projects/u2/u2-home-desktop.avif",
+            "webp": "/projects/u2/u2-home-desktop.webp",
+            "alt": "Главная презентационная страница ЮТУ",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-filters-desktop.avif",
+            "webp": "/projects/u2/u2-filters-desktop.webp",
+            "alt": "Каталог квартир ЮТУ с фильтрами",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-flat-desktop.avif",
+            "webp": "/projects/u2/u2-flat-desktop.webp",
+            "alt": "Детальная страница квартиры ЮТУ",
+            "width": 1600,
+            "height": 1000
+          },
+          {
+            "avif": "/projects/u2/u2-filters-mobile.avif",
+            "webp": "/projects/u2/u2-filters-mobile.webp",
+            "alt": "Мобильный каталог и фильтры квартир ЮТУ",
+            "width": 780,
+            "height": 1688
+          }
         ],
-        "technologies": ["Vue", "Nuxt", "TypeScript", "GSAP", "SCSS", "SSR"],
+        "technologies": [
+          "Vue",
+          "Nuxt",
+          "TypeScript",
+          "GSAP",
+          "SCSS",
+          "SSR"
+        ],
         "result": "Публичный интерфейс объединяет презентацию проекта, каталог, фильтрацию и детальный просмотр недвижимости без неподтверждённых числовых заявлений.",
         "backLabel": "На главную",
         "externalLabel": "Открыть ЮТУ",
@@ -212,129 +271,177 @@
     {
       "id": "vkusno-i-bystro",
       "name": "Вкусно и Быстро",
-	  "type": "Сервис доставки еды",
-	  "description": "Анимированные UI-компоненты, улучшение пользовательского пути и стабильность в продакшене.",
-	  "featured": false,
-	  "tags": [
-		"Vue 2/3",
-		"GSAP",
-		"TypeScript"
-	  ],
-	  "contributions": [
-		"Анимированные компоненты и пользовательские сценарии",
-		"Поддержка и стабильность интерфейса в продакшене"
-	  ],
-	  "links": [
-		{
-		  "label": "Сайт",
-		  "url": "https://vkusnoibistro.com/application/"
-		}
-	  ]
-	},
-	{
-	  "id": "tsvet-divanov",
-	  "name": "Цвет Диванов",
-	  "type": "Интернет-магазин мебели",
-	  "description": "Каталог, фильтры и карточки товаров с оптимизацией скорости и удобства выбора.",
-	  "featured": false,
-	  "tags": [
-		"Nuxt",
-		"SSR",
-		"E-commerce"
-	  ],
-	  "contributions": [
-		"Каталог, фильтры и карточки товаров",
-		"SSR и оптимизация скорости витрины"
-	  ],
-	  "links": [
-		{
-		  "label": "Сайт",
-		  "url": "https://zvet.ru/"
-		}
-	  ]
-	}
+      "type": "Сервис доставки еды",
+      "description": "Анимированные UI-компоненты, улучшение пользовательского пути и стабильность в продакшене.",
+      "featured": false,
+      "tags": [
+        "Vue 2/3",
+        "GSAP",
+        "TypeScript"
+      ],
+      "contributions": [
+        "Анимированные компоненты и пользовательские сценарии",
+        "Поддержка и стабильность интерфейса в продакшене"
+      ],
+      "links": [
+        {
+          "label": "Сайт",
+          "url": "https://vkusnoibistro.com/application/"
+        }
+      ]
+    },
+    {
+      "id": "tsvet-divanov",
+      "name": "Цвет Диванов",
+      "type": "Интернет-магазин мебели",
+      "description": "Каталог, фильтры и карточки товаров с оптимизацией скорости и удобства выбора.",
+      "featured": false,
+      "tags": [
+        "Nuxt",
+        "SSR",
+        "E-commerce"
+      ],
+      "contributions": [
+        "Каталог, фильтры и карточки товаров",
+        "SSR и оптимизация скорости витрины"
+      ],
+      "links": [
+        {
+          "label": "Сайт",
+          "url": "https://zvet.ru/"
+        }
+      ]
+    }
   ],
   "experience": [
-	{
-	  "company": "IdaProject",
-	  "role": "Frontend-разработчик",
-	  "period": "Июль 2024 — настоящее время",
-	  "stack": "Vue 2/3, Nuxt 2/3, TypeScript",
-	  "bullets": [
-		"Спроектировал фильтр с иерархией «очередь → корпус → секция» и выделил логику в переиспользуемый composable.",
-		"Создал универсальный калькулятор (ипотека/рассрочка) с типизацией и расширяемой архитектурой.",
-		"Разработал сложную GSAP-анимацию для картографического интерфейса с кастомными пинами."
-	  ]
-	},
-	{
-	  "company": "O2",
-	  "role": "Frontend-разработчик",
-	  "period": "Февраль 2021 — Июль 2024",
-	  "stack": "Nuxt 2, Vue 3, TypeScript",
-	  "bullets": [
-		"Перевел ключевые модули с Vue 2 на Vue 3 и TypeScript, уменьшив клиентский бандл.",
-		"Внедрил e2e-тестирование (Cypress) и практику code review.",
-		"Интегрировал карты и оптимизировал страницы с lazy loading через Intersection Observer."
-	  ]
-	}
+    {
+      "company": "IdaProject",
+      "role": "Frontend-разработчик",
+      "period": "Июль 2024 — настоящее время",
+      "stack": "Vue 2/3, Nuxt 2/3, TypeScript",
+      "bullets": [
+        "Спроектировал и вынес в типизированный composable трёхуровневую фильтрацию объектов: очередь → корпус → секция; уменьшил число некорректных состояний.",
+        "Создал единый модуль ипотечных и рассрочных расчётов с типами и адаптерами под разные API вместо дублирования реализаций.",
+        "Объединил функциональность личного кабинета из двух репозиториев, переработал авторизацию и унифицировал справочник из 14 000 городов.",
+        "Оптимизировал загрузку данных и legacy-модули на Vue/Nuxt; отдельные страницы ускорились на 15–40%.",
+        "Участвовал в декомпозиции, code review и разработке интерактивной карты объектов с GSAP-анимациями."
+      ]
+    },
+    {
+      "company": "O2",
+      "role": "Frontend-разработчик",
+      "period": "Февраль 2021 — Июль 2024",
+      "stack": "Nuxt 2, Vue 3, TypeScript",
+      "bullets": [
+        "Участвовал в миграции модулей с Vue 2 на Vue 3 и TypeScript, переводил логику на Composition API.",
+        "Ускорил загрузку ключевого экрана интернет-магазина мебели примерно с 5 до 2 секунд через lazy loading и Intersection Observer.",
+        "Использовал Cypress для E2E-проверок и Vitest для unit- и component-тестов критичных сценариев.",
+        "Разрабатывал каталоги, карточки товаров, корзину, интеграции с REST API, карты и анимированные UI-компоненты.",
+        "Участвовал в code review и рефакторинге legacy-кода совместно с backend, дизайнерами и QA."
+      ]
+    }
   ],
   "skills": [
-	{
-	  "group": "Frontend",
-	  "items": [
-		"Vue.js 2/3 (Composition API)",
-		"Nuxt.js 2/3 (SSR, маршрутизация, middleware)",
-		"TypeScript",
-		"JavaScript (ES6+)"
-	  ]
-	},
-	{
-	  "group": "State",
-	  "items": [
-		"Pinia",
-		"Vuex",
-		"REST API, Axios"
-	  ]
-	},
-	{
-	  "group": "Styling and UI",
-	  "items": [
-		"SCSS/Sass",
-		"BEM",
-		"Адаптивная и кроссбраузерная верстка",
-		"GSAP (interactive, animations)"
-	  ]
-	},
-	{
-	  "group": "Tooling",
-	  "items": [
-		"Vite",
-		"Webpack",
-		"Gulp",
-		"Git"
-	  ]
-	},
-	{
-	  "group": "Testing",
-	  "items": [
-		"Vitest",
-		"@nuxt/test-utils",
-		"Cypress (e2e)"
-	  ]
-	},
-	{
-	  "group": "Other",
-	  "items": [
-		"SSR",
-		"Интеграция карт (Maps)"
-	  ]
-	}
+    {
+      "group": "Frontend",
+      "items": [
+        "Vue.js 2/3 (Composition API)",
+        "Nuxt.js 2/3 (SSR, маршрутизация, middleware)",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "React (опыт отдельных задач)"
+      ]
+    },
+    {
+      "group": "State",
+      "items": [
+        "Pinia",
+        "Vuex",
+        "REST API, Axios"
+      ]
+    },
+    {
+      "group": "Styling and UI",
+      "items": [
+        "SCSS/Sass",
+        "BEM",
+        "Адаптивная и кроссбраузерная верстка",
+        "GSAP (interactive, animations)",
+        "Tailwind CSS",
+        "Storybook"
+      ]
+    },
+    {
+      "group": "Tooling",
+      "items": [
+        "Vite",
+        "Webpack",
+        "Gulp",
+        "Git",
+        "ESLint",
+        "Prettier"
+      ]
+    },
+    {
+      "group": "Testing",
+      "items": [
+        "Vitest",
+        "@nuxt/test-utils",
+        "Cypress (e2e)"
+      ]
+    },
+    {
+      "group": "Other",
+      "items": [
+        "SSR",
+        "Интеграция карт (Maps)"
+      ]
+    },
+    {
+      "group": "Architecture & Quality",
+      "items": [
+        "Архитектура frontend-модулей",
+        "Типизированные API-контракты и composables",
+        "Code Review, рефакторинг",
+        "SOLID · DRY · KISS · YAGNI"
+      ]
+    },
+    {
+      "group": "AI-assisted Engineering",
+      "items": [
+        "Claude Code · OpenAI Codex",
+        "AI Coding Agents · Agent Harnesses",
+        "Собственные Agent Skills для code review",
+        "Human-in-the-loop: анализ кода, тесты и edge cases"
+      ]
+    }
   ],
   "footer": {
-	"title": "Давайте обсудим проект или команду.",
-	"subtitle": "Открыт к предложениям по frontend-разработке (Vue / Nuxt / TypeScript).",
-	"telegramLabel": "Телеграм",
-	"emailLabel": "Почта",
-	"locationLabel": "Локация"
+    "title": "Давайте обсудим проект или команду.",
+    "subtitle": "Рассматриваю удалённые frontend-позиции Middle+ с Vue, Nuxt и TypeScript. Интересны сложные продукты и инженерные задачи.",
+    "telegramLabel": "Телеграм",
+    "emailLabel": "Почта",
+    "locationLabel": "Локация"
+  },
+  "aiEngineering": {
+    "title": "AI-assisted Engineering",
+    "subtitle": "Использую AI-агентов для инженерной разработки — не вместо архитектуры и ревью, а вместе с ними.",
+    "lead": "Работаю с Claude Code и OpenAI Codex: формулирую задачи, настраиваю контекст и критерии готовности, оцениваю решения и отвечаю за качество итогового кода.",
+    "steps": [
+      {
+        "title": "Архитектура и декомпозиция",
+        "description": "До реализации определяю границы модулей, контракты данных, зависимости, ограничения и критерии приёмки. Агент решает задачу внутри понятных рамок."
+      },
+      {
+        "title": "Agent Harnesses",
+        "description": "Выстраиваю процесс работы агента: проектные инструкции, контекст, инструменты и проверки. Подход ориентирован на предсказуемый результат, а не на количество сгенерированного кода."
+      },
+      {
+        "title": "Reviewer Skills и code review",
+        "description": "Создаю собственные навыки ревью для AI-агентов. Проверяю типобезопасность, обработку ошибок, edge cases, тестируемость и отсутствие ненужных абстракций."
+      }
+    ],
+    "qualityTitle": "Human-in-the-loop — обязательная часть процесса",
+    "qualityText": "Не принимаю AI-generated code без самостоятельной проверки. Приоритет — корректность, читаемость и поддерживаемость; применяю KISS, DRY, YAGNI и SOLID без переусложнения."
   }
 }
