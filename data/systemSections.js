@@ -80,10 +80,10 @@ export const systemSections = {
         principles: {
             title: 'ИНЖЕНЕРНЫЕ ПРИНЦИПЫ',
             items: [
-                'Система важнее хака',
-                'Читаемость важнее трюков',
+                'Продуманная архитектура важнее хака',
+                'Читаемость важнее лишних абстракций',
                 'Производительность имеет значение',
-                'Удобство разработки важно',
+                'AI-код требует инженерного ревью',
                 'Поддерживаемость в приоритете',
             ],
         },
@@ -173,10 +173,10 @@ export const systemSections = {
         principles: {
             title: 'PRINCIPLES',
             items: [
-                'Systems over hacks',
-                'Readability over cleverness',
+                'Thoughtful architecture over hacks',
+                'Readability over unnecessary abstractions',
                 'Performance matters',
-                'DX matters',
+                'AI-generated code needs engineering review',
                 'Maintainability first',
             ],
         },
