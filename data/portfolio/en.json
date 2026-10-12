@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Amiran Bestaev — Middle+ Frontend Engineer | Vue, Nuxt, TypeScript & AI-assisted Engineering",
-    "description": "Middle+ Frontend Engineer with 5+ years of commercial experience in Vue, Nuxt and TypeScript. Modular architecture, performance optimization, AI coding agents and code review."
+    "title": "Amiran Bestaev — Frontend Engineer | Vue / Nuxt / TypeScript",
+    "description": "Frontend Engineer with 5+ years of commercial experience in Vue, Nuxt and TypeScript. Modular architecture, performance optimization, AI coding agents and code review."
   },
   "labels": {
     "website": "Website",
@@ -15,7 +15,7 @@
     "contact": "Contact"
   },
   "hero": {
-    "eyebrow": "Middle+ Frontend · Vue / Nuxt · TypeScript",
+    "eyebrow": "Vue / Nuxt · TypeScript",
     "name": "Amiran Bestaev",
     "role": "Frontend Engineer",
     "subtitle": "I design maintainable frontend systems with complex business logic, typed API contracts and a focus on performance. I use AI coding agents with human-led architecture and code review.",
@@ -417,7 +417,7 @@
   ],
   "footer": {
     "title": "Let's discuss the project or the team.",
-    "subtitle": "Open to full-time remote Middle+ frontend roles using Vue, Nuxt and TypeScript, especially products with challenging engineering problems.",
+    "subtitle": "Open to full-time remote frontend roles using Vue, Nuxt and TypeScript, especially products with challenging engineering problems.",
     "telegramLabel": "Telegram",
     "emailLabel": "Email",
     "locationLabel": "Location"
