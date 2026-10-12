@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Амиран Бестаев — Frontend Middle+ | Vue, Nuxt, TypeScript и AI-assisted Engineering",
-    "description": "Frontend-разработчик Middle+ с 5+ годами коммерческого опыта: Vue 2/3, Nuxt 2/3, TypeScript, архитектура модулей, оптимизация, AI coding agents и code review."
+    "title": "Амиран Бестаев — Frontend Engineer | Vue / Nuxt / TypeScript",
+    "description": "Frontend Engineer с 5+ годами коммерческого опыта: Vue 2/3, Nuxt 2/3, TypeScript, архитектура модулей, оптимизация, AI coding agents и code review."
   },
   "labels": {
     "website": "Сайт",
@@ -15,7 +15,7 @@
     "contact": "Контакты"
   },
   "hero": {
-    "eyebrow": "Middle+ Frontend · Vue / Nuxt · TypeScript",
+    "eyebrow": "Vue / Nuxt · TypeScript",
     "name": "Амиран Бестаев",
     "role": "Frontend Engineer",
     "subtitle": "Проектирую и развиваю frontend-системы: сложная бизнес-логика, типизированные API, производительность и поддерживаемая архитектура. Использую AI-агентов под инженерным контролем.",
@@ -418,7 +418,7 @@
   ],
   "footer": {
     "title": "Давайте обсудим проект или команду.",
-    "subtitle": "Рассматриваю удалённые frontend-позиции Middle+ с Vue, Nuxt и TypeScript. Интересны сложные продукты и инженерные задачи.",
+    "subtitle": "Рассматриваю удалённые frontend-позиции с Vue, Nuxt и TypeScript. Интересны сложные продукты и инженерные задачи.",
     "telegramLabel": "Телеграм",
     "emailLabel": "Почта",
     "locationLabel": "Локация"
